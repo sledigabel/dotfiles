@@ -1,2 +1,3 @@
 # dotfiles
-My Dotfiles, managed by stow
+
+This repository contains my configuration files.
