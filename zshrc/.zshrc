@@ -114,7 +114,7 @@ plugins=(
   golang
   helm
   kubectl
-  osx
+  macos
   minikube
   node
   npm
