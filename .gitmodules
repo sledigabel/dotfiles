@@ -1,3 +1,9 @@
 [submodule "tmux/.tmux/tpm"]
 	path = tmux/.tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "tmux/.tmux/plugins/tmux-sensible"]
+	path = tmux/.tmux/plugins/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible
+[submodule "tmux/.tmux/plugins/tmux-base16-statusline"]
+	path = tmux/.tmux/plugins/tmux-base16-statusline
+	url = git@github.com:sledigabel/tmux-base16-statusline.git
