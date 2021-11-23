@@ -1,3 +1,3 @@
 #!/bin/bash
 
-stow -R zshrc bin -t ~
+stow -R zshrc bin tmux -t ~
