@@ -56,6 +56,9 @@ return require('packer').startup(function()
   -- Themes
   use { 'Mofiqul/vscode.nvim' }
 
+  -- Comment
+  use { 'numToStr/Comment.nvim' }
+
   -- bootstrapping packer
   if packer_bootstrap then
     require('packer').sync()
