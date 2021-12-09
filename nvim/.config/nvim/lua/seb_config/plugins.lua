@@ -24,6 +24,13 @@ return require('packer').startup(function()
   use { 'nvim-telescope/telescope-github.nvim' }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+  -- Surround
+  use {
+    "blackCauldron7/surround.nvim",
+    config = function()
+      require"surround".setup {mappings_style = "surround", map_insert_mode = false}
+    end
+  }
   -- TMUX
   use { "aserowy/tmux.nvim",
         config = function()
