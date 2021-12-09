@@ -33,11 +33,9 @@ vim.o.mouse = "a"
 vim.cmd[[au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}]]
 
 
--- set shortmess+=c
--- " Whitespace
--- 
--- 
--- " move swap files somewhere we dont care about
+vim.api.nvim_set_keymap("n", "<leader>y", '"*y', { noremap = true })
+vim.api.nvim_set_keymap("v", "<leader>y", '"*y', { noremap = true })
+
 -- set directory^=$HOME/.vim/tmp//
 -- 
 -- " general shortuts
