@@ -11,6 +11,7 @@ return require('packer').startup(function()
 
   -- Post-install/update hook with neovim command
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { 'nvim-treesitter/nvim-treesitter-textobjects' }
 
   -- bootstrapping packer
   if packer_bootstrap then
