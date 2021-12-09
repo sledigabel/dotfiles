@@ -9,9 +9,20 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
-  -- Post-install/update hook with neovim command
+  -- Webdevicons
+  use { 'kyazdani42/nvim-web-devicons' }
+
+  -- Tree sitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+
+  -- Telescope
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use { 'nvim-telescope/telescope-github.nvim' }
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- TMUX
   use { "aserowy/tmux.nvim",
@@ -44,3 +55,5 @@ return require('packer').startup(function()
     require('packer').sync()
   end
 end)
+
+
