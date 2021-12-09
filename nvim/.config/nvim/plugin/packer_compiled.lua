@@ -69,14 +69,39 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-textobjects"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  ["tmux.nvim"] = {
+    config = { "\27LJ\2\n¶\1\0\0\4\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2B\0\2\1K\0\1\0\vresize\1\0\1\31enable_default_keybindings\2\15navigation\1\0\1\31enable_default_keybindings\2\14copy_sync\1\0\0\1\0\1\venable\2\nsetup\ttmux\frequire\0" },
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/tmux.nvim",
+    url = "https://github.com/aserowy/tmux.nvim"
+  },
+  ["vscode.nvim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/vscode.nvim",
+    url = "https://github.com/Mofiqul/vscode.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: tmux.nvim
+time([[Config for tmux.nvim]], true)
+try_loadstring("\27LJ\2\n¶\1\0\0\4\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2B\0\2\1K\0\1\0\vresize\1\0\1\31enable_default_keybindings\2\15navigation\1\0\1\31enable_default_keybindings\2\14copy_sync\1\0\0\1\0\1\venable\2\nsetup\ttmux\frequire\0", "config", "tmux.nvim")
+time([[Config for tmux.nvim]], false)
 if should_profile then save_profiles() end
 
 end)
