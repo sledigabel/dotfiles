@@ -9,6 +9,9 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
+  -- Post-install/update hook with neovim command
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
   -- bootstrapping packer
   if packer_bootstrap then
     require('packer').sync()
