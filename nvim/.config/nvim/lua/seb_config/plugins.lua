@@ -62,6 +62,11 @@ return require('packer').startup(function()
   -- Git signs
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
+  -- LSP config
+  use { 'neovim/nvim-lspconfig' }
+  use { 'ray-x/lsp_signature.nvim' }
+  use { 'onsails/lspkind-nvim' }
+
   -- bootstrapping packer
   if packer_bootstrap then
     require('packer').sync()
