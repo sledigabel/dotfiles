@@ -26,16 +26,17 @@ cmp.setup({
     ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
     ['<up>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
     ['<down>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-    ['<CR>'] = cmp.mapping({
-        i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
-        c = function(fallback)
-            if cmp.visible() then
-                cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
-            else
-                fallback()
-            end
-        end
-    }),
+    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
+    -- ['<CR>'] = cmp.mapping({
+    --     i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
+    --     c = function(fallback)
+    --         if cmp.visible() then
+    --             cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
+    --         else
+    --             fallback()
+    --         end
+    --     end
+    -- }),
   },
   sources = {
 		{ name = "nvim_lsp" },
