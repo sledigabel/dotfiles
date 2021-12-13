@@ -27,27 +27,17 @@ cmp.setup({
     ['<up>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
     ['<down>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
     ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
-    -- ['<CR>'] = cmp.mapping({
-    --     i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
-    --     c = function(fallback)
-    --         if cmp.visible() then
-    --             cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
-    --         else
-    --             fallback()
-    --         end
-    --     end
-    -- }),
   },
-  sources = {
+  sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
     -- { name = 'vsnip' },
-    { name = 'buffer' },
 		{ name = "calc" },
 		{ name = "emoji" },
 		{ name = "luasnip" },
 		{ name = "nvim_lua" },
 		{ name = "path" },
-  },
+    { name = 'buffer' },
+  }),
   formatting = {
     format = lspkind.cmp_format {
       with_text = true,

@@ -47,15 +47,16 @@ return require('packer').startup(function()
   use { 'neovim/nvim-lspconfig' }
   use { 'ray-x/lsp_signature.nvim' }
   use { 'onsails/lspkind-nvim' }
+  use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
 
   -- Completion
-use {'hrsh7th/nvim-cmp'}
-use {'hrsh7th/cmp-path'}
-use {'hrsh7th/cmp-buffer'}
-use {'hrsh7th/cmp-calc'}
-use {'hrsh7th/cmp-emoji'}
-use {'hrsh7th/cmp-nvim-lsp'}
-use {'hrsh7th/cmp-nvim-lua'}
+  use {'hrsh7th/nvim-cmp'}
+  use {'hrsh7th/cmp-path'}
+  use {'hrsh7th/cmp-buffer'}
+  use {'hrsh7th/cmp-calc'}
+  use {'hrsh7th/cmp-emoji'}
+  use {'hrsh7th/cmp-nvim-lsp'}
+  use {'hrsh7th/cmp-nvim-lua'}
 
 
 

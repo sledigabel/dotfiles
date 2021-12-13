@@ -17,7 +17,14 @@ local border = "double"
 
 local nvim_lsp = require('lspconfig')
 local lsp_signature = require('lsp_signature')
-lsp_signature.setup()
+
+lsp_signature.setup({
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    handler_opts = {
+      border = "rounded"
+    },
+    floating_window_above_cur_line = false,
+})
 
 local on_attach = function(client, bufnr)
   vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border, focusable = false})
@@ -71,15 +78,22 @@ local on_attach = function(client, bufnr)
   -- lsp_signature.on_attach()
 end
 
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 nvim_lsp.pylsp.setup{
     on_attach = on_attach,
     cmd = { "/Users/sebastienledigabel/.pyenv/shims/pylsp" },
-    -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    capabilities = capabilities,
+}
+
+nvim_lsp.pyright.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
 }
 
 nvim_lsp.jsonls.setup {
     on_attach = on_attach,
-    -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
     commands = {
       Format = {
         function()
@@ -93,7 +107,7 @@ local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
-    -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
   }
 end
 
@@ -138,6 +152,18 @@ function M.setup()
   for i, kind in ipairs(kinds) do
     kinds[i] = M.icons[kind] or kind
   end
+end
+
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '●', -- Could be '●', '▎', 'x', '■'
+  }
+})
+
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 return M
