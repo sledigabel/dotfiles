@@ -17,10 +17,7 @@ return require('packer').startup(function()
   use { 'nvim-treesitter/nvim-treesitter-textobjects' }
 
   -- Telescope
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  use { 'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} } }
   use { 'nvim-telescope/telescope-github.nvim' }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
@@ -62,6 +59,8 @@ return require('packer').startup(function()
   use {'hrsh7th/cmp-nvim-lsp'}
   use {'hrsh7th/cmp-nvim-lua'}
 
+  -- Statusline
+  use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
 
   -- Git
   use { 'tpope/vim-fugitive' }

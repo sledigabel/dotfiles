@@ -103,7 +103,13 @@ nvim_lsp.jsonls.setup {
     }
 }
 
-local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls' }
+nvim_lsp.jsonnet_ls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { '/Users/sebastienledigabel/dev/go/bin/jsonnet-language-server' }
+}
+
+local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls', 'jsonnet_ls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
