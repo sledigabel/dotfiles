@@ -63,6 +63,8 @@ return require('packer').startup(function()
   use {'hrsh7th/cmp-nvim-lua'}
 
 
+  -- Git
+  use { 'tpope/vim-fugitive' }
 
   -- bootstrapping packer
   if packer_bootstrap then
