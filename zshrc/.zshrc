@@ -58,7 +58,7 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 export LC_ALL=en_GB.UTF-8
 export PATH="/Users/sebastienledigabel/.pyenv/shims:${PATH}:${HOME}/.bin:${GOPATH}/bin:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin"
 export SAVEHIST=5000
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 export ZSH=${HOME}/.oh-my-zsh
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 

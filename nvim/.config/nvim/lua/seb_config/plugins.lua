@@ -36,6 +36,10 @@ return require('packer').startup(function()
 
   -- Themes
   use { 'Mofiqul/vscode.nvim' }
+  use({
+    "catppuccin/nvim",
+    as = "catppuccin"
+  })
 
   -- Comment
   use { 'numToStr/Comment.nvim' }
