@@ -33,7 +33,7 @@ cmp.setup({
     -- { name = 'vsnip' },
 		{ name = "calc" },
 		{ name = "emoji" },
-		{ name = "luasnip" },
+		-- { name = "luasnip" },
 		{ name = "nvim_lua" },
 		{ name = "path" },
     { name = 'buffer' },

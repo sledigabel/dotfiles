@@ -14,6 +14,18 @@ require('telescope').setup {
     grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
     qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
+    vimgrep_arguments = {
+      "rg",
+      "--vimgrep",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--trim",
+      "--hidden",
+    },
+    file_ignore_patterns = { '.git' },
     mappings = {
       i = {
         ["<C-q>"] = actions.send_to_qflist,
@@ -36,9 +48,9 @@ require('telescope').load_extension('fzf')
 require('telescope').load_extension('gh')
 
 vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>lua require('telescope.builtin').git_files()<cr>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>f.", "<cmd>lua require('telescope.builtin').find_files({hidden=true, cwd='~/.config/nvim'})<cr>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>fa", "<cmd>lua require('telescope.builtin').live_grep()<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>f.", "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>fa", "<cmd>lua require('telescope.builtin').live_grep({hidden=true})<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>fo", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", { noremap = true })
 
