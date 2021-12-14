@@ -35,6 +35,7 @@ vim.cmd[[au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch
 
 vim.api.nvim_set_keymap("n", "<leader>y", '"*y', { noremap = true })
 vim.api.nvim_set_keymap("v", "<leader>y", '"*y', { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>caw", '<cmd>lua for _, win in ipairs(vim.api.nvim_list_wins()) do local config = vim.api.nvim_win_get_config(win); if config.relative ~= "" then vim.api.nvim_win_close(win, false)) end end<cr>', { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>caw", '<cmd>lua for _, win in ipairs(vim.api.nvim_list_wins()) do local config = vim.api.nvim_win_get_config(win); if config.relative ~= "" then vim.api.nvim_win_close(win, false) end end<cr>', { noremap = true })
 
+vim.api.nvim_set_keymap("n", "<leader>d", ':bd<cr>', { noremap = true })
 vim.o.directory = "/Users/sebastienledigabel/.vim/tmp/"

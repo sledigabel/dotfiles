@@ -6,8 +6,9 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function()
+return require('packer').startup { function()
   use 'wbthomason/packer.nvim'
+  use 'lewis6991/impatient.nvim'
 
   -- Webdevicons
   use { 'kyazdani42/nvim-web-devicons' }
@@ -65,10 +66,12 @@ return require('packer').startup(function()
   -- Git
   use { 'tpope/vim-fugitive' }
 
+  -- Impatient
+
   -- bootstrapping packer
   if packer_bootstrap then
     require('packer').sync()
   end
-end)
+end , config = { compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua' }}
 
 
