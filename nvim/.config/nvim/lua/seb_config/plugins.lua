@@ -49,7 +49,7 @@ return require('packer').startup { function()
   use { 'neovim/nvim-lspconfig' }
   use { 'ray-x/lsp_signature.nvim' }
   use { 'onsails/lspkind-nvim' }
-  use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
+  -- use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
 
   -- Completion
   use {'hrsh7th/nvim-cmp'}
@@ -68,7 +68,7 @@ return require('packer').startup { function()
 
   -- Formatter
   use { 'mhartington/formatter.nvim' }
-
+ 
   -- bootstrapping packer
   if packer_bootstrap then
     require('packer').sync()

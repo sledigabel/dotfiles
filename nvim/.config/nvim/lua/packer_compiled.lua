@@ -74,6 +74,12 @@ _G.packer_plugins = {
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  ["alpha-nvim"] = {
+    config = { "\27LJ\2\n_\0\0\5\0\5\0\n6\0\0\0'\2\1\0B\0\2\0029\0\2\0006\2\0\0'\4\3\0B\2\2\0029\2\4\2B\0\2\1K\0\1\0\topts\27alpha.themes.dashboard\nsetup\nalpha\frequire\0" },
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/alpha-nvim",
+    url = "https://github.com/goolord/alpha-nvim"
+  },
   catppuccin = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/catppuccin",
@@ -144,14 +150,6 @@ _G.packer_plugins = {
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
-  ["nvim-code-action-menu"] = {
-    commands = { "CodeActionMenu" },
-    loaded = false,
-    needs_bufread = true,
-    only_cond = false,
-    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/opt/nvim-code-action-menu",
-    url = "https://github.com/weilbith/nvim-code-action-menu"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -221,16 +219,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: alpha-nvim
+time([[Config for alpha-nvim]], true)
+try_loadstring("\27LJ\2\n_\0\0\5\0\5\0\n6\0\0\0'\2\1\0B\0\2\0029\0\2\0006\2\0\0'\4\3\0B\2\2\0029\2\4\2B\0\2\1K\0\1\0\topts\27alpha.themes.dashboard\nsetup\nalpha\frequire\0", "config", "alpha-nvim")
+time([[Config for alpha-nvim]], false)
 -- Config for: surround.nvim
 time([[Config for surround.nvim]], true)
 try_loadstring("\27LJ\2\nf\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\20map_insert_mode\1\19mappings_style\rsurround\nsetup\rsurround\frequire\0", "config", "surround.nvim")
 time([[Config for surround.nvim]], false)
-
--- Command lazy-loads
-time([[Defining lazy-load commands]], true)
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file CodeActionMenu lua require("packer.load")({'nvim-code-action-menu'}, { cmd = "CodeActionMenu", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-time([[Defining lazy-load commands]], false)
-
 if should_profile then save_profiles() end
 
 end)
