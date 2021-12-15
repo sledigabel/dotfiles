@@ -34,7 +34,7 @@ local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings
   local opts = { noremap=true, silent=true }
@@ -86,10 +86,9 @@ nvim_lsp.pylsp.setup{
     capabilities = capabilities,
 }
 
-nvim_lsp.pyright.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
+-- nvim_lsp.pyright.setup {
+--     on_attach = on_attach,
+-- }
 
 nvim_lsp.jsonls.setup {
     on_attach = on_attach,

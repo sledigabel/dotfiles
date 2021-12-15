@@ -66,7 +66,8 @@ return require('packer').startup { function()
   -- Git
   use { 'tpope/vim-fugitive' }
 
-  -- Impatient
+  -- Formatter
+  use { 'mhartington/formatter.nvim' }
 
   -- bootstrapping packer
   if packer_bootstrap then
