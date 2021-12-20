@@ -73,6 +73,14 @@ return require('packer').startup { function()
   -- Formatter
   use { 'mhartington/formatter.nvim' }
  
+
+  -- Tree
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    },
+  }
   -- bootstrapping packer
   if packer_bootstrap then
     require('packer').sync()

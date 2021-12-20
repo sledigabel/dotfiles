@@ -48,6 +48,9 @@ vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true })
 -- CTRL-E
 vim.api.nvim_set_keymap("i", "<C-e>", "<Esc>A", { noremap = true })
 
+vim.api.nvim_set_keymap("n", "<C-t>", ":NvimTreeToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>gf", ":NvimTreeFindFile<CR>", { noremap = true })
 
-
-
+-- Savings
+vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", {})
+vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", {})

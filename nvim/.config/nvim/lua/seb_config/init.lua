@@ -1,6 +1,4 @@
 vim.g.mapleader = ' '
-vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", {})
-vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", {})
 
 require('impatient')
 require 'seb_config.plugins'
@@ -17,3 +15,4 @@ require 'seb_config.statusline'
 require 'seb_config.filetypes'
 require 'seb_config.formatter'
 require 'seb_config.autopairs'
+require 'seb_config.nvimtree'
