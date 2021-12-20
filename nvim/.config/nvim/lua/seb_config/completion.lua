@@ -1,10 +1,13 @@
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
 local lspkind = require "lspkind"
 lspkind.init()
 
 local cmp = require'cmp'
 -- local luasnip = require("luasnip")
+
+-- If you want insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 cmp.setup({
   snippet = {
@@ -53,3 +56,5 @@ cmp.setup({
     },
   },
 })
+
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))

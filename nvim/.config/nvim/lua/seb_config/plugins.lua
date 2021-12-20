@@ -29,6 +29,10 @@ return require('packer').startup { function()
       require"surround".setup {mappings_style = "surround", map_insert_mode = false}
     end
   }
+
+  -- Autopairs
+  use { 'windwp/nvim-autopairs' }
+
   -- TMUX
   use { "aserowy/tmux.nvim" }
 

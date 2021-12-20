@@ -5,7 +5,7 @@ require('formatter').setup({
       function()
         return {
           exe = "black", -- this should be available on your $PATH
-          args = { '--line-length', '79', '-' },
+          args = { --[[ '--line-length', '79',  ]]'-' },
           stdin = true,
         }
       end
