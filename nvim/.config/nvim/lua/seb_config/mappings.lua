@@ -39,3 +39,15 @@ vim.api.nvim_set_keymap("n", "<leader>caw", '<cmd>lua for _, win in ipairs(vim.a
 
 vim.api.nvim_set_keymap("n", "<leader>d", ':bd<cr>', { noremap = true })
 vim.o.directory = "/Users/sebastienledigabel/.vim/tmp/"
+
+-- copy the current line and comment
+vim.api.nvim_set_keymap("n", "<leader>/", "<cmd>normal yyPgccj<CR>", { noremap = true })
+vim.api.nvim_set_keymap("v", "<lt>", "<lt>gv", { noremap = true })
+vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true })
+
+-- CTRL-E
+vim.api.nvim_set_keymap("i", "<C-e>", "<Esc>A", { noremap = true })
+
+
+
+
