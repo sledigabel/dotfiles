@@ -54,6 +54,7 @@ return require('packer').startup { function()
   use { 'ray-x/lsp_signature.nvim' }
   use { 'onsails/lspkind-nvim' }
   -- use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
+  use { 'jose-elias-alvarez/null-ls.nvim' }
 
   -- Completion
   use {'hrsh7th/nvim-cmp'}
