@@ -65,6 +65,8 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 	buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
+  --
+  --
 	-- -- Set some keybinds conditional on server capabilities
 	-- if client.resolved_capabilities.document_formatting then
 	--     buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
@@ -155,11 +157,12 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
-local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
-
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
-	local hl = "LspDiagnosticsSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	local hl2 = "LspDiagnosticsSign" .. type
+	vim.fn.sign_define(hl2, { text = icon, texthl = hl2, numhl = "" })
 end
 
 local M = {}
@@ -201,10 +204,5 @@ vim.diagnostic.config({
 	},
 })
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
 
 return M
