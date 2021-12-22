@@ -1,91 +1,99 @@
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+	packer_bootstrap = vim.fn.system({
+		"git",
+		"clone",
+		"--depth",
+		"1",
+		"https://github.com/wbthomason/packer.nvim",
+		install_path,
+	})
 end
 
-vim.cmd [[packadd packer.nvim]]
+vim.cmd([[packadd packer.nvim]])
 
-return require('packer').startup { function()
-  use 'wbthomason/packer.nvim'
-  use 'lewis6991/impatient.nvim'
+return require("packer").startup({
+	function()
+		use("wbthomason/packer.nvim")
+		use("lewis6991/impatient.nvim")
 
-  -- Webdevicons
-  use { 'kyazdani42/nvim-web-devicons' }
+		-- Webdevicons
+		use({ "kyazdani42/nvim-web-devicons" })
 
-  -- Tree sitter
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+		-- Tree sitter
+		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+		use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 
-  -- Telescope
-  use { 'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} } }
-  use { 'nvim-telescope/telescope-github.nvim' }
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+		-- Telescope
+		use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/plenary.nvim" } } })
+		use({ "nvim-telescope/telescope-github.nvim" })
+		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
-  -- Surround
-  use {
-    "blackCauldron7/surround.nvim",
-    config = function()
-      require"surround".setup {mappings_style = "surround", map_insert_mode = false}
-    end
-  }
+		-- Surround
+		use({
+			"blackCauldron7/surround.nvim",
+			config = function()
+				require("surround").setup({ mappings_style = "surround", map_insert_mode = false })
+			end,
+		})
 
-  -- Autopairs
-  use { 'windwp/nvim-autopairs' }
+		-- Autopairs
+		use({ "windwp/nvim-autopairs" })
 
-  -- TMUX
-  use { "aserowy/tmux.nvim" }
+		-- TMUX
+		use({ "aserowy/tmux.nvim" })
 
-  -- Themes
-  use { 'Mofiqul/vscode.nvim' }
-  use({
-    "catppuccin/nvim",
-    as = "catppuccin"
-  })
+		-- Themes
+		use({ "Mofiqul/vscode.nvim" })
+		use({
+			"catppuccin/nvim",
+			as = "catppuccin",
+		})
 
-  -- Comment
-  use { 'numToStr/Comment.nvim' }
+		-- Comment
+		use({ "numToStr/Comment.nvim" })
 
-  -- Git signs
-  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+		-- Git signs
+		use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
-  -- LSP config
-  use { 'neovim/nvim-lspconfig' }
-  use { 'ray-x/lsp_signature.nvim' }
-  use { 'onsails/lspkind-nvim' }
-  -- use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
-  use { 'jose-elias-alvarez/null-ls.nvim' }
+		-- LSP config
+		use({ "neovim/nvim-lspconfig" })
+		use({ "ray-x/lsp_signature.nvim" })
+		use({ "onsails/lspkind-nvim" })
+		-- use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
+		use({ "jose-elias-alvarez/null-ls.nvim" })
+		use({ "tjdevries/nlua.nvim" })
 
-  -- Completion
-  use {'hrsh7th/nvim-cmp'}
-  use {'hrsh7th/cmp-path'}
-  use {'hrsh7th/cmp-buffer'}
-  use {'hrsh7th/cmp-calc'}
-  use {'hrsh7th/cmp-emoji'}
-  use {'hrsh7th/cmp-nvim-lsp'}
-  use {'hrsh7th/cmp-nvim-lua'}
+		-- Completion
+		use({ "hrsh7th/nvim-cmp" })
+		use({ "hrsh7th/cmp-path" })
+		use({ "hrsh7th/cmp-buffer" })
+		use({ "hrsh7th/cmp-calc" })
+		use({ "hrsh7th/cmp-emoji" })
+		use({ "hrsh7th/cmp-nvim-lsp" })
+		use({ "hrsh7th/cmp-nvim-lua" })
 
-  -- Statusline
-  use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+		-- Statusline
+		use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 
-  -- Git
-  use { 'tpope/vim-fugitive' }
+		-- Git
+		use({ "tpope/vim-fugitive" })
 
-  -- Formatter
-  use { 'mhartington/formatter.nvim' }
- 
+		-- Formatter
+		use({ "mhartington/formatter.nvim" })
 
-  -- Tree
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icon
-    },
-  }
-  -- bootstrapping packer
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end , config = { compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua' }}
-
-
+		-- Tree
+		use({
+			"kyazdani42/nvim-tree.lua",
+			requires = {
+				"kyazdani42/nvim-web-devicons", -- optional, for file icon
+			},
+		})
+		-- bootstrapping packer
+		if packer_bootstrap then
+			require("packer").sync()
+		end
+	end,
+	config = { compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua" },
+})

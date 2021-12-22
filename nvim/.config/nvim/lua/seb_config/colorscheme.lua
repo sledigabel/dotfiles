@@ -1,4 +1,3 @@
 vim.g.vscode_style = "dark"
 
-vim.cmd[[colorscheme catppuccin]]
-
+vim.cmd([[colorscheme catppuccin]])

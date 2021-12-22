@@ -1,1 +1,1 @@
-require 'seb_config'
+require("seb_config")
