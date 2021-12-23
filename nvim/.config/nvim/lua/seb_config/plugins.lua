@@ -75,6 +75,7 @@ return require("packer").startup({
 		use({ "hrsh7th/cmp-emoji" })
 		use({ "hrsh7th/cmp-nvim-lsp" })
 		use({ "hrsh7th/cmp-nvim-lua" })
+		use({ "saadparwaiz1/cmp_luasnip" })
 
 		-- Statusline
 		use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
