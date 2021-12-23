@@ -13,3 +13,6 @@
 [submodule "tmux/.tmux/plugins/tmux-copycat"]
 	path = tmux/.tmux/plugins/tmux-copycat
 	url = git@github.com:tmux-plugins/tmux-copycat.git
+[submodule "nvim/.config/nvim/friendly-snippets"]
+	path = nvim/.config/nvim/friendly-snippets
+	url = git@github.com:rafamadriz/friendly-snippets.git

@@ -61,3 +61,4 @@ vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", {})
 
 -- Clipping
 vim.api.nvim_set_keymap("n", "<leader>pp", "<cmd>Telescope neoclip<CR>", { noremap = true })
+vim.api.nvim_set_keymap("i", "<C-x><C-p>", "<cmd>Telescope neoclip<CR>", { noremap = true, silent = true })

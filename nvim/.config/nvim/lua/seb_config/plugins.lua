@@ -96,6 +96,9 @@ return require("packer").startup({
 		-- Neovim clip
 		use({ "AckslD/nvim-neoclip.lua", requires = { { "nvim-telescope/telescope.nvim" } } })
 
+		-- Snips
+		use({ "L3MON4D3/LuaSnip" })
+
 		-- bootstrapping packer
 		if packer_bootstrap then
 			require("packer").sync()
