@@ -92,6 +92,10 @@ return require("packer").startup({
 				"kyazdani42/nvim-web-devicons", -- optional, for file icon
 			},
 		})
+
+		-- Neovim clip
+		use({ "AckslD/nvim-neoclip.lua", requires = { { "nvim-telescope/telescope.nvim" } } })
+
 		-- bootstrapping packer
 		if packer_bootstrap then
 			require("packer").sync()
