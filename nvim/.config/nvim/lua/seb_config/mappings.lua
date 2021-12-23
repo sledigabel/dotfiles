@@ -58,3 +58,6 @@ vim.api.nvim_set_keymap("n", "<leader>gf", ":NvimTreeFindFile<CR>", { noremap = 
 -- Savings
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", {})
 vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", {})
+
+-- Clipping
+vim.api.nvim_set_keymap("n", "<leader>pp", "<cmd>Telescope neoclip<CR>", { noremap = true })
