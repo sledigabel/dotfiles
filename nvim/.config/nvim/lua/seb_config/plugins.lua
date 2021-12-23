@@ -50,6 +50,8 @@ return require("packer").startup({
 			"catppuccin/nvim",
 			as = "catppuccin",
 		})
+		use({ "sainnhe/gruvbox-material" })
+		use({ "mhartington/oceanic-next" })
 
 		-- Comment
 		use({ "numToStr/Comment.nvim" })

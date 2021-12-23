@@ -119,6 +119,11 @@ _G.packer_plugins = {
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  ["gruvbox-material"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/gruvbox-material",
+    url = "https://github.com/sainnhe/gruvbox-material"
+  },
   ["impatient.nvim"] = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/impatient.nvim",
@@ -139,6 +144,21 @@ _G.packer_plugins = {
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["nlua.nvim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/nlua.nvim",
+    url = "https://github.com/tjdevries/nlua.nvim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -148,6 +168,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -163,6 +188,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
+  ["oceanic-next"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/oceanic-next",
+    url = "https://github.com/mhartington/oceanic-next"
   },
   ["packer.nvim"] = {
     loaded = true,
