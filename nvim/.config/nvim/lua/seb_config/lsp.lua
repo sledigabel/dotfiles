@@ -42,30 +42,45 @@ local on_attach = function(client, bufnr)
 		vim.api.nvim_buf_set_option(bufnr, ...)
 	end
 
-	-- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+	local lspsaga = require("lspsaga")
+	lspsaga.init_lsp_saga({
+		finder_action_keys = {
+			quit = "<Esc>",
+		},
+		code_action_keys = {
+			quit = "<Esc>",
+		},
+		rename_action_keys = {
+			quit = "<Esc>",
+		},
+	})
 
 	-- Mappings
 	local opts = { noremap = true, silent = true }
 
-	buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+	buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap("n", "<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+	buf_set_keymap("n", "<leader>gD", "<Cmd>Lspsaga preview_definition<CR>", opts)
+	buf_set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts)
+	buf_set_keymap("n", "<leader>gh", "<Cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
+
 	buf_set_keymap("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+	buf_set_keymap("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	-- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 	buf_set_keymap("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 	buf_set_keymap("n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-	buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	buf_set_keymap("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	buf_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
+	-- buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 	buf_set_keymap("n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
 	buf_set_keymap("n", "[g", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
 	buf_set_keymap("n", "]g", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 	buf_set_keymap("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 	buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
-  --
-  --
+	--
+	--
 	-- -- Set some keybinds conditional on server capabilities
 	-- if client.resolved_capabilities.document_formatting then
 	--     buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
@@ -96,11 +111,20 @@ nvim_lsp.pylsp.setup({
 	on_attach = on_attach,
 	cmd = { "/Users/sebastienledigabel/.pyenv/shims/pylsp" },
 	capabilities = capabilities,
+	settings = {
+		pylsp = {
+			plugins = {
+				configurationSources = { "flake8" },
+				flake8 = { enabled = true },
+				pycodestyle = { enabled = false },
+			},
+		},
+	},
 })
 
 -- nvim_lsp.pyright.setup {
 --     on_attach = on_attach,
---     -- capabilities = capabilities,
+--     capabilities = capabilities,
 -- }
 
 nvim_lsp.jsonls.setup({
@@ -203,6 +227,5 @@ vim.diagnostic.config({
 		prefix = "●", -- Could be '●', '▎', 'x', '■'
 	},
 })
-
 
 return M

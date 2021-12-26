@@ -1,3 +1,3 @@
 #!/bin/bash
 
-stow -R zshrc bin tmux nvim -t ~
+stow -R zshrc bin tmux nvim karabiner -t ~
