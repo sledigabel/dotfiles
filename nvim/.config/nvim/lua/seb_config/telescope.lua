@@ -51,7 +51,7 @@ vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>lua require('telescope.builtin').git
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>f.",
-	"<cmd>Telescope find_files hidden=true cwd=~/.config/nvim find_command=fd,-e,lua<cr>",
+	"<cmd>Telescope find_files hidden=true cwd=~/.config/nvim no_ignore=true find_command=fd,-e,lua<cr>",
 	{ noremap = true }
 )
 vim.api.nvim_set_keymap(

@@ -101,6 +101,7 @@ return require("packer").startup({
 		-- Snips
 		use({ "L3MON4D3/LuaSnip" })
 
+		use({ "lukas-reineke/indent-blankline.nvim" })
 		-- bootstrapping packer
 		if packer_bootstrap then
 			require("packer").sync()
