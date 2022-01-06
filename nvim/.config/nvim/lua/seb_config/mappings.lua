@@ -1,5 +1,6 @@
 -- general
-vim.o.colorcolumn = "80"
+-- vim.o.colorcolumn = "80"
+-- vim.cmd([[highlight ColorColumn ctermbg=#1E1E28 guibg=#1E1E28 ]])
 vim.o.formatoptions = "cqrn1"
 vim.o.number = true
 vim.o.numberwidth = 4
@@ -52,7 +53,7 @@ vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true })
 -- CTRL-E
 vim.api.nvim_set_keymap("i", "<C-e>", "<Esc>A", { noremap = true })
 
-vim.api.nvim_set_keymap("n", "<C-t>", ":NvimTreeToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tt", ":NvimTreeToggle<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>gf", ":NvimTreeFindFile<CR>", { noremap = true })
 
 -- Savings

@@ -102,6 +102,12 @@ return require("packer").startup({
 		use({ "L3MON4D3/LuaSnip" })
 
 		use({ "lukas-reineke/indent-blankline.nvim" })
+
+		use({ "McAuleyPenney/tidy.nvim" })
+
+    -- Zen mode
+    use({ "akinsho/bufferline.nvim" })
+
 		-- bootstrapping packer
 		if packer_bootstrap then
 			require("packer").sync()

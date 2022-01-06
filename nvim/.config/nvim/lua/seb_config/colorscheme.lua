@@ -1,5 +1,28 @@
 vim.g.vscode_style = "dark"
 
+local catppuccin = require("catppuccin")
+
+catppuccin.setup({
+	transparent_background = true,
+	integrations = {
+		treesitter = true,
+		native_lsp = {
+			enabled = true,
+		},
+		cmp = true,
+		lsp_saga = true,
+		gitsigns = true,
+		telescope = true,
+		nvimtree = {
+			enabled = true,
+			show_root = true,
+		},
+		indent_blankline = {
+			enabled = true,
+			colored_indent_levels = true,
+		},
+	},
+})
 vim.cmd([[colorscheme catppuccin]])
 
 -- vim.cmd([[colorscheme gruvbox-material]])
