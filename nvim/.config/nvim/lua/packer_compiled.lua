@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["bufferline.nvim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
+    url = "https://github.com/akinsho/bufferline.nvim"
+  },
   catppuccin = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/catppuccin",
@@ -124,6 +129,11 @@ _G.packer_plugins = {
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/formatter.nvim",
     url = "https://github.com/mhartington/formatter.nvim"
   },
+  ["gitlinker.nvim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/gitlinker.nvim",
+    url = "https://github.com/ruifm/gitlinker.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
@@ -138,6 +148,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/impatient.nvim",
     url = "https://github.com/lewis6991/impatient.nvim"
+  },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["lsp_signature.nvim"] = {
     loaded = true,
@@ -225,7 +240,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["surround.nvim"] = {
-    config = { "\27LJ\2\nf\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\19mappings_style\rsurround\20map_insert_mode\1\nsetup\rsurround\frequire\0" },
+    config = { "\27LJ\2\nf\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\20map_insert_mode\1\19mappings_style\rsurround\nsetup\rsurround\frequire\0" },
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/surround.nvim",
     url = "https://github.com/blackCauldron7/surround.nvim"
@@ -245,6 +260,11 @@ _G.packer_plugins = {
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["tidy.nvim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/tidy.nvim",
+    url = "https://github.com/McAuleyPenney/tidy.nvim"
+  },
   ["tmux.nvim"] = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/tmux.nvim",
@@ -259,13 +279,18 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/vscode.nvim",
     url = "https://github.com/Mofiqul/vscode.nvim"
+  },
+  ["which-key.nvim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
 -- Config for: surround.nvim
 time([[Config for surround.nvim]], true)
-try_loadstring("\27LJ\2\nf\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\19mappings_style\rsurround\20map_insert_mode\1\nsetup\rsurround\frequire\0", "config", "surround.nvim")
+try_loadstring("\27LJ\2\nf\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\20map_insert_mode\1\19mappings_style\rsurround\nsetup\rsurround\frequire\0", "config", "surround.nvim")
 time([[Config for surround.nvim]], false)
 if should_profile then save_profiles() end
 

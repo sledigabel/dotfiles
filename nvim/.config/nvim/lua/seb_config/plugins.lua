@@ -58,6 +58,7 @@ return require("packer").startup({
 
 		-- Git signs
 		use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
+		use({ "ruifm/gitlinker.nvim" })
 
 		-- LSP config
 		use({ "neovim/nvim-lspconfig" })
@@ -105,9 +106,11 @@ return require("packer").startup({
 
 		use({ "McAuleyPenney/tidy.nvim" })
 
-    -- Zen mode
-    use({ "akinsho/bufferline.nvim" })
+		-- Zen mode
+		use({ "akinsho/bufferline.nvim" })
 
+		-- Which key
+		use({ "folke/which-key.nvim" })
 		-- bootstrapping packer
 		if packer_bootstrap then
 			require("packer").sync()

@@ -58,26 +58,26 @@ local on_attach = function(client, bufnr)
 	-- Mappings
 	local opts = { noremap = true, silent = true }
 
-	buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	buf_set_keymap("n", "<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	buf_set_keymap("n", "<leader>gD", "<Cmd>Lspsaga preview_definition<CR>", opts)
-	buf_set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts)
-	buf_set_keymap("n", "<leader>gh", "<Cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
+	-- buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+	-- buf_set_keymap("n", "<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	-- buf_set_keymap("n", "<leader>gD", "<Cmd>Lspsaga preview_definition<CR>", opts)
+	-- buf_set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts)
+	-- buf_set_keymap("n", "<leader>gh", "<Cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
 
-	buf_set_keymap("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	buf_set_keymap("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	-- buf_set_keymap("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+	-- buf_set_keymap("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	-- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-	buf_set_keymap("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-	buf_set_keymap("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-	buf_set_keymap("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-	buf_set_keymap("n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-	buf_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
+	-- buf_set_keymap("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+	-- buf_set_keymap("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+	-- buf_set_keymap("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+	-- buf_set_keymap("n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+	-- buf_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
 	-- buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	buf_set_keymap("n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-	buf_set_keymap("n", "[g", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-	buf_set_keymap("n", "]g", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-	buf_set_keymap("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-	buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+	-- buf_set_keymap("n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+	-- buf_set_keymap("n", "[g", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+	-- buf_set_keymap("n", "]g", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+	-- buf_set_keymap("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+	-- buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
 	--
 	--
@@ -172,8 +172,43 @@ nvim_lsp.sumneko_lua.setup({
 	},
 })
 
+-- getting the token from a hidden file
+local function file_exists(file)
+  local f = io.open(file, "rb")
+  if f then f:close() end
+  return f ~= nil
+end
+
+local function readall(filename)
+  local fh = assert(io.open(filename, "rb"))
+  local contents = assert(fh:read(_VERSION <= "Lua 5.2" and "*a" or "a"))
+  fh:close()
+  return contents
+end
+
+local filename = "/Users/sebastienledigabel/.bin/fetch_schema_token"
+local githubtoken = ""
+if file_exists(filename) then
+  githubtoken = readall(filename)
+end
+
+
+nvim_lsp.yamlls.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		yaml = {
+			schemas = {
+        -- TODO: set this up properly
+        -- ["https://github.skyscannertools.net/raw/surveyor/Surveyor/master/app/utils/schemas/component/default/v1.yml?token="..githubtoken] = "**/.catalog.yml",
+				["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+			},
+		},
+	},
+})
+
 -- local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls', 'jsonnet_ls', 'sumneko_lua' }
-local servers = { "gopls", "rust_analyzer", "bashls", "yamlls", "jsonnet_ls" }
+local servers = { "gopls", "rust_analyzer", "bashls", "jsonnet_ls" }
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
 		on_attach = on_attach,

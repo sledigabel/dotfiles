@@ -30,36 +30,25 @@ vim.o.shiftround = false
 -- mouse
 vim.o.mouse = "a"
 
+-- directory settings
+vim.o.directory = "/Users/sebastienledigabel/.vim/tmp/"
+
 -- highlight the yanking
 vim.cmd([[au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}]])
 
-vim.api.nvim_set_keymap("n", "<leader>y", '"*y', { noremap = true })
-vim.api.nvim_set_keymap("v", "<leader>y", '"*y', { noremap = true })
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>caw",
-	'<cmd>lua for _, win in ipairs(vim.api.nvim_list_wins()) do local config = vim.api.nvim_win_get_config(win); if config.relative ~= "" then vim.api.nvim_win_close(win, false) end end<cr>',
-	{ noremap = true }
-)
-
-vim.api.nvim_set_keymap("n", "<leader>d", ":bd<cr>", { noremap = true })
-vim.o.directory = "/Users/sebastienledigabel/.vim/tmp/"
-
--- copy the current line and comment
-vim.api.nvim_set_keymap("n", "<leader>/", "<cmd>normal yyPgccj<CR>", { noremap = true })
 vim.api.nvim_set_keymap("v", "<lt>", "<lt>gv", { noremap = true })
 vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true })
 
 -- CTRL-E
 vim.api.nvim_set_keymap("i", "<C-e>", "<Esc>A", { noremap = true })
-
-vim.api.nvim_set_keymap("n", "<leader>tt", ":NvimTreeToggle<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>gf", ":NvimTreeFindFile<CR>", { noremap = true })
+vim.api.nvim_set_keymap("i", "<C-a>", "<Esc>I", { noremap = true })
 
 -- Savings
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", {})
 vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", {})
 
 -- Clipping
-vim.api.nvim_set_keymap("n", "<leader>pp", "<cmd>Telescope neoclip<CR>", { noremap = true })
 vim.api.nvim_set_keymap("i", "<C-x><C-p>", "<cmd>Telescope neoclip<CR>", { noremap = true, silent = true })
+
+-- CTRL-P
+vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>lua require('telescope.builtin').git_files()<cr>", { noremap = true })
