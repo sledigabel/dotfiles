@@ -77,3 +77,11 @@ wk.register({
 	["[g"] = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Prev diag" },
 	["]g"] = { "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", "Prev diag" },
 }, { noremap = true, mode = "n" })
+
+-- Various mappings, visual
+-- vnoremap J :m '>+1<CR>gv=gv
+-- vnoremap K :m '<-2<CR>gv=gv
+wk.register({
+  ["K"] = { ":m '<-2<CR>gv=gv", "Moves the selection one line up" },
+	["J"] = { ":m '>+1<CR>gv=gv", "Moves selection one line down" },
+}, { noremap = true, mode = "v" })

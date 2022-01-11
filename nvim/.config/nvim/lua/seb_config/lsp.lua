@@ -24,7 +24,7 @@ lsp_signature.setup({
 	floating_window_above_cur_line = false,
 })
 
-local on_attach = function(client, bufnr)
+local on_attach_normal = function(client, bufnr)
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 		vim.lsp.handlers.hover,
 		{ border = border, focusable = false }
@@ -34,13 +34,6 @@ local on_attach = function(client, bufnr)
 		{ border = border, focusable = false }
 	)
 	-- require('completion').on_attach()
-
-	local function buf_set_keymap(...)
-		vim.api.nvim_buf_set_keymap(bufnr, ...)
-	end
-	local function buf_set_option(...)
-		vim.api.nvim_buf_set_option(bufnr, ...)
-	end
 
 	local lspsaga = require("lspsaga")
 	lspsaga.init_lsp_saga({
@@ -55,60 +48,42 @@ local on_attach = function(client, bufnr)
 		},
 	})
 
-	-- Mappings
-	local opts = { noremap = true, silent = true }
+end
 
-	-- buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	-- buf_set_keymap("n", "<leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	-- buf_set_keymap("n", "<leader>gD", "<Cmd>Lspsaga preview_definition<CR>", opts)
-	-- buf_set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts)
-	-- buf_set_keymap("n", "<leader>gh", "<Cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
+local on_attach_no_formatting = function(client, bufnr)
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+		vim.lsp.handlers.hover,
+		{ border = border, focusable = false }
+	)
+	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+		vim.lsp.handlers.hover,
+		{ border = border, focusable = false }
+	)
+	-- require('completion').on_attach()
 
-	-- buf_set_keymap("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	-- buf_set_keymap("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	-- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-	-- buf_set_keymap("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-	-- buf_set_keymap("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-	-- buf_set_keymap("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-	-- buf_set_keymap("n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-	-- buf_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
-	-- buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	-- buf_set_keymap("n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-	-- buf_set_keymap("n", "[g", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-	-- buf_set_keymap("n", "]g", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-	-- buf_set_keymap("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-	-- buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+	local lspsaga = require("lspsaga")
+	lspsaga.init_lsp_saga({
+		finder_action_keys = {
+			quit = "<Esc>",
+		},
+		code_action_keys = {
+			quit = "<Esc>",
+		},
+		rename_action_keys = {
+			quit = "<Esc>",
+		},
+	})
 
-	--
-	--
-	-- -- Set some keybinds conditional on server capabilities
-	-- if client.resolved_capabilities.document_formatting then
-	--     buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-	-- elseif client.resolved_capabilities.document_range_formatting then
-	--     buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-	-- end
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
 
-	-- -- Set autocommands conditional on server_capabilities
-	-- if client.resolved_capabilities.document_highlight then
-	--     require('lspconfig').util.nvim_multiline_command [[
-	--     :hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-	--     :hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-	--     :hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-	--     augroup lsp_document_highlight
-	--         autocmd!
-	--         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-	--         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-	--     augroup END
-	--     ]]
-	-- end
-	-- lsp_signature.on_attach()
 end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 nvim_lsp.pylsp.setup({
-	on_attach = on_attach,
+	on_attach = on_attach_normal,
 	cmd = { "/Users/sebastienledigabel/.pyenv/shims/pylsp" },
 	capabilities = capabilities,
 	settings = {
@@ -128,7 +103,7 @@ nvim_lsp.pylsp.setup({
 -- }
 
 nvim_lsp.jsonls.setup({
-	on_attach = on_attach,
+	on_attach = on_attach_normal,
 	capabilities = capabilities,
 	commands = {
 		Format = {
@@ -140,7 +115,7 @@ nvim_lsp.jsonls.setup({
 })
 
 nvim_lsp.jsonnet_ls.setup({
-	on_attach = on_attach,
+	on_attach = on_attach_normal,
 	capabilities = capabilities,
 	cmd = { "/Users/sebastienledigabel/dev/go/bin/jsonnet-language-server" },
 })
@@ -150,7 +125,7 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 nvim_lsp.sumneko_lua.setup({
-	on_attach = on_attach,
+	on_attach = on_attach_normal,
 	capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -172,46 +147,27 @@ nvim_lsp.sumneko_lua.setup({
 	},
 })
 
--- getting the token from a hidden file
-local function file_exists(file)
-  local f = io.open(file, "rb")
-  if f then f:close() end
-  return f ~= nil
-end
-
-local function readall(filename)
-  local fh = assert(io.open(filename, "rb"))
-  local contents = assert(fh:read(_VERSION <= "Lua 5.2" and "*a" or "a"))
-  fh:close()
-  return contents
-end
-
-local filename = "/Users/sebastienledigabel/.bin/fetch_schema_token"
-local githubtoken = ""
-if file_exists(filename) then
-  githubtoken = readall(filename)
-end
-
-
 nvim_lsp.yamlls.setup({
-	on_attach = on_attach,
+	on_attach = on_attach_normal,
 	capabilities = capabilities,
 	settings = {
 		yaml = {
 			schemas = {
-        -- TODO: set this up properly
-        -- ["https://github.skyscannertools.net/raw/surveyor/Surveyor/master/app/utils/schemas/component/default/v1.yml?token="..githubtoken] = "**/.catalog.yml",
 				["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
 			},
 		},
 	},
 })
 
+nvim_lsp.gopls.setup({
+  on_attach = on_attach_no_formatting,
+  capabilities = capabilities,
+})
 -- local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls', 'jsonnet_ls', 'sumneko_lua' }
-local servers = { "gopls", "rust_analyzer", "bashls", "jsonnet_ls" }
+local servers = { "rust_analyzer", "bashls", "jsonnet_ls" }
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
-		on_attach = on_attach,
+		on_attach = on_attach_normal,
 		capabilities = capabilities,
 	})
 end
