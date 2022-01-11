@@ -28,6 +28,7 @@ wk.register({
 	},
 	g = {
 		name = "Lsp",
+		a = { "<cmd>lua require('lspsaga.codeaction').code_action()<cr>", "CodeActions" },
 		d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
 		D = { "<cmd>Lspsaga preview_definition<cr>", "Saga Definition" },
 		e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
