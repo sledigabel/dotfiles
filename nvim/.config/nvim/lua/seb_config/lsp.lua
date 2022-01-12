@@ -1,17 +1,6 @@
 vim.cmd([[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]])
 vim.cmd([[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
 
--- local border = {
---       {"┌", "FloatBorder"},
---       {"─", "FloatBorder"},
---       {"┐", "FloatBorder"},
---       {"│", "FloatBorder"},
---       {"┘", "FloatBorder"},
---       {"─", "FloatBorder"},
---       {"└", "FloatBorder"},
---       {"│", "FloatBorder"},
--- }
-
 local border = "double"
 local nvim_lsp = require("lspconfig")
 local lsp_signature = require("lsp_signature")
@@ -33,7 +22,6 @@ local on_attach_normal = function(client, bufnr)
 		vim.lsp.handlers.hover,
 		{ border = border, focusable = false }
 	)
-	-- require('completion').on_attach()
 
 	local lspsaga = require("lspsaga")
 	lspsaga.init_lsp_saga({
@@ -59,7 +47,6 @@ local on_attach_no_formatting = function(client, bufnr)
 		vim.lsp.handlers.hover,
 		{ border = border, focusable = false }
 	)
-	-- require('completion').on_attach()
 
 	local lspsaga = require("lspsaga")
 	lspsaga.init_lsp_saga({
