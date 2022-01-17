@@ -67,7 +67,8 @@ return require("packer").startup({
 		-- use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
 		use({ "jose-elias-alvarez/null-ls.nvim" })
 		use({ "tjdevries/nlua.nvim" })
-		use("tami5/lspsaga.nvim")
+		use({ "tami5/lspsaga.nvim" })
+		use({ "folke/trouble.nvim" })
 
 		-- Completion
 		use({ "hrsh7th/nvim-cmp" })

@@ -13,6 +13,20 @@ lsp_signature.setup({
 	floating_window_above_cur_line = false,
 })
 
+local lspsaga = require("lspsaga")
+lspsaga.init_lsp_saga({
+	finder_action_keys = {
+		quit = "<Esc>",
+		open = "<cr>",
+	},
+	code_action_keys = {
+		quit = "<Esc>",
+	},
+	rename_action_keys = {
+		quit = "<Esc>",
+	},
+})
+
 local on_attach_normal = function(client, bufnr)
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 		vim.lsp.handlers.hover,
@@ -22,20 +36,6 @@ local on_attach_normal = function(client, bufnr)
 		vim.lsp.handlers.hover,
 		{ border = border, focusable = false }
 	)
-
-	local lspsaga = require("lspsaga")
-	lspsaga.init_lsp_saga({
-		finder_action_keys = {
-			quit = "<Esc>",
-		},
-		code_action_keys = {
-			quit = "<Esc>",
-		},
-		rename_action_keys = {
-			quit = "<Esc>",
-		},
-	})
-
 end
 
 local on_attach_no_formatting = function(client, bufnr)
@@ -48,22 +48,8 @@ local on_attach_no_formatting = function(client, bufnr)
 		{ border = border, focusable = false }
 	)
 
-	local lspsaga = require("lspsaga")
-	lspsaga.init_lsp_saga({
-		finder_action_keys = {
-			quit = "<Esc>",
-		},
-		code_action_keys = {
-			quit = "<Esc>",
-		},
-		rename_action_keys = {
-			quit = "<Esc>",
-		},
-	})
-
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
-
+	client.resolved_capabilities.document_formatting = false
+	client.resolved_capabilities.document_range_formatting = false
 end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -147,8 +133,8 @@ nvim_lsp.yamlls.setup({
 })
 
 nvim_lsp.gopls.setup({
-  on_attach = on_attach_no_formatting,
-  capabilities = capabilities,
+	on_attach = on_attach_no_formatting,
+	capabilities = capabilities,
 })
 -- local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls', 'jsonnet_ls', 'sumneko_lua' }
 local servers = { "rust_analyzer", "bashls", "jsonnet_ls" }
@@ -204,6 +190,10 @@ vim.diagnostic.config({
 	virtual_text = {
 		prefix = "●", -- Could be '●', '▎', 'x', '■'
 	},
+})
+
+require("trouble").setup({
+	height = 4,
 })
 
 return M

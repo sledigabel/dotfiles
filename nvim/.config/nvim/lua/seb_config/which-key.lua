@@ -1,5 +1,13 @@
 local wk = require("which-key")
-wk.setup({})
+wk.setup({
+	plugins = {
+		marks = false,
+		registers = false,
+	},
+	window = {
+		border = "single",
+	},
+})
 
 -- Leader key normal mode
 wk.register({
@@ -36,7 +44,7 @@ wk.register({
 		g = { "<cmd>:Git<cr>", "Git" },
 		h = { "<cmd>lua require'lspsaga.provider'.lsp_finder()<cr>", "Saga Finder" },
 		i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Implementations" },
-		q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Diag list" },
+		q = { "<cmd>TroubleToggle<cr>", "Diag list" },
 		r = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
 		t = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type definition" },
 		w = {
@@ -74,14 +82,13 @@ wk.register({
 wk.register({
 	["gd"] = { "<Cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
 	["K"] = { "<Cmd>Lspsaga hover_doc<cr>", "Signature" },
-	["[g"] = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Prev diag" },
-	["]g"] = { "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", "Prev diag" },
+	["[g"] = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev diag" },
+	["]g"] = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next diag" },
+	["[b"] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
+	["]b"] = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
 }, { noremap = true, mode = "n" })
 
--- Various mappings, visual
--- vnoremap J :m '>+1<CR>gv=gv
--- vnoremap K :m '<-2<CR>gv=gv
 wk.register({
-  ["K"] = { ":m '<-2<CR>gv=gv", "Moves the selection one line up" },
+	["K"] = { ":m '<-2<CR>gv=gv", "Moves the selection one line up" },
 	["J"] = { ":m '>+1<CR>gv=gv", "Moves selection one line down" },
 }, { noremap = true, mode = "v" })

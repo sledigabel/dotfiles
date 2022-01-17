@@ -5,3 +5,10 @@ augroup JsonnetFiles
   autocmd BufReadPre *.libsonnet setfiletype jsonnet
 augroup END
 ]])
+
+vim.cmd([[
+augroup filetype_golang
+    autocmd!
+    autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+augroup END
+]])
