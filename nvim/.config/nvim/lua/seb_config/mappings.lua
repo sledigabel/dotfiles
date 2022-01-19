@@ -12,6 +12,7 @@ vim.o.splitright = true
 vim.o.textwidth = 0
 vim.o.wrapmargin = 0
 vim.o.shortmess = vim.o.shortmess .. "c"
+vim.o.swapfile = true
 
 -- search
 vim.o.hlsearch = false
