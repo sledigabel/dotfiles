@@ -1,4 +1,4 @@
-vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "noinsert" }
 
 local lspkind = require("lspkind")
 lspkind.init()

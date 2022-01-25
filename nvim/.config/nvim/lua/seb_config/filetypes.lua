@@ -6,9 +6,10 @@ augroup JsonnetFiles
 augroup END
 ]])
 
-vim.cmd([[
-augroup filetype_golang
-    autocmd!
-    autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
-augroup END
-]])
+-- vim.cmd([[
+-- augroup filetype_golang
+--     autocmd!
+--     autocmd BufWritePre *.go :silent! lua require('go.format').gofmt()
+--     autocmd BufWritePre *.go :silent! lua require('go.format').goimport()
+-- augroup END
+-- ]])

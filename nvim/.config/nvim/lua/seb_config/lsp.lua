@@ -132,10 +132,10 @@ nvim_lsp.yamlls.setup({
 	},
 })
 
-nvim_lsp.gopls.setup({
-	on_attach = on_attach_no_formatting,
-	capabilities = capabilities,
-})
+-- nvim_lsp.gopls.setup({
+-- 	on_attach = on_attach_no_formatting,
+-- 	capabilities = capabilities,
+-- })
 -- local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls', 'jsonnet_ls', 'sumneko_lua' }
 local servers = { "rust_analyzer", "bashls", "jsonnet_ls" }
 for _, lsp in ipairs(servers) do

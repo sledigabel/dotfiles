@@ -112,6 +112,9 @@ return require("packer").startup({
 
 		-- Which key
 		use({ "folke/which-key.nvim" })
+
+		-- Go
+		use({ "ray-x/go.nvim" })
 		-- bootstrapping packer
 		if packer_bootstrap then
 			require("packer").sync()
