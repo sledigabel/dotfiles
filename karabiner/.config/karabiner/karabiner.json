@@ -50,11 +50,7 @@
                                             "name": "vim_mode",
                                             "value": 1
                                         }
-                                    },
-                                    {
-                                        "shell_command": "osascript -e 'display notification \"Release [caps lock] to leave\" with title \"-- NORMAL --\"'"
-                                    }
-                                ],
+                                    }                                ],
                                 "type": "basic"
                             },
                             {
@@ -77,11 +73,7 @@
                                             "name": "vim_mode",
                                             "value": 0
                                         }
-                                    },
-                                    {
-                                        "shell_command": "osascript -e 'display notification with title \"-- INSERT --\"'"
-                                    }
-                                ],
+                                    }                                ],
                                 "type": "basic"
                             }
                         ]
