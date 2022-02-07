@@ -127,6 +127,11 @@ nvim_lsp.yamlls.setup({
 		yaml = {
 			schemas = {
 				["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+				["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/docker-compose.yml",
+				["https://goreleaser.com/static/schema.json"] = "/.goreleaser.yml",
+				["https://json.schemastore.org/golangci-lint.json"] = { "/.golangci.yml", "/.golangci.yaml" },
+				["https://json.schemastore.org/chart.json"] = { "/Chart.yml", "/Chart.yaml" },
+				["kubernetes"] = "/*",
 			},
 		},
 	},

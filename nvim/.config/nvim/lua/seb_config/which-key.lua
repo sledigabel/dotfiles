@@ -92,3 +92,8 @@ wk.register({
 	["K"] = { ":m '<-2<CR>gv=gv", "Moves the selection one line up" },
 	["J"] = { ":m '>+1<CR>gv=gv", "Moves selection one line down" },
 }, { noremap = true, mode = "v" })
+
+wk.register({
+	["<C-e>"] = { "<esc>A", "Skips to the end of the line" },
+	["<C-a>"] = { "<esc>I", "Get back to the beginning of the line" },
+}, { noremap = true, mode = "i" })
