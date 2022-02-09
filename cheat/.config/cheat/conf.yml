@@ -1,0 +1,10 @@
+---
+cheatpaths:
+  - name: "community"
+    path: "~/dev/perso/cheatsheets"
+    tags: ["community"]
+    readonly: true
+  - name: "personal"
+    path: "~/dev/perso/personal_cheatsheets"
+    tags: ["perso"]
+    readonly: false
