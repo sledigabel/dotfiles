@@ -96,4 +96,8 @@ wk.register({
 wk.register({
 	["<C-e>"] = { "<esc>A", "Skips to the end of the line" },
 	["<C-a>"] = { "<esc>I", "Get back to the beginning of the line" },
+	["<C-j>"] = { '<esc>:lua require("tmux").move_bottom()<cr>', "Window down" },
+	["<C-h>"] = { '<esc>:lua require("tmux").move_left()<cr>', "Window left" },
+	["<C-k>"] = { '<esc>:lua require("tmux").move_top()<cr>', "Window up" },
+	["<C-l>"] = { '<esc>:lua require("tmux").move_right()<cr>', "Window right" },
 }, { noremap = true, mode = "i" })
