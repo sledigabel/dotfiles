@@ -131,7 +131,7 @@ nvim_lsp.yamlls.setup({
 				["https://goreleaser.com/static/schema.json"] = "/.goreleaser.yml",
 				["https://json.schemastore.org/golangci-lint.json"] = { "/.golangci.yml", "/.golangci.yaml" },
 				["https://json.schemastore.org/chart.json"] = { "/Chart.yml", "/Chart.yaml" },
-				["kubernetes"] = "/*",
+				-- ["kubernetes"] = "/*",
 			},
 		},
 	},
