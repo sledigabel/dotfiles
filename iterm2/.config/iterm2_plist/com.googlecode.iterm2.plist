@@ -3668,7 +3668,7 @@
 				<real>1</real>
 			</dict>
 			<key>Blinking Cursor</key>
-			<false/>
+			<true/>
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
@@ -4070,7 +4070,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>JetBrainsMonoNerdFontCo-Regular 15</string>
+			<string>JetBrainsMonoNerdFontCompleteM-Regular 15</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
