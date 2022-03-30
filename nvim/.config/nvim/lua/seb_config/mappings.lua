@@ -13,6 +13,9 @@ vim.o.textwidth = 0
 vim.o.wrapmargin = 0
 vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.swapfile = true
+vim.cmd([[
+  set signcolumn=yes
+]])
 
 -- search
 vim.o.hlsearch = false

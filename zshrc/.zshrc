@@ -51,12 +51,13 @@ setopt zle
 export EDITOR=nvim
 export FZF_DEFAULT_OPTS="--layout=reverse --preview-window='right:60%' --preview 'bat' --border=rounded"
 export GOPATH="$HOME/dev/go"
+# export GOROOT=$(${GOPATH}/bin/go1.17 env GOROOT)
 export GPG_TTY=$(tty)
 export HISTFILE=~/.zsh_history
 export HISTSIZE=5000
 export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 export LC_ALL=en_GB.UTF-8
-export PATH="/Users/sebastienledigabel/.pyenv/shims:${PATH}:${HOME}/.bin:${GOPATH}/bin:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:$(npm bin)"
+export PATH="/Users/sebastienledigabel/.pyenv/shims:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:$(npm bin)"
 export SAVEHIST=5000
 # export TERM="xterm-256color"
 export ZSH=${HOME}/.oh-my-zsh
