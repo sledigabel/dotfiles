@@ -40,6 +40,7 @@ vim.o.directory = "/Users/sebastienledigabel/.vim/tmp/"
 -- highlight the yanking
 vim.cmd([[au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}]])
 
+
 vim.api.nvim_set_keymap("v", "<lt>", "<lt>gv", { noremap = true })
 vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true })
 

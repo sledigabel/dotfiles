@@ -35,7 +35,7 @@ local sources = {
 	null_ls.builtins.formatting.shfmt,
 	null_ls.builtins.formatting.sqlformat,
 	null_ls.builtins.formatting.stylelint,
-	null_ls.builtins.formatting.stylua,
+	-- null_ls.builtins.formatting.stylua,
 	null_ls.builtins.formatting.terraform_fmt,
 }
 
