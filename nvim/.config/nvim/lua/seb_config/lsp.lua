@@ -57,7 +57,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 nvim_lsp.pylsp.setup({
   on_attach = on_attach_normal,
-  cmd = { "/Users/sebastienledigabel/.pyenv/shims/pylsp" },
+  -- cmd = { "/Users/sebastienledigabel/.pyenv/shims/pylsp" },
   capabilities = capabilities,
   settings = {
     pylsp = {
@@ -132,6 +132,7 @@ nvim_lsp.yamlls.setup({
         ["https://json.schemastore.org/golangci-lint.json"] = { "/.golangci.yml", "/.golangci.yaml" },
         ["https://json.schemastore.org/chart.json"] = { "/Chart.yml", "/Chart.yaml" },
         -- ["kubernetes"] = "/*",
+        ["/Users/sebastienledigabel/temp/catalog-schema.json"] = { "/.catalog.yml" },
       },
     },
   },

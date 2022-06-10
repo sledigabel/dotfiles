@@ -61,6 +61,10 @@ export PATH="/Users/sebastienledigabel/.pyenv/shims:${HOME}/.bin:${GOPATH}/bin:$
 export SAVEHIST=5000
 # export TERM="xterm-256color"
 export ZSH=${HOME}/.oh-my-zsh
+export VIRTUALENVWRAPPER_VIRTUALENV=/Users/sebastienledigabel/.pyenv/shims/virtualenv
+export VIRTUALENVWRAPPER_PYTHON="/Users/sebastienledigabel/.pyenv/shims/python3"
+export CC=`which gcc-11`
+export WORKON_HOME=~/.virtualenvs
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
 # for zsh-highlighters
@@ -71,6 +75,7 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/h
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # for virtualenvwrapper
 [ -e "/usr/local/bin/virtualenvwrapper.sh" ] && source /usr/local/bin/virtualenvwrapper.sh
+# [ -e "/Users/sebastienledigabel/.pyenv/shims/virtualenvwrapper.sh" ] && source /Users/sebastienledigabel/.pyenv/shims/virtualenvwrapper.sh
 # iterm2 integration
  [ -f "${HOME}/.iterm2_shell_integration.zsh" ] && source "${HOME}/.iterm2_shell_integration.zsh"
 # extra sources

@@ -28,6 +28,7 @@ cmp.setup({
 		["<up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
 		["<down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
 		["<C-y>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
+    ['<C-x><C-d>'] = cmp.mapping.complete(),
 	},
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
