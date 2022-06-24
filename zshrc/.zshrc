@@ -17,6 +17,7 @@ then
    ZSH_THEME="sorin"
   fi
 fi
+# ZSH_THEME="sorin"
 
 
 # http://zsh.sourceforge.net/Doc/Release/Options.html#Options
@@ -73,7 +74,7 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/h
 # for zsh-highlighters
 [ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # for zsh-git-prompt
-[ -f "/usr/local/opt/zsh-git-prompt/zshrc.sh" ] && source "/usr/local/opt/zsh-git-prompt/zshrc.sh"
+# [ -f "/usr/local/opt/zsh-git-prompt/zshrc.sh" ] && source "/usr/local/opt/zsh-git-prompt/zshrc.sh"
 # for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # for virtualenvwrapper
@@ -112,33 +113,33 @@ gitlog() {
 
 
 plugins=(
-  aws
+  # aws
   brew
   colorize
   colored-man-pages
   docker
-  docker-compose
-  git
-  git-extras
-  golang
-  helm
-  kubectl
-  macos
-  minikube
-  node
-  npm
-  ruby
-  rvm
-  rbenv
+  # docker-compose
+  # git
+  # git-extras
+  # golang
+  # helm
+  # kubectl
+  # macos
+  # minikube
+  # node
+  # npm
+  # ruby
+  # rvm
+  # rbenv
   pip
   python
   history
   httpie
   safe-paste
   tmux
-  virtualenv
+  # virtualenv
   # virtualenvwrapper
-  zsh-autosuggestions
+  # zsh-autosuggestions
   # zsh-syntax-highlighting
 )
 
