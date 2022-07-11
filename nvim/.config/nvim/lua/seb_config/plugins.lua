@@ -45,6 +45,7 @@ return require("packer").startup({
     use({ "aserowy/tmux.nvim" })
 
     -- Themes
+    use({ "folke/tokyonight.nvim" })
     use({ "Mofiqul/vscode.nvim" })
     use({
       "catppuccin/nvim",
@@ -84,8 +85,6 @@ return require("packer").startup({
     use({ "hrsh7th/cmp-nvim-lua" })
     use({ "saadparwaiz1/cmp_luasnip" })
 
-    -- Statusline
-    use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 
     -- Git
     use({ "tpope/vim-fugitive" })
@@ -119,6 +118,10 @@ return require("packer").startup({
 
     -- Go
     use({ "ray-x/go.nvim" })
+
+    -- Statusline
+    use({ "nvim-lualine/lualine.nvim", requires = { { "kyazdani42/nvim-web-devicons", opt = true }, { "catppuccin" } } })
+
     -- bootstrapping packer
     if packer_bootstrap then
       require("packer").sync()
