@@ -120,7 +120,7 @@ return require("packer").startup({
     use({ "ray-x/go.nvim" })
 
     -- Statusline
-    use({ "nvim-lualine/lualine.nvim", requires = { { "kyazdani42/nvim-web-devicons", opt = true }, { "catppuccin" } } })
+    use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 
     -- bootstrapping packer
     if packer_bootstrap then

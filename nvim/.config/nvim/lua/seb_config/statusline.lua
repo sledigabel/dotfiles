@@ -12,7 +12,8 @@ require("lualine").setup({
     globalstatus = true,
     theme = mod_theme,
     section_separators = '',
-    component_separators = '|',
+    -- component_separators = '|',
+    component_separators = '',
     -- section_separators = { left = '', right = '' },
     -- component_separators = { left = '', right = '' },
     -- section_separators = { left = '', right = '' },
@@ -25,7 +26,8 @@ require("lualine").setup({
     lualine_b = {
       {
         "branch",
-        icon = "",
+        -- icon = "",
+        icon = "",
         padding = 2,
       },
       {
@@ -60,7 +62,9 @@ require("lualine").setup({
     },
     lualine_c = {
     },
-    lualine_x = { "filetype" },
+    lualine_x = { "filetype", "progress" },
+    lualine_y = {},
+    lualine_z = { { "location", separator = { left =  '' } } },
   },
 })
 
