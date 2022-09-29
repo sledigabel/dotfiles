@@ -56,15 +56,20 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protoco
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 nvim_lsp.pylsp.setup({
-  on_attach = on_attach_normal,
+  on_attach = on_attach_no_formatting,
   -- cmd = { "/Users/sebastienledigabel/.pyenv/shims/pylsp" },
   capabilities = capabilities,
   settings = {
     pylsp = {
       plugins = {
-        configurationSources = { "flake8" },
-        flake8 = { enabled = true },
-        pycodestyle = { enabled = false },
+        -- configurationSources = { "flake8", "black" },
+        flake8 = { enabled = false, },
+        black = { enabled = true },
+        pycodestyle = {
+          enabled = true,
+          maxLineLength = 160,
+        },
+        yapf = { enabled = false },
       },
     },
   },

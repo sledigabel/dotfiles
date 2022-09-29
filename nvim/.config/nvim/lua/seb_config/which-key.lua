@@ -5,7 +5,7 @@ wk.setup({
     registers = false,
   },
   window = {
-    border = "single",
+    border = "double",
   },
 })
 
