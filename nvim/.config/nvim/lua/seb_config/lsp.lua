@@ -48,8 +48,10 @@ local on_attach_no_formatting = function(client, bufnr)
     { border = border, focusable = false }
   )
 
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
+  -- client.resolved_capabilities.document_formatting = false
+  -- client.resolved_capabilities.document_range_formatting = false
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
 end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())

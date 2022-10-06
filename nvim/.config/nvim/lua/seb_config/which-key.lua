@@ -56,7 +56,7 @@ wk.register({
     },
   },
   l = {
-    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Formatting" },
+    f = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "Formatting" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Set Location list" },
   },
   p = {
