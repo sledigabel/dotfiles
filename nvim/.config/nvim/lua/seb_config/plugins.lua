@@ -122,6 +122,32 @@ return require("packer").startup({
     -- Statusline
     use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 
+    -- Debug
+    use { "mfussenegger/nvim-dap", }
+    -- use { "Pocco81/dap-buddy.nvim" }
+    use { "theHamsta/nvim-dap-virtual-text" }
+    use { "rcarriga/nvim-dap-ui" }
+    use { "mfussenegger/nvim-dap-python" }
+    use { "nvim-telescope/telescope-dap.nvim" }
+    use { "leoluz/nvim-dap-go" }
+    use { "jbyuki/one-small-step-for-vimkind" }
+    --   opt = true,
+    --   event = "BufReadPre",
+    --   module = { "dap" },
+    --   wants = { "nvim-dap-virtual-text", "DAPInstall.nvim", "nvim-dap-ui", "nvim-dap-python", "which-key.nvim" },
+    --   requires = {
+    --     { "Pocco81/dap-buddy.nvim"},
+    --     "theHamsta/nvim-dap-virtual-text",
+    --     "rcarriga/nvim-dap-ui",
+    --     "mfussenegger/nvim-dap-python",
+    --     "nvim-telescope/telescope-dap.nvim",
+    --     { "leoluz/nvim-dap-go", module = "dap-go" },
+    --     { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+    --   },
+    --   config = function()
+    --     require("config.dap").setup()
+    --   end,
+    -- }
     -- bootstrapping packer
     if packer_bootstrap then
       require("packer").sync()
