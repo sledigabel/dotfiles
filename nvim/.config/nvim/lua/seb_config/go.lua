@@ -1,12 +1,16 @@
+local navic = require 'nvim-navic'
+
 local on_attach_normal = function(client, bufnr)
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-		vim.lsp.handlers.hover,
-		{ border = "single", focusable = false }
-	)
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-		vim.lsp.handlers.hover,
-		{ border = "single", focusable = false }
-	)
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover,
+    { border = "single", focusable = false }
+  )
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.hover,
+    { border = "single", focusable = false }
+  )
+
+  navic.attach(client, bufnr)
 end
 
 require("go").setup({

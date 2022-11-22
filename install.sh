@@ -10,3 +10,7 @@ defaults write com.knollsoft.Rectangle gapSize 20
 
 defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms), can be 10
 defaults write -g KeyRepeat -int 2 # normal minimum is 2 (30 ms), can be 1
+
+# trying to help Rectangle to set up with right shortcuts
+defaults write "Apple Global Domain" NSUserKeyEquivalents -dict-add "Hide Others" ""
+

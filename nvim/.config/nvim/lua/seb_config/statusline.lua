@@ -1,16 +1,33 @@
-local mod_theme = require("lualine.themes.auto")
-local global_background = mod_theme.inactive.c.bg
+-- local mod_theme = require("lualine.themes.auto")
+-- local global_background = mod_theme.inactive.c.bg
+
+local tundra_theme = require("lualine.themes.tundra")
+
+local cp = require('nvim-tundra.palette.' .. vim.g.tundra_biome)
+
+tundra_theme.normal = {
+  a = { fg = cp.indigo._900, bg = cp.indigo._500, gui = 'bold' },
+  b = { fg = cp.indigo._500, bg = cp.transparent, gui = 'bold' },
+  c = { fg = cp.indigo._300, bg = cp.transparent },
+}
+
 -- print(global_background)
-mod_theme.normal.b.bg = global_background
-mod_theme.insert.b.bg = global_background
-mod_theme.replace.b.bg = global_background
-mod_theme.visual.b.bg = global_background
-mod_theme.command.b.bg = global_background
+-- mod_theme.normal.b.bg = global_background
+-- mod_theme.insert.b.bg = global_background
+-- mod_theme.replace.b.bg = global_background
+-- mod_theme.visual.b.bg = global_background
+-- mod_theme.command.b.bg = global_background
+-- mod_theme.normal.b.bg = global_background
+-- mod_theme.insert.b.bg = global_background
+-- mod_theme.replace.b.bg = global_background
+-- mod_theme.visual.b.bg = global_background
+-- mod_theme.command.b.bg = global_background
 
 require("lualine").setup({
   options = {
     globalstatus = true,
-    theme = mod_theme,
+    theme = tundra_theme,
+    -- theme = tundra_theme,
     section_separators = '',
     -- component_separators = '|',
     component_separators = '',
@@ -68,4 +85,4 @@ require("lualine").setup({
   },
 })
 
--- require("galaxyline.themes.eviline"){}
+vim.o.winbar = "     %-50(%#BufferLineHintSelected#%{%v:lua.require'nvim-navic'.get_location()%}%)"

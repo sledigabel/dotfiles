@@ -52,7 +52,7 @@ setopt zle
 export EDITOR=nvim
 export FZF_DEFAULT_OPTS="--layout=reverse --preview-window='right:60%' --preview 'bat' --border=rounded"
 export GOPATH="$HOME/dev/go"
-# export GOROOT=$(${GOPATH}/bin/go1.17 env GOROOT)
+
 export GPG_TTY=$(tty)
 export HISTFILE=~/.zsh_history
 export HISTSIZE=5000
@@ -65,9 +65,11 @@ eval "$(pyenv virtualenv-init -)"
 export SAVEHIST=5000
 # export TERM="xterm-256color"
 export ZSH=${HOME}/.oh-my-zsh
-# export VIRTUALENVWRAPPER_VIRTUALENV=/Users/sebastienledigabel/.pyenv/shims/virtualenv
-# export VIRTUALENVWRAPPER_PYTHON="/Users/sebastienledigabel/.pyenv/shims/python3"
-export CC=`which gcc-11`
+export VIRTUALENVWRAPPER_VIRTUALENV=/Users/sebastienledigabel/.pyenv/shims/virtualenv
+export VIRTUALENVWRAPPER_PYTHON="/Users/sebastienledigabel/.pyenv/shims/python3"
+# export CC=`which gcc-11`
+# export LDFLAGS="-L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
+# export CPPFLAGS="-I$(brew --prefix zlib)/include -I$(brew --prefix bzip2)/include"
 export WORKON_HOME=~/.virtualenvs
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
@@ -78,10 +80,9 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/h
 # for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # for virtualenvwrapper
-[ -e "/usr/local/bin/virtualenvwrapper.sh" ] && source /usr/local/bin/virtualenvwrapper.sh
-# [ -e "/Users/sebastienledigabel/.pyenv/shims/virtualenvwrapper.sh" ] && source /Users/sebastienledigabel/.pyenv/shims/virtualenvwrapper.sh
+[ -e "/opt/homebrew/bin/virtualenvwrapper.sh" ] && source /opt/homebrew/bin/virtualenvwrapper.sh
 # iterm2 integration
- [ -f "${HOME}/.iterm2_shell_integration.zsh" ] && source "${HOME}/.iterm2_shell_integration.zsh"
+[ -f "${HOME}/.iterm2_shell_integration.zsh" ] && source "${HOME}/.iterm2_shell_integration.zsh"
 # extra sources
 if [ -d "${HOME}/.source" ]
 then
@@ -114,6 +115,7 @@ gitlog() {
 
 plugins=(
   # aws
+  # asdf
   brew
   colorize
   colored-man-pages
@@ -168,12 +170,3 @@ source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
 
-_saml2aws_bash_autocomplete() {
-    local cur prev opts base
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    opts=$( ${COMP_WORDS[0]} --completion-bash ${COMP_WORDS[@]:1:$COMP_CWORD} )
-    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-    return 0
-}
-complete -F _saml2aws_bash_autocomplete saml2aws

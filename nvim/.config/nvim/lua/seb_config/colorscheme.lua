@@ -31,7 +31,6 @@ catppuccin.setup({
 -- vim.g.catppuccin_flavour = "moccha"
 vim.g.catppuccin_flavour = "frappe"
 
-vim.cmd([[colorscheme catppuccin]])
 -- vim.cmd([[colorscheme tokyonight]])
 
 -- vim.cmd([[colorscheme gruvbox-material]])
@@ -40,6 +39,23 @@ vim.cmd([[colorscheme catppuccin]])
 -- vim.g.gruvbox_material_enable_bold = true
 
 -- vim.cmd([[colorscheme OceanicNext]])
+
+require('nvim-tundra').setup({
+  transparent_background = true,
+  plugins = {
+    lsp = true,
+    treesitter = true,
+    nvimtree = true,
+    cmp = true,
+    context = true,
+    gitsigns = true,
+    telescope = true,
+  }
+})
+
+
+vim.opt.background = 'dark'
+vim.cmd('colorscheme tundra')
 
 -- Set transparency
 vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])

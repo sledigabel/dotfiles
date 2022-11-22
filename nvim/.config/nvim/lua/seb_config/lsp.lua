@@ -5,6 +5,9 @@ local border = "double"
 local nvim_lsp = require("lspconfig")
 local lsp_signature = require("lsp_signature")
 
+local navic = require("nvim-navic")
+navic.setup {}
+
 lsp_signature.setup({
   bind = true, -- This is mandatory, otherwise border config won't get registered.
   handler_opts = {
@@ -36,6 +39,7 @@ local on_attach_normal = function(client, bufnr)
     vim.lsp.handlers.hover,
     { border = border, focusable = false }
   )
+  navic.attach(client, bufnr)
 end
 
 local on_attach_no_formatting = function(client, bufnr)
@@ -47,6 +51,9 @@ local on_attach_no_formatting = function(client, bufnr)
     vim.lsp.handlers.hover,
     { border = border, focusable = false }
   )
+  -- if client.server_capabilities.documentSymbolProvider then
+  navic.attach(client, bufnr)
+  -- end
 
   -- client.resolved_capabilities.document_formatting = false
   -- client.resolved_capabilities.document_range_formatting = false
@@ -86,6 +93,7 @@ nvim_lsp.pylsp.setup({
 nvim_lsp.jsonls.setup({
   on_attach = on_attach_normal,
   capabilities = capabilities,
+  cmd = { "/Users/sebastienledigabel/node_modules/.bin/vscode-json-languageserver" },
   commands = {
     Format = {
       function()
@@ -242,5 +250,7 @@ vim.diagnostic.config({
 require("trouble").setup({
   height = 4,
 })
+
+require('mason').setup({})
 
 return M

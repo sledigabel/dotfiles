@@ -54,6 +54,7 @@ return require("packer").startup({
     -- use({ "sainnhe/gruvbox-material" })
     use({ "mhartington/oceanic-next" })
     use({ "ellisonleao/gruvbox.nvim" })
+    use({ "sam4llis/nvim-tundra" })
 
     -- Comment
     use({ "numToStr/Comment.nvim" })
@@ -74,6 +75,9 @@ return require("packer").startup({
     use({ "tjdevries/nlua.nvim" })
     use({ "tami5/lspsaga.nvim" })
     use({ "folke/trouble.nvim" })
+    -- context
+    use { "SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig" }
+    use { "williamboman/mason.nvim" }
 
     -- Completion
     use({ "hrsh7th/nvim-cmp" })
