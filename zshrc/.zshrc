@@ -59,9 +59,10 @@ export HISTSIZE=5000
 export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 export LC_ALL=en_GB.UTF-8
 # export PATH="/Users/sebastienledigabel/.pyenv/shims:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:$(npm bin)"
-export PATH="/Users/sebastienledigabel/.pyenv/bin:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:$(npm bin)"
+export PATH="/Users/sebastienledigabel/.pyenv/bin:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:${TMUX_SESSION_DIR:-/Users/sebastienledigabel}/node_modules/.bin"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# https://github.com/pyenv/pyenv-virtualenv/issues/259#issuecomment-1007432346
+eval "$(pyenv virtualenv-init -| sed s/precmd/precwd/g)"
 export SAVEHIST=5000
 # export TERM="xterm-256color"
 export ZSH=${HOME}/.oh-my-zsh
@@ -125,7 +126,7 @@ plugins=(
   # git-extras
   # golang
   # helm
-  kubectl
+  # kubectl
   # macos
   # minikube
   # node
@@ -133,8 +134,8 @@ plugins=(
   # ruby
   # rvm
   # rbenv
-  pip
-  python
+  # pip
+  # python
   history
   httpie
   safe-paste
@@ -166,6 +167,7 @@ fi
 
 # run OMZ
 source $ZSH/oh-my-zsh.sh
+# eval "$(starship init zsh)"
 
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
