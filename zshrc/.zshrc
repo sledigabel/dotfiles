@@ -66,7 +66,7 @@ export SAVEHIST=5000
 # export TERM="xterm-256color"
 export ZSH=${HOME}/.oh-my-zsh
 export VIRTUALENVWRAPPER_VIRTUALENV=/Users/sebastienledigabel/.pyenv/shims/virtualenv
-export VIRTUALENVWRAPPER_PYTHON="/Users/sebastienledigabel/.pyenv/shims/python3"
+# export VIRTUALENVWRAPPER_PYTHON="/Users/sebastienledigabel/.pyenv/shims/python3"
 # export CC=`which gcc-11`
 # export LDFLAGS="-L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
 # export CPPFLAGS="-I$(brew --prefix zlib)/include -I$(brew --prefix bzip2)/include"
@@ -125,7 +125,7 @@ plugins=(
   # git-extras
   # golang
   # helm
-  # kubectl
+  kubectl
   # macos
   # minikube
   # node

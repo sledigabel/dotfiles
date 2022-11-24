@@ -54,7 +54,7 @@ require('nvim-tundra').setup({
 })
 
 
-vim.opt.background = 'dark'
+-- vim.opt.background = 'dark'
 vim.cmd('colorscheme tundra')
 
 -- Set transparency
