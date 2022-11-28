@@ -66,7 +66,8 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 nvim_lsp.pylsp.setup({
-  on_attach = on_attach_no_formatting,
+  -- on_attach = on_attach_no_formatting,
+  on_attach = on_attach_normal,
   -- cmd = { "/Users/sebastienledigabel/.pyenv/shims/pylsp" },
   capabilities = capabilities,
   settings = {

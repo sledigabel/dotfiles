@@ -60,6 +60,7 @@ return require("packer").startup({
     use({ "numToStr/Comment.nvim" })
 
     -- Search
+    -- TODO
     use('rktjmp/highlight-current-n.nvim')
 
     -- Git signs
@@ -94,7 +95,7 @@ return require("packer").startup({
     use({ "tpope/vim-fugitive" })
 
     -- Formatter
-    use({ "mhartington/formatter.nvim" })
+    -- use({ "mhartington/formatter.nvim" })
 
     -- Tree
     use({
@@ -127,14 +128,14 @@ return require("packer").startup({
     use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 
     -- Debug
-    use { "mfussenegger/nvim-dap", }
-    -- use { "Pocco81/dap-buddy.nvim" }
-    use { "theHamsta/nvim-dap-virtual-text" }
-    use { "rcarriga/nvim-dap-ui" }
-    use { "mfussenegger/nvim-dap-python" }
-    use { "nvim-telescope/telescope-dap.nvim" }
-    use { "leoluz/nvim-dap-go" }
-    use { "jbyuki/one-small-step-for-vimkind" }
+    -- use { "mfussenegger/nvim-dap", }
+    -- -- use { "Pocco81/dap-buddy.nvim" }
+    -- use { "theHamsta/nvim-dap-virtual-text" }
+    -- use { "rcarriga/nvim-dap-ui" }
+    -- use { "mfussenegger/nvim-dap-python" }
+    -- use { "nvim-telescope/telescope-dap.nvim" }
+    -- use { "leoluz/nvim-dap-go" }
+    -- use { "jbyuki/one-small-step-for-vimkind" }
     --   opt = true,
     --   event = "BufReadPre",
     --   module = { "dap" },
