@@ -18,6 +18,9 @@ lsp_signature.setup({
 
 local lspsaga = require("lspsaga")
 lspsaga.init_lsp_saga({
+  code_action_prompt = {
+    enable = false,
+  },
   finder_action_keys = {
     quit = "<Esc>",
     open = "<cr>",
@@ -65,23 +68,38 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+local pyenv_bin_path = os.getenv('PYENV_VIRTUAL_ENV')
+if pyenv_bin_path == nil then
+  pyenv_bin_path = "/Users/sebastienledigabel/.pyenv/shims"
+else
+  pyenv_bin_path = pyenv_bin_path .. "/bin"
+end
+
+print(pyenv_bin_path)
+
+vim.lsp.set_log_level("debug")
 nvim_lsp.pylsp.setup({
   -- on_attach = on_attach_no_formatting,
   on_attach = on_attach_normal,
-  -- cmd = { "/Users/sebastienledigabel/.pyenv/shims/pylsp" },
+  -- cmd = { "${PYENV_VIRTUAL_ENV}/bin/pylsp" },
+  cmd = { pyenv_bin_path .. "/pylsp" },
   capabilities = capabilities,
   settings = {
     pylsp = {
       plugins = {
         -- configurationSources = { "flake8", "black" },
-        flake8 = { enabled = false, },
+        configurationSources = { "pycodestyle" },
+        flake8 = {
+          enabled = false,
+          -- executable = pyenv_bin_path .. "/flake8",
+        },
         black = { enabled = true },
         pycodestyle = {
           enabled = true,
           maxLineLength = 160,
         },
         yapf = { enabled = false },
-      },
+      }
     },
   },
 })
@@ -252,6 +270,18 @@ require("trouble").setup({
   height = 4,
 })
 
-require('mason').setup({})
+-- require('mason').setup({})
+
+
+-- Java
+require'lspconfig'.jdtls.setup{}
+--
+--
+-- TODO: look into jdtls extended
+-- local config = {
+--   cmd = { '/opt/homebrew/bin/jdtls' },
+--   root_dir = vim.fs.dirname(vim.fs.find({ '.gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+-- }
+-- require('jdtls').start_or_attach(config)
 
 return M

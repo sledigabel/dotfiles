@@ -1,6 +1,7 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
+#
 
 PARENTPROCESS=$(ps -p `ps -p $$ -o ppid=` -o comm=)
 
@@ -168,6 +169,7 @@ fi
 # run OMZ
 source $ZSH/oh-my-zsh.sh
 # eval "$(starship init zsh)"
+. ~/.asdf/plugins/java/set-java-home.zsh
 
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit

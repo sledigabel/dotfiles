@@ -29,6 +29,8 @@ return require("packer").startup({
     use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/plenary.nvim" } } })
     use({ "nvim-telescope/telescope-github.nvim" })
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+    use({ "nvim-telescope/telescope-dap.nvim",
+      requires = { { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" } } })
 
     -- Surround
     use({
@@ -78,7 +80,7 @@ return require("packer").startup({
     use({ "folke/trouble.nvim" })
     -- context
     use { "SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig" }
-    use { "williamboman/mason.nvim" }
+    -- use { "williamboman/mason.nvim" }
 
     -- Completion
     use({ "hrsh7th/nvim-cmp" })
@@ -124,15 +126,18 @@ return require("packer").startup({
     -- Go
     use({ "ray-x/go.nvim" })
 
+    -- Java
+    use({ 'mfussenegger/nvim-jdtls' })
+
     -- Statusline
     use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 
     -- Debug
-    -- use { "mfussenegger/nvim-dap", }
+    use { "mfussenegger/nvim-dap", }
     -- -- use { "Pocco81/dap-buddy.nvim" }
-    -- use { "theHamsta/nvim-dap-virtual-text" }
-    -- use { "rcarriga/nvim-dap-ui" }
-    -- use { "mfussenegger/nvim-dap-python" }
+    use { "theHamsta/nvim-dap-virtual-text" }
+    use { "rcarriga/nvim-dap-ui" }
+    use { "mfussenegger/nvim-dap-python" }
     -- use { "nvim-telescope/telescope-dap.nvim" }
     -- use { "leoluz/nvim-dap-go" }
     -- use { "jbyuki/one-small-step-for-vimkind" }
@@ -144,7 +149,7 @@ return require("packer").startup({
     --     { "Pocco81/dap-buddy.nvim"},
     --     "theHamsta/nvim-dap-virtual-text",
     --     "rcarriga/nvim-dap-ui",
-    --     "mfussenegger/nvim-dap-python",
+    --     "mfussenegger/nvim-ap-python",
     --     "nvim-telescope/telescope-dap.nvim",
     --     { "leoluz/nvim-dap-go", module = "dap-go" },
     --     { "jbyuki/one-small-step-for-vimkind", module = "osv" },

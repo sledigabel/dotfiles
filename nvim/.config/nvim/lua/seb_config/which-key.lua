@@ -12,6 +12,19 @@ wk.setup({
 -- Leader key normal mode
 wk.register({
   b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+  B = {
+    name = "debugger",
+    b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Breakpoint", },
+    B = { "<cmd>Telescope dap list_breakpoints<cr>", "Breakpoint", },
+    c = { "<cmd>lua require('dap').continue()<cr>", "Continue", },
+    C = { "<cmd>Telescope dap commands<cr>", "Continue", },
+    i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into", },
+    o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over", },
+    O = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out", },
+    s = { "<cmd>lua require'dap'.close()<cr>", "Stop", },
+    p = { "<cmd>lua require('dap-python').test_method()<cr>", "Python test", },
+    u = { "<cmd>DapUiToggle<cr>", "UI Toggle", },
+  },
   c = {
     ["aw"] = {
       '<cmd>lua for _, win in ipairs(vim.api.nvim_list_wins()) do local config = vim.api.nvim_win_get_config(win); if config.relative ~= "" then vim.api.nvim_win_close(win, false) end end<cr>',
@@ -68,6 +81,7 @@ wk.register({
   },
   t = {
     name = "NvimTree", -- optional group name
+    d = { "<cmd>:DapUiToggle<cr>", "Toggle DAP UI" },
     t = { "<cmd>:NvimTreeToggle<cr>", "Toggle NvimTree" }, -- create a binding with label
   },
   y = { '"*y', "Copy to the clipboard" },
@@ -87,6 +101,8 @@ wk.register({
   ["]g"] = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next diag" },
   ["[b"] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
   ["]b"] = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
+  ["<C-u>"] = { "<C-u>zz", "scroll up" },
+  ["<C-d>"] = { "<C-d>zz", "scroll down" },
 }, { noremap = true, mode = "n" })
 
 wk.register({

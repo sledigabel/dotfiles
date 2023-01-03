@@ -40,4 +40,7 @@ local sources = {
   null_ls.builtins.formatting.terraform_fmt,
 }
 
-null_ls.setup({ sources = sources })
+null_ls.setup({
+  sources = sources,
+  debug = true,
+})
