@@ -125,7 +125,7 @@ plugins=(
   # docker-compose
   # git
   # git-extras
-  # golang
+  golang
   # helm
   # kubectl
   # macos
@@ -156,7 +156,7 @@ else
     zstyle :omz:plugins:ssh-agent agent-forwarding on
     # zstyle :omz:plugins:ssh-agent ssh-add-args -K
     zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain --apple-use-keychain
-    zstyle :omz:plugins:ssh-agent identities id_rsa_ss_github id_rsa_github_perso bitbucket
+    zstyle :omz:plugins:ssh-agent identities id_rsa_ss_github id_rsa_github_perso bitbucket id_vps
     # we are within the terminal but not in tmux yet. starting the ssh-agent in there.
     plugins=(
       ssh-agent

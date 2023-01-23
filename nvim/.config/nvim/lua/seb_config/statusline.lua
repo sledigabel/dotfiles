@@ -38,7 +38,8 @@ require("lualine").setup({
   },
   sections = {
     lualine_a = {
-      { 'mode', separator = { left = '', right = '' }, right_padding = 2, }
+      -- { 'mode', separator = { left = '', right = '' }, right_padding = 2, }
+      { 'mode', right_padding = 2, }
     },
     lualine_b = {
       {
@@ -81,7 +82,8 @@ require("lualine").setup({
     },
     lualine_x = { "filetype", "progress" },
     lualine_y = {},
-    lualine_z = { { "location", separator = { left =  '' } } },
+    -- lualine_z = { { "location", separator = { left = '' } } },
+    lualine_z = { { "location" } },
   },
 })
 

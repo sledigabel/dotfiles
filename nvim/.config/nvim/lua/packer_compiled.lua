@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/catppuccin",
     url = "https://github.com/catppuccin/nvim"
   },
+  ["cellular-automaton.nvim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/cellular-automaton.nvim",
+    url = "https://github.com/eandrju/cellular-automaton.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -128,6 +133,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
+  ["codeium.vim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/codeium.vim",
+    url = "https://github.com/Exafunction/codeium.vim"
   },
   ["gitlinker.nvim"] = {
     loaded = true,
@@ -183,6 +193,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  neovim = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/neovim",
+    url = "https://github.com/rose-pine/neovim"
   },
   ["nlua.nvim"] = {
     loaded = true,
@@ -283,6 +298,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["silicon.nvim"] = {
+    loaded = true,
+    path = "/Users/sebastienledigabel/.local/share/nvim/site/pack/packer/start/silicon.nvim",
+    url = "https://github.com/krivahtoo/silicon.nvim"
   },
   ["surround.nvim"] = {
     config = { "\27LJ\2\nf\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\19mappings_style\rsurround\20map_insert_mode\1\nsetup\rsurround\frequire\0" },

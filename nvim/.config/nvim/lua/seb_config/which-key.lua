@@ -50,6 +50,7 @@ wk.register({
   g = {
     name = "Lsp",
     a = { "<cmd>lua require('lspsaga.codeaction').code_action()<cr>", "CodeActions" },
+    c = { "<cmd>CodeiumToggle<cr>", "CodeActions" },
     d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
     D = { "<cmd>Lspsaga preview_definition<cr>", "Saga Definition" },
     e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
@@ -103,11 +104,15 @@ wk.register({
   ["]b"] = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
   ["<C-u>"] = { "<C-u>zz", "scroll up" },
   ["<C-d>"] = { "<C-d>zz", "scroll down" },
+  ["<C-s>"] = { ":w<cr>", "save" },
+  ["<C-p>"] = { "<cmd>lua require('telescope.builtin').git_files()<cr>", "git files" },
 }, { noremap = true, mode = "n" })
 
 wk.register({
   ["K"] = { ":m '<-2<CR>gv=gv", "Moves the selection one line up" },
   ["J"] = { ":m '>+1<CR>gv=gv", "Moves selection one line down" },
+  ["<lt>"] = { "<lt>gv", "Tab in" },
+  [">"] = { ">gv", "Tab out" },
 }, { noremap = true, mode = "v" })
 
 wk.register({
@@ -117,4 +122,7 @@ wk.register({
   ["<C-h>"] = { '<esc>:lua require("tmux").move_left()<cr>', "Window left" },
   ["<C-k>"] = { '<esc>:lua require("tmux").move_top()<cr>', "Window up" },
   ["<C-l>"] = { '<esc>:lua require("tmux").move_right()<cr>', "Window right" },
+  ["<C-s>"] = { '<esc>:w<cr>', "save" },
+  ["<C-x><C-p"] = { '<cmd>Telescope neoclip<CR>', "Neoclip" },
+
 }, { noremap = true, mode = "i" })

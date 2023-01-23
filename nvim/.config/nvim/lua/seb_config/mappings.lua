@@ -1,4 +1,3 @@
--- general
 -- vim.o.colorcolumn = "80"
 -- vim.cmd([[highlight ColorColumn ctermbg=#1E1E28 guibg=#1E1E28 ]])
 vim.o.formatoptions = "cqrn1"
@@ -41,19 +40,26 @@ vim.o.directory = "/Users/sebastienledigabel/.vim/tmp/"
 vim.cmd([[au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}]])
 
 
-vim.api.nvim_set_keymap("v", "<lt>", "<lt>gv", { noremap = true })
-vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true })
+-- Codeium
+vim.g.codeium_enabled = false
+-- function to check if Codeium is toggled
+function CheckCodeium()
+  if vim.g.codeium_enabled == nil then
+    return true
+  end
+  return vim.g.codeium_enabled
+end
 
--- CTRL-E
-vim.api.nvim_set_keymap("i", "<C-e>", "<Esc>A", { noremap = true })
-vim.api.nvim_set_keymap("i", "<C-a>", "<Esc>I", { noremap = true })
+function ToggleCodeium()
+  if CheckCodeium() then
+    vim.g.codeium_enabled = false
+  else
+    vim.g.codeium_enabled = true
+  end
+end
 
--- Savings
-vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", {})
-vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", {})
+-- Command to toggle Codeium
+vim.api.nvim_create_user_command("CodeiumToggle", ToggleCodeium, {})
 
--- Clipping
-vim.api.nvim_set_keymap("i", "<C-x><C-p>", "<cmd>Telescope neoclip<CR>", { noremap = true, silent = true })
-
--- CTRL-P
-vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>lua require('telescope.builtin').git_files()<cr>", { noremap = true })
+-- change the codeium highlight group
+vim.api.nvim_set_hl(0, 'CodeiumSuggestion', { fg = "#656c79", italic = true })

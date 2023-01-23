@@ -1,7 +1,6 @@
 require("nvim-tree").setup({
   hijack_cursor = true,
   view = {
-    -- 	auto_resize = true,
     adaptive_size = true,
     preserve_window_proportions = true
   },
