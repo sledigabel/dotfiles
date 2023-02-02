@@ -81,7 +81,7 @@ require("lualine").setup({
     lualine_c = {
     },
     lualine_x = { "filetype", "progress" },
-    lualine_y = {},
+    lualine_y = { "StatusCodeium()" },
     -- lualine_z = { { "location", separator = { left = '' } } },
     lualine_z = { { "location" } },
   },

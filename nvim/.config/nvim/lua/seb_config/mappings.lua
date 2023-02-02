@@ -42,6 +42,8 @@ vim.cmd([[au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearc
 
 -- Codeium
 vim.g.codeium_enabled = false
+vim.g.codeium_no_map_tab = true
+
 -- function to check if Codeium is toggled
 function CheckCodeium()
   if vim.g.codeium_enabled == nil then
@@ -55,6 +57,14 @@ function ToggleCodeium()
     vim.g.codeium_enabled = false
   else
     vim.g.codeium_enabled = true
+  end
+end
+
+function StatusCodeium()
+  if CheckCodeium() then
+    return "ﮧ"
+  else
+    return " "
   end
 end
 

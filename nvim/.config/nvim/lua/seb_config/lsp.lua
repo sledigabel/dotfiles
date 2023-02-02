@@ -128,6 +128,9 @@ nvim_lsp.jsonnet_ls.setup({
   cmd = { "/Users/sebastienledigabel/dev/go/bin/jsonnet-language-server" },
 })
 
+-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+require("neodev").setup({})
+
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -274,7 +277,7 @@ require("trouble").setup({
 
 
 -- Java
-require'lspconfig'.jdtls.setup{}
+require 'lspconfig'.jdtls.setup {}
 --
 --
 -- TODO: look into jdtls extended

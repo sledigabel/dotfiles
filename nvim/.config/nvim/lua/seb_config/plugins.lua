@@ -76,7 +76,8 @@ return require("packer").startup({
     use({ "onsails/lspkind-nvim" })
     -- use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
     use({ "jose-elias-alvarez/null-ls.nvim" })
-    use({ "tjdevries/nlua.nvim" })
+    use({ "folke/neodev.nvim" })
+    -- use({ "tjdevries/nlua.nvim" })
     use({ "tami5/lspsaga.nvim" })
     use({ "folke/trouble.nvim" })
     -- context

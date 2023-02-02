@@ -3,17 +3,26 @@
 --   commented = true,
 -- }
 -- --
+--
+--
+--
+--
 local dap, dapui = require "dap", require "dapui"
-
+--
 vim.fn.sign_define('DapBreakpoint',
   { text = '', texthl = "DapUIBreakpointsInfo", linehl = "DapUIBreakpointsInfo", numhl = "DapUIBreakpointsInfo" })
 vim.fn.sign_define('DapStopped',
   { text = '', texthl = "DapUIStop", linehl = "DapUIStop", numhl = "DapUIStop" })
-
+--
 dapui.setup({})
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end
+
+
+
+
+
 -- dap.listeners.before.event_terminated["dapui_config"] = function()
 --   dapui.close()
 -- end
@@ -23,9 +32,15 @@ end
 -- --
 -- --
 -- -- -- debuggers
+
+
+
 local dappython = require('dap-python')
 dappython.setup('~/.pyenv/shims/python')
 dappython.test_runner = 'pytest'
+
+
+
 --   -- require("config.dap.lua").setup()
 --   -- require("config.dap.python").setup()
 --   -- require("config.dap.rust").setup()

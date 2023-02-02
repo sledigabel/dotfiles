@@ -123,6 +123,14 @@ wk.register({
   ["<C-k>"] = { '<esc>:lua require("tmux").move_top()<cr>', "Window up" },
   ["<C-l>"] = { '<esc>:lua require("tmux").move_right()<cr>', "Window right" },
   ["<C-s>"] = { '<esc>:w<cr>', "save" },
-  ["<C-x><C-p"] = { '<cmd>Telescope neoclip<CR>', "Neoclip" },
-
+  ["<C-x><C-p>"] = { '<cmd>Telescope neoclip<CR>', "Neoclip" },
+  -- ["<C-/>"] = { function() vim.api.nvim_call_function("codeium#Accept", {}) print("Accept!") end, "Codeium Complete" },
 }, { noremap = true, mode = "i" })
+
+vim.cmd("imap <script><silent><nowait><expr> <C-x><C-x> codeium#Accept()")
+
+
+
+
+
+

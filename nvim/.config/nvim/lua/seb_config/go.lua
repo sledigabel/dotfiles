@@ -21,7 +21,7 @@ require("go").setup({
   lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
   lsp_codelens = true,
   lsp_on_attach = on_attach_normal, -- use on_attach from go.nvim
-  dap_debug = true,
+  dap_debug = false,
 })
 
 vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
