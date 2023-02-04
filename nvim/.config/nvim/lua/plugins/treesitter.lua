@@ -1,4 +1,6 @@
-require("nvim-treesitter.configs").setup({
+return {
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = function()
+      require("nvim-treesitter.configs").setup({
 	-- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
 	ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
 	sync_install = true, -- install languages synchronously (only applied to `ensure_installed`)
@@ -44,3 +46,6 @@ require("nvim-treesitter.configs").setup({
 		},
 	},
 })
+    end},
+    { "nvim-treesitter/nvim-treesitter-textobjects" }
+}
