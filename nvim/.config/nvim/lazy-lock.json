@@ -18,7 +18,6 @@
   "highlight-current-n.nvim": { "branch": "master", "commit": "bac803d821d06d5f1e58b31af1cf2e5f9a5fb4ad" },
   "indent-blankline.nvim": { "branch": "master", "commit": "8299fe7703dfff4b1752aeed271c3b95281a952d" },
   "lazy.nvim": { "branch": "main", "commit": "3d2dcb2d5ef99106c5ff412da88c6f59a9f8a693" },
-  "lsp-progress.nvim": { "branch": "main", "commit": "a479e9ac1da6fd36f63fded37af7ace5ff6b2fe1" },
   "lsp_signature.nvim": { "branch": "master", "commit": "6f6252f63b0baf0f2224c4caea33819a27f3f550" },
   "lspkind-nvim": { "branch": "master", "commit": "c68b3a003483cf382428a43035079f78474cd11e" },
   "lspsaga.nvim": { "branch": "main", "commit": "5faeec9f2508d2d49a66c0ac0d191096b4e3fa81" },
