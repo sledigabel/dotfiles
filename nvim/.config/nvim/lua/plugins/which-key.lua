@@ -56,14 +56,16 @@ return {
           name = "Lsp",
           a = { "<cmd>lua require('lspsaga.codeaction').code_action()<cr>", "CodeActions" },
           c = { "<cmd>CodeiumToggle<cr>", "CodeActions" },
-          d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
-          D = { "<cmd>Lspsaga preview_definition<cr>", "Saga Definition" },
-          e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
+          -- d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
+          d = { "<cmd>Lspsaga goto_definition<cr>", "Definition" },
+          D = { "<cmd>Lspsaga lsp_finder<cr>", "Saga Finder" },
+          -- e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
+          e = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
           f = { "<cmd>NvimTreeFindFile<cr>", "Find file" },
           g = { "<cmd>:Git<cr>", "Git" },
-          h = { "<cmd>lua require'lspsaga.provider'.lsp_finder()<cr>", "Saga Finder" },
           i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Implementations" },
           o = { "<cmd>lua io.popen('gh pr view -w')<cr>", "Open PR in web" },
+          O = { "<cmd>Lspsaga outline<cr>", "Saga Outline" },
           q = { "<cmd>TroubleToggle<cr>", "Diag list" },
           r = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
           t = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type definition" },
@@ -83,7 +85,7 @@ return {
           p = { "<cmd>Telescope neoclip<cr>", "Neoclip" },
         },
         r = {
-          n = { "<cmd>Lspsaga rename<cr>", "Rename" },
+          n = { "<cmd>Lspsaga rename ++project<cr>", "Rename" },
         },
         t = {
           name = "NvimTree", -- optional group name
@@ -102,7 +104,7 @@ return {
       -- Various mappings
       wk.register({
         ["gd"] = { "<Cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
-        ["K"] = { "<Cmd>Lspsaga hover_doc<cr>", "Signature" },
+        ["K"] = { "<Cmd>Lspsaga hover_doc ++quiet<cr>", "Signature" },
         ["[g"] = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev diag" },
         ["]g"] = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next diag" },
         ["[b"] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },

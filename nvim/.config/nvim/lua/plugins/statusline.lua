@@ -5,7 +5,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"sam4llis/nvim-tundra",
 			"Exafunction/codeium.vim",
-			"SmiteshP/nvim-navic",
+			-- "SmiteshP/nvim-navic",
 		},
 		config = function()
 			local lualine_theme = "auto"
@@ -86,7 +86,7 @@ return {
 				},
 			})
 
-			vim.o.winbar = "     %-50(%#BufferLineHintSelected#%{%v:lua.require'nvim-navic'.get_location()%}%)"
+			-- vim.o.winbar = "     %-50(%#BufferLineHintSelected#%{%v:lua.require'nvim-navic'.get_location()%}%)"
 		end,
 		priority = 1,
 	},

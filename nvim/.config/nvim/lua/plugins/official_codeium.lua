@@ -36,6 +36,8 @@ return {
 
       -- change the codeium highlight group
       vim.api.nvim_set_hl(0, "CodeiumSuggestion", { fg = "#656c79", italic = true })
+
+      vim.cmd("imap <script><silent><nowait><expr> <C-x><C-x> codeium#Accept()")
     end,
   },
 }
