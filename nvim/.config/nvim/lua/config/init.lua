@@ -38,6 +38,7 @@ vim.o.directory = "/Users/sebastienledigabel/.vim/tmp/"
 vim.cmd([[au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}]])
 
 vim.opt.completeopt = { "menu", "menuone", "noinsert" }
+vim.opt.termguicolors = true
 
 
 vim.cmd([[

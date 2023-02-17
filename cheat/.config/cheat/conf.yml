@@ -1,10 +1,23 @@
 ---
+colorize: true
+
+# Which 'chroma' colorscheme should be applied to the output?
+# Options are available here:
+#   https://github.com/alecthomas/chroma/tree/master/styles
+style: monokai
+
+# Which 'chroma' "formatter" should be applied?
+# One of: "terminal", "terminal256", "terminal16m"
+formatter: terminal256
 cheatpaths:
-  - name: "community"
+  - name: community
     path: "~/dev/perso/cheatsheets"
-    tags: ["community"]
+    tags: [community]
     readonly: true
-  - name: "personal"
+
+  # If you have personalized cheatsheets, list them last. They will take
+  # precedence over the more global cheatsheets.
+  - name: personal
     path: "~/dev/perso/personal_cheatsheets"
-    tags: ["perso"]
+    tags: [personal]
     readonly: false

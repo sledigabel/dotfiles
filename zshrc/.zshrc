@@ -75,6 +75,9 @@ export VIRTUALENVWRAPPER_VIRTUALENV=/Users/sebastienledigabel/.pyenv/shims/virtu
 export WORKON_HOME=~/.virtualenvs
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+
 # for zsh-highlighters
 [ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # for zsh-git-prompt
