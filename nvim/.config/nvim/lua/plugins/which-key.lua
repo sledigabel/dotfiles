@@ -2,7 +2,6 @@ return {
   {
     "folke/which-key.nvim",
     config = function()
-
       local wk = require("which-key")
       wk.setup({
         plugins = {
@@ -19,16 +18,16 @@ return {
         b = { "<cmd>Telescope buffers<cr>", "Buffers" },
         B = {
           name = "debugger",
-          b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Breakpoint", },
-          B = { "<cmd>Telescope dap list_breakpoints<cr>", "Breakpoint", },
-          c = { "<cmd>lua require('dap').continue()<cr>", "Continue", },
-          C = { "<cmd>Telescope dap commands<cr>", "Continue", },
-          i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into", },
-          o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over", },
-          O = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out", },
-          s = { "<cmd>lua require'dap'.close()<cr>", "Stop", },
-          p = { "<cmd>lua require('dap-python').test_method()<cr>", "Python test", },
-          u = { "<cmd>DapUiToggle<cr>", "UI Toggle", },
+          b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Breakpoint" },
+          B = { "<cmd>Telescope dap list_breakpoints<cr>", "Breakpoint" },
+          c = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
+          C = { "<cmd>Telescope dap commands<cr>", "Continue" },
+          i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
+          o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
+          O = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
+          s = { "<cmd>lua require'dap'.close()<cr>", "Stop" },
+          p = { "<cmd>lua require('dap-python').test_method()<cr>", "Python test" },
+          u = { "<cmd>lua require('dapui').open()<cr>", "UI Toggle" },
         },
         c = {
           ["aw"] = {
@@ -54,7 +53,7 @@ return {
         },
         g = {
           name = "Lsp",
-          a = { "<cmd>lua require('lspsaga.codeaction').code_action()<cr>", "CodeActions" },
+          a = { "<cmd>Lspsaga code_action<cr>", "CodeActions" },
           c = { "<cmd>CodeiumToggle<cr>", "CodeActions" },
           -- d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
           d = { "<cmd>Lspsaga goto_definition<cr>", "Definition" },
@@ -85,7 +84,8 @@ return {
           p = { "<cmd>Telescope neoclip<cr>", "Neoclip" },
         },
         r = {
-          n = { "<cmd>Lspsaga rename ++project<cr>", "Rename" },
+          n = { "<cmd>Lspsaga rename<cr>", "Rename" },
+          N = { "<cmd>Lspsaga rename ++project<cr>", "Rename" },
         },
         t = {
           name = "NvimTree", -- optional group name
@@ -99,12 +99,14 @@ return {
       -- Leader key visual mode
       wk.register({
         y = { '"*y', "Copy to clipboard" },
+        ["lf"] = { "<Esc><cmd>lua vim.lsp.buf.range_formatting()<cr>gv", "Format selection" },
       }, { prefix = "<leader>", noremap = true, mode = "v" })
 
       -- Various mappings
       wk.register({
         ["gd"] = { "<Cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
-        ["K"] = { "<Cmd>Lspsaga hover_doc ++quiet<cr>", "Signature" },
+        -- ["K"] = { "<Cmd>Lspsaga hover_doc ++quiet<cr>", "Signature" },
+        ["K"] = { "<Cmd>Lspsaga hover_doc<cr>", "Signature" },
         ["[g"] = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev diag" },
         ["]g"] = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next diag" },
         ["[b"] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
@@ -129,12 +131,13 @@ return {
         ["<C-h>"] = { '<esc>:lua require("tmux").move_left()<cr>', "Window left" },
         ["<C-k>"] = { '<esc>:lua require("tmux").move_top()<cr>', "Window up" },
         ["<C-l>"] = { '<esc>:lua require("tmux").move_right()<cr>', "Window right" },
-        ["<C-s>"] = { '<esc>:w<cr>', "save" },
-        ["<C-x><C-p"] = { '<cmd>Telescope neoclip<CR>', "Neoclip" },
-        ["<C-Space>"] = { '<cmd>lua ls = require("luasnip"); if ls.expand_or_jumpable() then ls.expand_or_jump() end<CR>',
-          'LuaSnip complete' },
+        ["<C-s>"] = { "<esc>:w<cr>", "save" },
+        ["<C-x><C-p"] = { "<cmd>Telescope neoclip<CR>", "Neoclip" },
+        ["<C-Space>"] = {
+          '<cmd>lua ls = require("luasnip"); if ls.expand_or_jumpable() then ls.expand_or_jump() end<CR>',
+          "LuaSnip complete",
+        },
       }, { noremap = true, mode = "i" })
-
-    end
+    end,
   },
 }

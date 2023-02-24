@@ -1,3 +1,3 @@
 return {
-  { 'rktjmp/highlight-current-n.nvim' }
+  { "rktjmp/highlight-current-n.nvim" },
 }

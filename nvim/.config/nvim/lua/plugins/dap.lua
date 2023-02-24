@@ -29,7 +29,7 @@ return {
       --   dapui.close()
       -- end
     end,
-    -- lazy = true,
+    lazy = true,
   },
   {
     "mfussenegger/nvim-dap-python",

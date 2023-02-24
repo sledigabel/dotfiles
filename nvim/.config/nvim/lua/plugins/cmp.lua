@@ -18,7 +18,8 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"windwp/nvim-autopairs",
 			"onsails/lspkind-nvim",
-			"petertriho/cmp-git",
+			-- "petertriho/cmp-git",
+			{ dir = "~/dev/perso/cmp-git/" },
 			-- dep
 			"nvim-lua/plenary.nvim",
 		},
@@ -26,6 +27,12 @@ return {
 			local cmp = require("cmp")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			local lspkind = require("lspkind")
+			-- for git
+			require("cmp_git").setup({
+				github = {
+					hosts = { "github.skyscannertools.net" },
+				},
+			})
 
 			cmp.setup({
 				snippet = {
@@ -69,8 +76,6 @@ return {
 			})
 
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
-			-- for git
-			require("cmp_git").setup()
 		end,
 	},
 }

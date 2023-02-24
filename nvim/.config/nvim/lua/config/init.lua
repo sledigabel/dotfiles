@@ -40,7 +40,6 @@ vim.cmd([[au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearc
 vim.opt.completeopt = { "menu", "menuone", "noinsert" }
 vim.opt.termguicolors = true
 
-
 vim.cmd([[
 augroup JsonnetFiles
   autocmd!
