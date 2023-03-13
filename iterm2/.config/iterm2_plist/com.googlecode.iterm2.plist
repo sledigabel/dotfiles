@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ActiveUpdateCadence</key>
+	<real>120</real>
 	<key>AllowClipboardAccess</key>
 	<true/>
 	<key>AutoHideTmuxClientSession</key>
@@ -3829,6 +3831,10 @@
 	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>MetalRedrawPeriod</key>
+	<real>0.10000000149011612</real>
+	<key>MetalSlowFrameRate</key>
+	<real>120</real>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -6003,7 +6009,9 @@
 	<key>ShowFullScreenTabBar</key>
 	<false/>
 	<key>ShowMetalFPSmeter</key>
-	<false/>
+	<true/>
+	<key>SlowFrameRate</key>
+	<real>60</real>
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SoundForEsc</key>

@@ -2,7 +2,8 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "b0o/SchemaStore.nvim", "hrsh7th/cmp-nvim-lsp", "nvim-lua/lsp-status.nvim" },
+    event = "BufRead",
+    dependencies = { "b0o/SchemaStore.nvim", "hrsh7th/cmp-nvim-lsp", "nvim-lua/lsp-status.nvim", "folke/neodev.nvim" },
     config = function()
       local nvim_lsp = require("lspconfig")
 
@@ -246,6 +247,7 @@ return {
   -- use({ "onsails/lspkind-nvim" })
   {
     "glepnir/lspsaga.nvim",
+    event = "BufRead",
     config = function()
       local lspsaga = require("lspsaga")
       lspsaga.setup({

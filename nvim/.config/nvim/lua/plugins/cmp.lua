@@ -18,8 +18,8 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"windwp/nvim-autopairs",
 			"onsails/lspkind-nvim",
-			-- "petertriho/cmp-git",
-			{ dir = "~/dev/perso/cmp-git/" },
+			"petertriho/cmp-git",
+			-- { dir = "~/dev/perso/cmp-git/" },
 			-- dep
 			"nvim-lua/plenary.nvim",
 		},

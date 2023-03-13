@@ -8,8 +8,9 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.c
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 defaults write com.knollsoft.Rectangle gapSize 20
 
-defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms), can be 10
-defaults write -g KeyRepeat -int 2 # normal minimum is 2 (30 ms), can be 1
+# defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms), can be 10
+defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms), can be 10
+defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms), can be 1
 
 # trying to help Rectangle to set up with right shortcuts
 defaults write "Apple Global Domain" NSUserKeyEquivalents -dict-add "Hide Others" ""

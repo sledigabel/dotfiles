@@ -9,7 +9,8 @@ if [ -n "${ZSH_TMUX_AUTOSTARTED:-}" ]
 then
    if [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM_PROGRAM}" = "alacritty" ] || [ "${TERM_PROGRAM}" = "tmux" ]
    then
-     ZSH_THEME="powerlevel10k/powerlevel10k"
+     # ZSH_THEME="powerlevel10k/powerlevel10k"
+     ZSH_THEME="sorin"
      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
      if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
        source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
