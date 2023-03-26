@@ -23,8 +23,6 @@ return {
         lualine_theme = tundra_theme
       end
 
-      print(lualine_theme)
-
       require("lualine").setup({
         options = {
           globalstatus = true,

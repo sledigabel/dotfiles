@@ -78,6 +78,7 @@ return {
         l = {
           f = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "Formatting" },
           q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Set Location list" },
+          L = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Restart LspLines" },
         },
         p = {
           name = "Neoclip",

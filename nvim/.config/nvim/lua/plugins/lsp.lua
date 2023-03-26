@@ -217,9 +217,10 @@ return {
       -- end
 
       vim.diagnostic.config({
-        virtual_text = {
-          prefix = "●", -- Could be '●', '▎', 'x', '■'
-        },
+        virtual_text = false,
+        -- virtual_text = {
+        --   prefix = "●", -- Could be '●', '▎', 'x', '■'
+        -- },
       })
     end,
   },

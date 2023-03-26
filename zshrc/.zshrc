@@ -9,8 +9,8 @@ if [ -n "${ZSH_TMUX_AUTOSTARTED:-}" ]
 then
    if [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM_PROGRAM}" = "alacritty" ] || [ "${TERM_PROGRAM}" = "tmux" ]
    then
-     # ZSH_THEME="powerlevel10k/powerlevel10k"
-     ZSH_THEME="sorin"
+     ZSH_THEME="powerlevel10k/powerlevel10k"
+     # ZSH_THEME="alanpeabody"
      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
      if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
        source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -77,6 +77,7 @@ export WORKON_HOME=~/.virtualenvs
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
 export NVM_DIR="$HOME/.nvm"
+export DISABLE_UNTRACKED_FILES_DIRTY=true
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 
 # for zsh-highlighters
