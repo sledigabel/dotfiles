@@ -58,10 +58,10 @@ export GOPATH="$HOME/dev/go"
 export GPG_TTY=$(tty)
 export HISTFILE=~/.zsh_history
 export HISTSIZE=5000
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+# export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 export LC_ALL=en_GB.UTF-8
 # export PATH="/Users/sebastienledigabel/.pyenv/shims:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:$(npm bin)"
-export PATH="/Users/sebastienledigabel/.pyenv/bin:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:${TMUX_SESSION_DIR:-/Users/sebastienledigabel}/node_modules/.bin"
+export PATH="/Users/sebastienledigabel/.pyenv/bin:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:${TMUX_SESSION_DIR:-/Users/sebastienledigabel}/node_modules/.bin:${HOME}/.cargo/bin"
 eval "$(pyenv init -)"
 # https://github.com/pyenv/pyenv-virtualenv/issues/259#issuecomment-1007432346
 eval "$(pyenv virtualenv-init -| sed s/precmd/precwd/g)"

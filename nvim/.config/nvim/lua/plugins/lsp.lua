@@ -162,11 +162,26 @@ return {
         },
       })
 
+      -- local local_dir = os.getenv("TMUX_SESSION_DIR")
+      -- if not local_dir then
+      --   local_dir = vim.fn.getcwd()
+      -- end
+      --
+      -- local_dir = vim.fn.fnamemodify(local_dir, ":p:h:t")
+      -- local workspace_dir = os.getenv("HOME") .. "/workspaces/" .. local_dir
+      -- nvim_lsp.jdtls.setup({
+      --   cmd = {
+      --     "/Users/sebastienledigabel/dev/tools/jdtls/bin/jdtls",
+      --     "-data",
+      --     workspace_dir,
+      --   },
+      -- })
       -- nvim_lsp.gopls.setup({
       -- 	on_attach = on_attach_no_formatting,
       -- 	capabilities = capabilities,
       -- })
       -- local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls', 'jsonnet_ls', 'sumneko_lua' }
+      --
       local servers = { "rust_analyzer", "bashls", "jsonnet_ls" }
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({

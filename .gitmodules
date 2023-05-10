@@ -16,3 +16,6 @@
 [submodule "nvim/.config/nvim/friendly-snippets"]
 	path = nvim/.config/nvim/friendly-snippets
 	url = git@github.com:rafamadriz/friendly-snippets.git
+[submodule "nvim/.config/nvim/java/vscode-java-decompiler"]
+	path = nvim/.config/nvim/java/vscode-java-decompiler
+	url = git@github.com:dgileadi/vscode-java-decompiler.git
