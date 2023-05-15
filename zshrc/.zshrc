@@ -58,7 +58,7 @@ export GOPATH="$HOME/dev/go"
 export GPG_TTY=$(tty)
 export HISTFILE=~/.zsh_history
 export HISTSIZE=5000
-# export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 export LC_ALL=en_GB.UTF-8
 # export PATH="/Users/sebastienledigabel/.pyenv/shims:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:$(npm bin)"
 export PATH="/Users/sebastienledigabel/.pyenv/bin:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:${TMUX_SESSION_DIR:-/Users/sebastienledigabel}/node_modules/.bin:${HOME}/.cargo/bin"
@@ -73,6 +73,7 @@ export VIRTUALENVWRAPPER_VIRTUALENV=/Users/sebastienledigabel/.pyenv/shims/virtu
 # export CC=`which gcc-11`
 # export LDFLAGS="-L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
 # export CPPFLAGS="-I$(brew --prefix zlib)/include -I$(brew --prefix bzip2)/include"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
 export WORKON_HOME=~/.virtualenvs
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
@@ -174,7 +175,7 @@ fi
 # run OMZ
 source $ZSH/oh-my-zsh.sh
 # eval "$(starship init zsh)"
-. ~/.asdf/plugins/java/set-java-home.zsh
+# . ~/.asdf/plugins/java/set-java-home.zsh
 
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit

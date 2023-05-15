@@ -19,3 +19,6 @@
 [submodule "nvim/.config/nvim/java/vscode-java-decompiler"]
 	path = nvim/.config/nvim/java/vscode-java-decompiler
 	url = git@github.com:dgileadi/vscode-java-decompiler.git
+[submodule "nvim/.config/nvim/java/java-debug"]
+	path = nvim/.config/nvim/java/java-debug
+	url = git@github.com:microsoft/java-debug.git
