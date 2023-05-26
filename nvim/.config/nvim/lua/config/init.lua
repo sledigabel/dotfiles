@@ -32,7 +32,7 @@ vim.o.shiftround = false
 vim.o.mouse = "a"
 
 -- directory settings
-vim.o.directory = "/Users/sebastienledigabel/.vim/tmp/"
+vim.o.directory = os.getenv("HOME") .. "/.vim/tmp/"
 
 -- highlight the yanking
 vim.cmd([[au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}]])

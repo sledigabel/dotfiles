@@ -9,7 +9,7 @@
 	<key>AutoHideTmuxClientSession</key>
 	<true/>
 	<key>Command</key>
-	<string>/opt/homebrew/bin/zsh</string>
+	<string></string>
 	<key>CopyWithStylesByDefault</key>
 	<true/>
 	<key>Custom Color Presets</key>
@@ -4083,7 +4083,7 @@
 				<real>0.88627451658248901</real>
 			</dict>
 			<key>Blinking Cursor</key>
-			<true/>
+			<false/>
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
