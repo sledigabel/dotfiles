@@ -55,8 +55,8 @@ return {
           name = "Lsp",
           a = { "<cmd>Lspsaga code_action<cr>", "CodeActions" },
           c = { "<cmd>CodeiumToggle<cr>", "CodeActions" },
-          -- d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
-          d = { "<cmd>Lspsaga goto_definition<cr>", "Definition" },
+          d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
+          -- d = { "<cmd>Lspsaga goto_definition<cr>", "Definition" },
           D = { "<cmd>Lspsaga lsp_finder<cr>", "Saga Finder" },
           -- e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
           e = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
@@ -106,8 +106,9 @@ return {
       -- Various mappings
       wk.register({
         ["gd"] = { "<Cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
-        -- ["K"] = { "<Cmd>Lspsaga hover_doc ++quiet<cr>", "Signature" },
-        ["K"] = { "<Cmd>Lspsaga hover_doc<cr>", "Signature" },
+        ["K"] = { "<Cmd>Lspsaga hover_doc ++quiet<cr>", "Signature" },
+        -- ["K"] = { "<Cmd>Lspsaga hover_doc<cr>", "Signature" },
+        -- ["K"] = { "<Cmd>lua vim.lsp.buf.hover()<cr>", "Signature" },
         ["[g"] = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev diag" },
         ["]g"] = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next diag" },
         ["[b"] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },

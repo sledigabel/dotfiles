@@ -5,7 +5,7 @@ if not local_dir then
 end
 
 local home = os.getenv("HOME")
-local jdtls_home = home .. "/dev/tools/jdtls4/"
+local jdtls_home = home .. "/dev/tools/jdtls6/"
 
 local local_dir_name = vim.fn.fnamemodify(local_dir, ":p:h:t")
 local workspace_dir = home .. "/workspaces/" .. local_dir_name
@@ -21,6 +21,7 @@ end, {
   "/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
   "/vscode-java-decompiler/server/*.jar",
   "/vscode-java-test/server/*.jar",
+  "/lombok/*.jar",
   -- "/ecd/plugins/*.jar",
   -- "/ecd/features/*.jar",
   -- "/jface/*.jar",
@@ -39,11 +40,11 @@ local settings = {
   -- ["java.format.settings.profile"] = "GoogleStyle",
   java = {
     signatureHelp = { enabled = true },
-    decompiler = {
-      fernflower = {},
-      cfr = {},
-      procyon = {},
-    },
+    -- decompiler = {
+    --   fernflower = {},
+    --   cfr = {},
+    --   procyon = {},
+    -- },
     contentProvider = { preferred = "fernflower" },
     completion = {
       favoriteStaticMembers = {
@@ -92,6 +93,9 @@ local settings = {
     configuration = {
       updateBuildConfiguration = "interactive",
     },
+    gradle = {
+      downloadSources = true,
+    },
     maven = {
       downloadSources = true,
     },
@@ -125,13 +129,13 @@ local config = {
   -- },
 
   -- cmd for the jdtls package
-  -- cmd = {
-  --   jdtls_home .. "/bin/jdtls",
-  --   "--jvm-args=-Dlog.level=ALL",
-  --   "--jvm-args=-Dlog.protocol=true",
-  --   "-data",
-  --   workspace_dir,
-  -- },
+  cmd = {
+    jdtls_home .. "/bin/jdtls",
+    "--jvm-args=-Dlog.level=ALL",
+    "--jvm-args=-Dlog.protocol=true",
+    "-data",
+    workspace_dir,
+  },
 
   -- cmd = {
   --   -- "/Users/sebastienledigabel/.vscode/extensions/redhat.java-1.18.0-darwin-arm64/jre/17.0.7-macosx-aarch64/bin/java",
@@ -171,38 +175,38 @@ local config = {
   --   "-data",
   --   workspace_dir,
   -- },
-  cmd = {
-    --   -- home .. "/.asdf/installs/java/temurin-17.0.4+101/bin/java",
-    "java",
-    -- added for debugging
-    -- "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044",
-    "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-    "-Dosgi.bundles.defaultStartLevel=4",
-    "-Declipse.product=org.eclipse.jdt.ls.core.product",
-    "-Dosgi.checkConfiguration=true",
-    "-Dosgi.sharedConfiguration.area=" .. jdtls_home .. "/config_mac",
-    "-Dosgi.sharedConfiguration.area.readOnly=true",
-    "-Dosgi.configuration.cascaded=true",
-    "-Dlog.protocol=true",
-    "-Dlog.level=ALL",
-    "-Xmx2g",
-    "--add-modules=ALL-SYSTEM",
-    "--add-opens",
-    "java.base/java.util=ALL-UNNAMED",
-    "--add-opens",
-    "java.base/java.lang=ALL-UNNAMED",
-    "--add-opens",
-    "java.base/sun.nio.fs=ALL-UNNAMED",
-    -- '-cp',
-    -- jdtls_home .. 'plugins/*',
-    -- "org.eclipse.equinox.launcher.Main",
-    "-jar",
-    -- home .. "/dev/tools/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
-    jdtls_home .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
-    -- jdtls_home .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
-    "-data",
-    workspace_dir,
-  },
+  -- cmd = {
+  --   --   -- home .. "/.asdf/installs/java/temurin-17.0.4+101/bin/java",
+  --   "java",
+  --   -- added for debugging
+  --   -- "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044",
+  --   "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+  --   "-Dosgi.bundles.defaultStartLevel=4",
+  --   "-Declipse.product=org.eclipse.jdt.ls.core.product",
+  --   "-Dosgi.checkConfiguration=true",
+  --   "-Dosgi.sharedConfiguration.area=" .. jdtls_home .. "/config_mac",
+  --   "-Dosgi.sharedConfiguration.area.readOnly=true",
+  --   "-Dosgi.configuration.cascaded=true",
+  --   "-Dlog.protocol=true",
+  --   "-Dlog.level=ALL",
+  --   "-Xmx2g",
+  --   "--add-modules=ALL-SYSTEM",
+  --   "--add-opens",
+  --   "java.base/java.util=ALL-UNNAMED",
+  --   "--add-opens",
+  --   "java.base/java.lang=ALL-UNNAMED",
+  --   "--add-opens",
+  --   "java.base/sun.nio.fs=ALL-UNNAMED",
+  --   -- '-cp',
+  --   -- jdtls_home .. 'plugins/*',
+  --   -- "org.eclipse.equinox.launcher.Main",
+  --   "-jar",
+  --   -- home .. "/dev/tools/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
+  --   jdtls_home .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
+  --   -- jdtls_home .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
+  --   "-data",
+  --   workspace_dir,
+  -- },
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
@@ -229,11 +233,11 @@ local config = {
   --   client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
   -- end,
 }
-vim.print(vim.fn.join(config.cmd, " "))
+vim.print(local_dir)
 -- vim.print(bundles)
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 require("jdtls.setup").add_commands()
 require("jdtls").setup_dap({ hotcodereplace = "auto" })
 require("jdtls").start_or_attach(config)

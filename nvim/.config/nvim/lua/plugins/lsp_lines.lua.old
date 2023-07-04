@@ -1,3 +1,4 @@
+-- return {}
 return {
   "ErichDonGubler/lsp_lines.nvim",
   config = function()
