@@ -174,6 +174,8 @@ fi
 
 # run OMZ
 source $ZSH/oh-my-zsh.sh
+unalias buf
+
 # eval "$(starship init zsh)"
 . ~/.asdf/plugins/java/set-java-home.zsh
 

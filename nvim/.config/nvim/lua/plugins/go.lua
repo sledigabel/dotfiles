@@ -20,6 +20,7 @@ return {
         lsp_codelens = true,
         lsp_on_attach = on_attach_normal, -- use on_attach from go.nvim
         dap_debug = true,
+        icons = false,
       })
 
       vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)

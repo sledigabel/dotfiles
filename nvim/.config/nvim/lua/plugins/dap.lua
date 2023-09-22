@@ -25,9 +25,9 @@ return {
       -- dap.listeners.before.event_terminated["dapui_config"] = function()
       --   dapui.close()
       -- end
-      -- dap.listeners.before.event_exited["dapui_config"] = function()
-      --   dapui.close()
-      -- end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
     end,
     lazy = true,
   },
@@ -41,6 +41,14 @@ return {
     end,
     -- lazy = true,
   },
+  -- {
+  --   "leoluz/nvim-dap-go",
+  --   dependencies = { "mfussenegger/nvim-dap" },
+  --   config = function()
+  --     require("dap-go").setup()
+  --   end,
+  --   -- lazy = true,
+  -- },
   {
     "mfussenegger/nvim-dap",
     config = function()

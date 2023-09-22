@@ -13,21 +13,44 @@ return {
         },
       })
 
+      function select_test_to_run()
+        -- test which filetype we are in
+        local ft = vim.bo.filetype
+        if ft == "go" then
+          return vim.cmd([[ GoDebug --test]])
+        elseif ft == "python" then
+          return require('dap-python').test_method()
+        else
+          return print("Filetype not supported for unit test")
+        end
+      end
+      
+      function terminate()
+        local ft = vim.bo.filetype
+        if ft == "go" then
+          return vim.cmd([[ GoDebug --stop]])
+        else
+          return vim.cmd([[ DapTerminate ]])
+        end
+
+      end
+
+
       -- Leader key normal mode
       wk.register({
         b = { "<cmd>Telescope buffers<cr>", "Buffers" },
         B = {
           name = "debugger",
-          b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Breakpoint" },
           B = { "<cmd>Telescope dap list_breakpoints<cr>", "Breakpoint" },
+          O = { "<cmd>lua require('dap').step_out()<cr>", "Step Out" },
+          b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Breakpoint" },
           c = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
-          C = { "<cmd>Telescope dap commands<cr>", "Continue" },
-          i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-          o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-          O = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-          s = { "<cmd>lua require'dap'.close()<cr>", "Stop" },
-          p = { "<cmd>lua require('dap-python').test_method()<cr>", "Python test" },
-          u = { "<cmd>lua require('dapui').open()<cr>", "UI Toggle" },
+          i = { "<cmd>lua require('dap').step_into()<cr>", "Step Into" },
+          o = { "<cmd>lua require('dap').step_over()<cr>", "Step Over" },
+          p = { "<cmd>lua select_test_to_run()<cr>", "(Debug) Run test" },
+          S = { "<cmd>lua terminate()<cr>", "Terminate" },
+          t = { "<cmd>Telescope dap commands<cr>", "Commands" },
+          u = { "<cmd>lua require('dapui').toggle()<cr>", "UI Toggle" },
         },
         c = {
           ["aw"] = {
@@ -57,7 +80,7 @@ return {
           c = { "<cmd>CodeiumToggle<cr>", "CodeActions" },
           d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
           -- d = { "<cmd>Lspsaga goto_definition<cr>", "Definition" },
-          D = { "<cmd>Lspsaga lsp_finder<cr>", "Saga Finder" },
+          D = { "<cmd>Lspsaga finder<cr>", "Saga Finder" },
           -- e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Show line diagnostics" },
           e = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show line diagnostics" },
           f = { "<cmd>NvimTreeFindFile<cr>", "Find file" },

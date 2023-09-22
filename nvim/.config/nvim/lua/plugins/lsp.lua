@@ -6,6 +6,7 @@ return {
     dependencies = { "b0o/SchemaStore.nvim", "hrsh7th/cmp-nvim-lsp", "nvim-lua/lsp-status.nvim", "folke/neodev.nvim" },
     config = function()
       local nvim_lsp = require("lspconfig")
+      local util = require("lspconfig.util")
 
       -- for python to use the pyenv lsp
       local pyenv_bin_path = os.getenv("PYENV_VIRTUAL_ENV")
@@ -106,6 +107,14 @@ return {
             },
           },
         },
+      })
+
+      nvim_lsp.gradle_ls.setup({
+        capabilities = capabilities,
+        cmd = {
+          "/Users/sebastienledigabel/dev/perso/dotfiles/nvim/.config/nvim/java/vscode-gradle/gradle-language-server/build/install/gradle-language-server/bin/gradle-language-server",
+        },
+        root_dir = util.root_pattern("settings.gradle", "build.gradle", "gradle.properties"),
       })
 
       nvim_lsp.yamlls.setup({
@@ -280,8 +289,15 @@ return {
             quit = "<Esc>",
           },
         },
+        finder = {
+          keys = {
+            toggle_or_open = '<CR>',
+            quit = "<Esc>",
+          },
+        },
         definition = {
           keys = {
+            toggle_or_open = '<CR>',
             quit = "<Esc>",
           },
         },
