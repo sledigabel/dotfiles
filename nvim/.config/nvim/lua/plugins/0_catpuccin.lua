@@ -25,6 +25,11 @@ return {
         which_key = true,
         markdown = true,
       },
+      custom_highlights = function(colors)
+        return {
+          Whitespace = { fg = "#3B3B3B"},
+        }
+      end
     })
     -- vim.g.catppuccin_flavour = "macchiato"
     -- vim.g.catppuccin_flavour = "moccha"

@@ -28,6 +28,19 @@ vim.o.softtabstop = 2
 vim.o.tabstop = 2
 vim.o.shiftround = false
 
+-- stop removing the new line at the end of files!
+vim.o.fixeol = false
+
+-- aesthetics
+vim.opt.list = true
+-- vim.opt.listchars = "eol:󰘌,nbsp:+,space:⋅,tab: ,trail:-"
+vim.opt.listchars = "nbsp:+,space:⋅,tab:󰇘 ,trail:-"
+-- vim.opt.listchars = "eol:↴,nbsp:+,space:⋅,tab: ,trail:-"
+-- vim.opt.listchars = "eol:󰌑,nbsp:+,space:⋅,tab: ,trail:-"
+-- vim.opt.listchars:append("space:⋅")
+-- vim.opt.listchars:append("eol:↴")
+-- vim.opt.listchars.tab = " "
+
 -- mouse
 vim.o.mouse = "a"
 

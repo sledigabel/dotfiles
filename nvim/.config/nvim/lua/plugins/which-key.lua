@@ -19,12 +19,12 @@ return {
         if ft == "go" then
           return vim.cmd([[ GoDebug --test]])
         elseif ft == "python" then
-          return require('dap-python').test_method()
+          return require("dap-python").test_method()
         else
           return print("Filetype not supported for unit test")
         end
       end
-      
+
       function terminate()
         local ft = vim.bo.filetype
         if ft == "go" then
@@ -32,9 +32,7 @@ return {
         else
           return vim.cmd([[ DapTerminate ]])
         end
-
       end
-
 
       -- Leader key normal mode
       wk.register({
@@ -110,6 +108,10 @@ return {
         r = {
           n = { "<cmd>Lspsaga rename<cr>", "Rename" },
           N = { "<cmd>Lspsaga rename ++project<cr>", "Rename" },
+        },
+        s = {
+          o = { "<cmd>ScratchOpenFzf<cr>", "Open Scratch" },
+          n = { "<cmd>ScratchWithName<cr>", "New Scratch" },
         },
         t = {
           name = "NvimTree", -- optional group name

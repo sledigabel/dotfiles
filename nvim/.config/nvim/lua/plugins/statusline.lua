@@ -48,15 +48,15 @@ return {
             },
             {
               "diff",
-              symbols = { added = " ", modified = "柳", removed = " " },
+              symbols = { added = " ", modified = "󰏬 ", removed = " " },
               padding = 2,
             },
             {
               "diagnostics",
               sources = { "nvim_diagnostic", "nvim_lsp" },
               symbols = {
-                error = " ",
-                warn = " ",
+                error = " ",
+                warn = " ",
                 hint = " ",
                 info = " ",
               },

@@ -25,9 +25,9 @@ return {
 
       function StatusCodeium()
         if CheckCodeium() then
-          return "ﮧ"
+          return " "
         else
-          return " "
+          return "  "
         end
       end
 
