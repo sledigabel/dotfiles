@@ -33,8 +33,9 @@ end
 
 -- eclipse jdtls settings
 local settings = {
-  ["java.format.settings.url"] = "/Users/sebastienledigabel/dev/perso/dotfiles/nvim/.config/nvim/lua/config/google-formatter.xml",
-  ["java.format.settings.profile"] = "GoogleStyle",
+  -- ["java.format.settings.url"] = "/Users/sebastienledigabel/dev/perso/dotfiles/nvim/.config/nvim/lua/config/google-formatter.xml",
+  -- ["java.format.settings.profile"] = "GoogleStyle",
+  ["java.format.enabled"] = false,
   java = {
     signatureHelp = { enabled = true },
     contentProvider = { preferred = "fernflower" },
