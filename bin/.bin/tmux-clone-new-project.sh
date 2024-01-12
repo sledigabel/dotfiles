@@ -43,4 +43,11 @@ case ${endpoint_name} in
     echo "the server is not recognised"
     exit 1;;
 esac
+if [ "$1" == "--help" ]; then
+  echo "Usage: ./script.sh <input>"
+elif [ -z "$1" ]; then
+  echo "Input argument cannot be empty."
+else
+  echo "Hello, world!"
+fi
 read -p "Press enter to continue"

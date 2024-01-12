@@ -38,6 +38,7 @@ return {
           mappings = {
             i = {
               ["<C-q>"] = actions.send_to_qflist,
+              -- ["<C-q>"] = actions.send_selected_to_qflist,
               ["<esc>"] = actions.close,
               ["<C-x>"] = actions.select_horizontal,
               ["<C-v>"] = actions.select_vertical,
@@ -75,6 +76,13 @@ return {
       require("neoclip").setup()
 
       require("telescope").load_extension("neoclip")
+    end,
+  },
+  {
+    "dj95/telescope-gen.nvim",
+    dependencies = "nvim-telescope/telescope.nvim",
+    config = function()
+      require("telescope").load_extension("gen")
     end,
   },
 }

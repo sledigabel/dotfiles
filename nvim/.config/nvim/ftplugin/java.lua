@@ -6,6 +6,7 @@ end
 
 local home = os.getenv("HOME")
 local jdtls_home = home .. "/dev/tools/jdtls6/"
+-- local jdtls_home = home .. "/dev/tools/jdtls-1.28.0/"
 
 local local_dir_name = vim.fn.fnamemodify(local_dir, ":p:h:t")
 local workspace_dir = home .. "/workspaces/" .. local_dir_name
@@ -117,6 +118,8 @@ local config = {
   --   jdtls_home .. "/bin/jdtls",
   --   "--jvm-args=-Dlog.level=ALL",
   --   "--jvm-args=-Dlog.protocol=true",
+  --   "-javaagent:" .. vim.fn.stdpath("config") .. "/java/lombok/lombok.jar",
+  --   "-Xbootclasspath/a:/" .. vim.fn.stdpath("config") .. "/java/lombok/lombok.jar",
   --   "-data",
   --   workspace_dir,
   -- },
@@ -181,6 +184,7 @@ local config = {
 -- DEBUG
 -- vim.print(local_dir)
 -- vim.print(config.cmd)
+-- vim.print(table.concat(config.cmd, " "))
 -- vim.print(bundles)
 --
 -- vim.lsp.set_log_level("debug")

@@ -13,7 +13,8 @@ return {
           timeout = 400,
         },
         filters = {
-          custom = { "node_modules", ".git", ".idea" },
+          -- git_ignored = true,
+          custom = { "node_modules", ".idea", "^.git$" },
         },
         view = {
           adaptive_size = true,

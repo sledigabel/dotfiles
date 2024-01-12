@@ -9,12 +9,12 @@ return {
       local util = require("lspconfig.util")
 
       -- for python to use the pyenv lsp
-      local pyenv_bin_path = os.getenv("PYENV_VIRTUAL_ENV")
-      if pyenv_bin_path == nil then
-        pyenv_bin_path = "/Users/sebastienledigabel/.pyenv/shims"
-      else
-        pyenv_bin_path = pyenv_bin_path .. "/bin"
-      end
+      -- local pyenv_bin_path = os.getenv("PYENV_VIRTUAL_ENV")
+      -- if pyenv_bin_path == nil then
+      --   -- pyenv_bin_path = "/Users/sebastienledigabel/.pyenv/shims"
+      -- else
+      --   pyenv_bin_path = pyenv_bin_path .. "/bin"
+      -- end
 
       local lsp_status = require("lsp-status")
       -- lsp_status.config({ show_filename = false, diagnostics = false, current_function = false })
@@ -23,27 +23,30 @@ return {
       local capabilities =
         vim.tbl_extend("keep", require("cmp_nvim_lsp").default_capabilities(), lsp_status.capabilities)
       capabilities.textDocument.completion.completionItem.snippetSupport = true
+      -- vim.print(capabilities)
 
       -- python
       nvim_lsp.pylsp.setup({
         -- on_attach = on_attach_normal,
-        cmd = { pyenv_bin_path .. "/pylsp" },
+        -- cmd = { pyenv_bin_path .. "/pylsp" },
+        -- cmd = { "pylsp" },
         capabilities = capabilities,
         settings = {
           pylsp = {
+            configurationSources = { "black" },
             plugins = {
-              -- configurationSources = { "flake8", "black" },
-              configurationSources = { "pycodestyle" },
               flake8 = {
                 enabled = false,
                 -- executable = pyenv_bin_path .. "/flake8",
               },
-              black = { enabled = true },
+              black = { enabled = true, line_length = 120 },
               pycodestyle = {
                 enabled = true,
                 maxLineLength = 160,
               },
               yapf = { enabled = false },
+              mccabe = { enabled = true },
+              autopep8 = { enabled = false },
             },
           },
         },
@@ -191,7 +194,7 @@ return {
       -- })
       -- local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls', 'jsonnet_ls', 'sumneko_lua' }
       --
-      local servers = { "rust_analyzer", "bashls", "jsonnet_ls" }
+      local servers = { "rust_analyzer", "bashls", "jsonnet_ls", "bufls" }
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
           -- on_attach = on_attach_normal,
@@ -199,7 +202,7 @@ return {
         })
       end
 
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -246,6 +249,22 @@ return {
         --   prefix = "●", -- Could be '●', '▎', 'x', '■'
         -- },
       })
+
+      -- WAIT UNTIL NEOVIM 0.10
+      -- vim.lsp.util.stylize_markdown = function(bufnr, contents, opts)
+      --   contents = vim.lsp.util._normalize_markdown(contents, {
+      --     width = vim.lsp.util._make_floating_popup_size(contents, opts),
+      --   })
+      --
+      --   vim.bo[bufnr].filetype = "markdown"
+      --   vim.treesitter.start(bufnr)
+      --   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, contents)
+      --
+      --   return contents
+      -- end
+      --
+      -- Set for debugging
+      -- vim.lsp.set_log_level("debug")
     end,
   },
   {
@@ -291,13 +310,13 @@ return {
         },
         finder = {
           keys = {
-            toggle_or_open = '<CR>',
+            toggle_or_open = "<CR>",
             quit = "<Esc>",
           },
         },
         definition = {
           keys = {
-            toggle_or_open = '<CR>',
+            toggle_or_open = "<CR>",
             quit = "<Esc>",
           },
         },

@@ -1,6 +1,6 @@
 return {
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     config = function()
       local null_ls = require("null-ls")
 
@@ -11,9 +11,10 @@ return {
         -- null_ls.builtins.formatting.golines,
         null_ls.builtins.formatting.google_java_format,
         -- null_ls.builtins.formatting.isort,
+        null_ls.builtins.formatting.autoflake,
         -- null_ls.builtins.formatting.lua_format,
         null_ls.builtins.code_actions.eslint,
-        null_ls.builtins.code_actions.gitsigns,
+        -- null_ls.builtins.code_actions.gitsigns,
         null_ls.builtins.code_actions.shellcheck,
         null_ls.builtins.diagnostics.alex,
         null_ls.builtins.diagnostics.ansiblelint,
@@ -23,11 +24,11 @@ return {
         null_ls.builtins.diagnostics.commitlint,
         null_ls.builtins.diagnostics.cppcheck,
         null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.diagnostics.flake8,
+        -- null_ls.builtins.diagnostics.flake8,
         null_ls.builtins.diagnostics.golangci_lint,
         null_ls.builtins.diagnostics.jsonlint,
         null_ls.builtins.diagnostics.markdownlint,
-        null_ls.builtins.diagnostics.semgrep,
+        -- null_ls.builtins.diagnostics.semgrep,
         null_ls.builtins.diagnostics.shellcheck,
         null_ls.builtins.diagnostics.staticcheck,
         null_ls.builtins.diagnostics.write_good,

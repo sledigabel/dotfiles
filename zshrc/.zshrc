@@ -65,9 +65,10 @@ export HISTSIZE=5000
 export LC_ALL=en_GB.UTF-8
 # export PATH="/Users/sebastienledigabel/.pyenv/shims:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:$(npm bin)"
 export PATH="/Users/sebastienledigabel/.pyenv/bin:${HOME}/.bin:${GOPATH}/bin:/opt/homebrew/bin:${PATH}:${TMUX_SESSION_DIR:-/Users/sebastienledigabel}/node_modules/.bin:${HOME}/.cargo/bin"
+export NODE_PATH="/opt/homebrew/lib/node_modules"
 eval "$(pyenv init -)"
 # https://github.com/pyenv/pyenv-virtualenv/issues/259#issuecomment-1007432346
-eval "$(pyenv virtualenv-init -| sed s/precmd/precwd/g)"
+# eval "$(pyenv virtualenv-init -| sed s/precmd/precwd/g)"
 export SAVEHIST=5000
 # export TERM="xterm-256color"
 export ZSH=${HOME}/.oh-my-zsh
@@ -110,14 +111,6 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # start the ssh-agent if not started already
 [ -z "${SSH_AUTH_SOCK}" ] && eval $(ssh-agent)
 
-alias ls='lsd'
-# alias ls="ls -G -@"
-alias vi=nvim
-alias vim=nvim
-alias vimdiff="nvim -d"
-alias obfuscate="sed -Ee 's/[0-9]+(\.[0-9]+){3}/OBFUSCATED_IP/g'"
-alias ssh="ssh -o StrictHostKeyChecking=no"
-alias less="bat"
 
 # git setup
 gitlog() {
@@ -127,7 +120,7 @@ gitlog() {
 
 plugins=(
   # aws
-  # asdf
+  asdf
   brew
   colorize
   colored-man-pages
@@ -180,10 +173,20 @@ fi
 source $ZSH/oh-my-zsh.sh
 unalias buf
 
+alias ls='lsd'
+alias vi=lnvim
+alias vim=nvim
+alias vimdiff="nvim -d"
+alias obfuscate="sed -Ee 's/[0-9]+(\.[0-9]+){3}/OBFUSCATED_IP/g'"
+alias ssh="ssh -o StrictHostKeyChecking=no"
+alias less="bat"
+alias jira='JIRA_API_TOKEN="$(security find-generic-password -a ${USER} -s jira_token -w)" /opt/homebrew/bin/jira'
+
 # eval "$(starship init zsh)"
 # . ~/.asdf/plugins/java/set-java-home.zsh
 
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
 
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 zprof > ~/zshProfile

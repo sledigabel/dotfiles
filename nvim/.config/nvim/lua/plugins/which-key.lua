@@ -34,6 +34,10 @@ return {
         end
       end
 
+      function buf_lsp_filter_function(client)
+        return client.name ~= "pylsp"
+      end
+
       -- Leader key normal mode
       wk.register({
         b = { "<cmd>Telescope buffers<cr>", "Buffers" },
@@ -63,14 +67,20 @@ return {
             "<cmd>Telescope find_files hidden=true cwd=~/.config/nvim no_ignore=true find_command=fd,-e,lua<cr>",
             "Neovim files",
           },
+          O = { "<cmd>ObsidianSearch<cr>", "Obsidian" },
           a = { "<cmd>lua require('telescope.builtin').live_grep({hidden=true})<cr>", "Grep files" },
           c = { "<cmd>lua require('telescope').extensions.gh.gist()<cr>", "Gists" },
-          i = { "<cmd>lua require('telescope').extensions.gh.issues()<cr>", "Github issues" },
           f = { "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>", "Find files" },
           g = { "<cmd>lua require('telescope.builtin').git_files()<cr>", "Git files" },
+          i = { "<cmd>lua require('telescope').extensions.gh.issues()<cr>", "Github issues" },
           o = { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", "Symbols" },
           p = { "<cmd>lua require('telescope').extensions.gh.pull_requests()<cr>", "Pull requests" },
           r = { "<cmd>lua require('telescope').extensions.gh.run()<cr>", "Runs" },
+          s = {
+            s = { "<cmd>Scratch<cr>", "New Scratch" },
+            n = { "<cmd>ScratchWithName<cr>", "Named Scratch" },
+            o = { "<cmd>ScratchOpenFzf<cr>", "Open Scratch" },
+          },
         },
         g = {
           name = "Lsp",
@@ -97,8 +107,9 @@ return {
           },
         },
         l = {
-          f = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "Formatting" },
+          f = { "<cmd>lua vim.lsp.buf.format { async = true, filter = buf_lsp_filter_function }<cr>", "Formatting" },
           q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Set Location list" },
+          l = { "<cmd>lua require('telescope').extensions.gen.prompts({ mode = 'n'})<cr>", "LLM Prompts" },
           L = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Restart LspLines" },
         },
         p = {
@@ -120,18 +131,21 @@ return {
         },
         y = { '"*y', "Copy to the clipboard" },
         ["/"] = { "<cmd>normal yyPgccj<cr>", "Copy and comment" },
+        K = { require("hover").hover, "hover" },
       }, { prefix = "<leader>", noremap = true })
 
       -- Leader key visual mode
       wk.register({
         y = { '"*y', "Copy to clipboard" },
         ["lf"] = { "<Esc><cmd>lua vim.lsp.buf.range_formatting()<cr>gv", "Format selection" },
+        ["ll"] = { "<cmd>lua require('telescope').extensions.gen.prompts({ mode = 'v'})<cr>", "LLM Prompts" },
       }, { prefix = "<leader>", noremap = true, mode = "v" })
 
       -- Various mappings
       wk.register({
         ["gd"] = { "<Cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
         ["K"] = { "<Cmd>Lspsaga hover_doc ++quiet<cr>", "Signature" },
+        ["L"] = { "<Cmd>Lspsaga peek_definition<cr>", "Peek definition" },
         -- ["K"] = { "<Cmd>Lspsaga hover_doc<cr>", "Signature" },
         -- ["K"] = { "<Cmd>lua vim.lsp.buf.hover()<cr>", "Signature" },
         ["[g"] = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev diag" },
@@ -142,6 +156,8 @@ return {
         ["<C-d>"] = { "<C-d>zz", "scroll down" },
         ["<C-s>"] = { ":w<cr>", "save" },
         ["<C-p>"] = { "<cmd>lua require('telescope.builtin').git_files()<cr>", "git files" },
+        ["[["] = { "<cmd>Gitsigns next_hunk<cr>", "[Git] next hunk" },
+        ["]]"] = { "<cmd>Gitsigns prev_hunk<cr>", "[Git] previous hunk" },
       }, { noremap = true, mode = "n" })
 
       wk.register({
@@ -159,7 +175,7 @@ return {
         ["<C-k>"] = { '<esc>:lua require("tmux").move_top()<cr>', "Window up" },
         ["<C-l>"] = { '<esc>:lua require("tmux").move_right()<cr>', "Window right" },
         ["<C-s>"] = { "<esc>:w<cr>", "save" },
-        ["<C-x><C-p"] = { "<cmd>Telescope neoclip<CR>", "Neoclip" },
+        ["<C-x><C-p>"] = { "<cmd>Telescope neoclip<CR>", "Neoclip" },
         ["<C-Space>"] = {
           '<cmd>lua ls = require("luasnip"); if ls.expand_or_jumpable() then ls.expand_or_jump() end<CR>',
           "LuaSnip complete",
