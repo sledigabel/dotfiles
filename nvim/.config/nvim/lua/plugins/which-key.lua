@@ -25,6 +25,17 @@ return {
         end
       end
 
+      function run_local_test()
+        local ft = vim.bo.filetype
+        if ft == "go" then
+          return vim.cmd([[ GoTestFunc ]])
+        elseif ft == "python" then
+          return require("dap-python").test_method()
+        else
+          return print("Filetype not supported for unit test")
+        end
+      end
+
       function terminate()
         local ft = vim.bo.filetype
         if ft == "go" then
@@ -81,6 +92,7 @@ return {
             n = { "<cmd>ScratchWithName<cr>", "Named Scratch" },
             o = { "<cmd>ScratchOpenFzf<cr>", "Open Scratch" },
           },
+          ["ml"] = { "<cmd>CellularAutomaton make_it_rain<cr>", "FML" },
         },
         g = {
           name = "Lsp",
@@ -131,7 +143,7 @@ return {
         },
         y = { '"*y', "Copy to the clipboard" },
         ["/"] = { "<cmd>normal yyPgccj<cr>", "Copy and comment" },
-        K = { require("hover").hover, "hover" },
+        -- K = { require("hover").hover, "hover" },
       }, { prefix = "<leader>", noremap = true })
 
       -- Leader key visual mode
@@ -144,7 +156,8 @@ return {
       -- Various mappings
       wk.register({
         ["gd"] = { "<Cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
-        ["K"] = { "<Cmd>Lspsaga hover_doc ++quiet<cr>", "Signature" },
+        -- ["K"] = { "<Cmd>Lspsaga hover_doc ++quiet<cr>", "Signature" },
+        K = { require("hover").hover, "hover" },
         ["L"] = { "<Cmd>Lspsaga peek_definition<cr>", "Peek definition" },
         -- ["K"] = { "<Cmd>Lspsaga hover_doc<cr>", "Signature" },
         -- ["K"] = { "<Cmd>lua vim.lsp.buf.hover()<cr>", "Signature" },

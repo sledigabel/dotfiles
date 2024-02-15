@@ -1,6 +1,7 @@
 #!/bin/bash
 
-[ -z "${TMUX_SESSION_DIR}" ] && exit 1
+eval "$(tmux show-environment TMUX_SESSION_DIR)"
+[ "$TMUX_SESSION_DIR" = "" ] && exit 1
 branch=""
 if [[ "${#}" -eq 1 ]]; then
 	branch=$1
