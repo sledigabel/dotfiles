@@ -5,7 +5,9 @@ if not local_dir then
 end
 
 local home = os.getenv("HOME")
-local jdtls_home = home .. "/dev/tools/jdtls6/"
+-- local jdtls_home = home .. "/dev/tools/jdtls6/"
+local jdtls_home = home .. "/dev/tools/jdtls-1.33.0/"
+local jdtls_jar_name = "org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar"
 -- local jdtls_home = home .. "/dev/tools/jdtls-1.28.0/"
 
 local local_dir_name = vim.fn.fnamemodify(local_dir, ":p:h:t")
@@ -148,7 +150,7 @@ local config = {
     "--add-opens",
     "java.base/sun.nio.fs=ALL-UNNAMED",
     "-jar",
-    jdtls_home .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
+    jdtls_home .. "/plugins/" .. jdtls_jar_name,
     "-data",
     workspace_dir,
   },

@@ -1,5 +1,5 @@
 {
-  "filetypes": ["markdown", "sh", "go", "lua", "js", "py", "java"],
+  "filetypes": ["markdown", "text", "sh", "go", "lua", "js", "py", "java"],
   "localKeys": [
     {
       "filenameContains": ["gp"],

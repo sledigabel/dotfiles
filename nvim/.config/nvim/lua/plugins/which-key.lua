@@ -135,6 +135,7 @@ return {
         s = {
           o = { "<cmd>ScratchOpenFzf<cr>", "Open Scratch" },
           n = { "<cmd>ScratchWithName<cr>", "New Scratch" },
+          s = { "<cmd>Scratch<cr>", "Open New Daily Scratch" },
         },
         t = {
           name = "NvimTree", -- optional group name

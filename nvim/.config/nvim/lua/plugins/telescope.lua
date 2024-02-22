@@ -38,9 +38,9 @@ return {
               and (not string.find(prompt, "test") and not string.find(prompt, "Test"))
             then
               -- could be any positive value, taking a low value to ensure the test files offset
-              test_file_weight = 0.1
+              test_file_weight = 1
             end
-            return 1 / (fzy_score + OFFSET) + test_file_weight
+            return 1 / (fzy_score + OFFSET - test_file_weight)
           end,
 
           -- The fzy.positions function, which returns an array of string indices, is
