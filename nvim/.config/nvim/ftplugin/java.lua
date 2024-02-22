@@ -5,10 +5,13 @@ if not local_dir then
 end
 
 local home = os.getenv("HOME")
--- local jdtls_home = home .. "/dev/tools/jdtls6/"
-local jdtls_home = home .. "/dev/tools/jdtls-1.33.0/"
-local jdtls_jar_name = "org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar"
--- local jdtls_home = home .. "/dev/tools/jdtls-1.28.0/"
+-- previous jdtls
+local jdtls_home = home .. "/dev/tools/jdtls6/"
+local jdtls_jar_name = "org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
+
+-- new jdtls
+-- local jdtls_home = home .. "/dev/tools/jdtls-1.33.0/"
+-- local jdtls_jar_name = "org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar"
 
 local local_dir_name = vim.fn.fnamemodify(local_dir, ":p:h:t")
 local workspace_dir = home .. "/workspaces/" .. local_dir_name
@@ -24,7 +27,7 @@ end, {
   "/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
   "/vscode-java-decompiler/server/*.jar",
   "/vscode-java-test/server/*.jar",
-  "/lombok/*.jar",
+  -- "/lombok/*.jar",
 })
 
 local bundles = {}
@@ -140,7 +143,7 @@ local config = {
     "-Dlog.protocol=true",
     "-Dlog.level=ALL",
     "-javaagent:" .. vim.fn.stdpath("config") .. "/java/lombok/lombok.jar",
-    "-Xbootclasspath/a:/" .. vim.fn.stdpath("config") .. "/java/lombok/lombok.jar",
+    -- "-Xbootclasspath/a:/" .. vim.fn.stdpath("config") .. "/java/lombok/lombok.jar",
     "-Xmx2g",
     "--add-modules=ALL-SYSTEM",
     "--add-opens",

@@ -5,6 +5,7 @@ return {
       "nvim-tree/nvim-web-devicons",
       "sam4llis/nvim-tundra",
       "Exafunction/codeium.vim",
+      "nvim-lua/lsp-status.nvim",
       -- "SmiteshP/nvim-navic",
     },
     config = function()
@@ -78,13 +79,24 @@ return {
           },
           lualine_c = {},
           lualine_x = {
-            { "require('lsp-status').status_progress()", always_visible = false, separator = { left = "", right = "" } },
-            { "StatusCodeium()", always_visible = false, separator = { left = "", right = "" } },
-            "progress",
+            {
+              "require('lsp-status').status()",
+              always_visible = true,
+              separator = { left = "", right = "" },
+              fmt = function(str)
+                return str:sub(1, 60)
+              end,
+            },
+            { "StatusCodeium()", padding = 0, always_visible = false, separator = { left = "", right = "" } },
+            -- "progress",
           },
           lualine_y = { "filetype" },
           -- lualine_z = { { "location", separator = { left = '' } } },
-          lualine_z = { "location" },
+          lualine_z = {
+            -- { "progress", separator = { left = "", right = "" } },
+            { "progress" },
+            { "location", padding = 0 },
+          },
         },
       })
 

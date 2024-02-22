@@ -344,4 +344,18 @@ return {
 
   { "folke/neoconf.nvim", cmd = "Neoconf" },
   "folke/neodev.nvim",
+  {
+    "nvim-lua/lsp-status.nvim",
+    config = function()
+      s = require("lsp-status").config({
+        status_symbol = "",
+        diagnostics = false,
+        -- indicator_errors = " ",
+        -- indicator_warnings = " ",
+        -- indicator_info = " ",
+        -- indicator_hint = " ",
+        -- indicator_ok = "",
+      })
+    end,
+  },
 }
