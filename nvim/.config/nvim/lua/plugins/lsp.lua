@@ -3,7 +3,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
-    dependencies = { "b0o/SchemaStore.nvim", "hrsh7th/cmp-nvim-lsp", "nvim-lua/lsp-status.nvim", "folke/neodev.nvim" },
+    dependencies = { "b0o/SchemaStore.nvim", "hrsh7th/cmp-nvim-lsp", "folke/neodev.nvim" },
     config = function()
       local nvim_lsp = require("lspconfig")
       local util = require("lspconfig.util")
@@ -23,6 +23,7 @@ return {
       local capabilities =
         vim.tbl_extend("keep", require("cmp_nvim_lsp").default_capabilities(), lsp_status.capabilities)
       capabilities.textDocument.completion.completionItem.snippetSupport = true
+      capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
       -- vim.print(capabilities)
 
       -- python
@@ -194,6 +195,14 @@ return {
       -- })
       -- local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls', 'jsonnet_ls', 'sumneko_lua' }
       --
+
+      nvim_lsp.markdown_oxide.setup({
+        capabilities = capabilities,
+        root_dir = function ()
+          return os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents/"
+        end
+      })
+
       local servers = { "rust_analyzer", "bashls", "jsonnet_ls", "bufls" }
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
@@ -346,6 +355,7 @@ return {
   "folke/neodev.nvim",
   {
     "nvim-lua/lsp-status.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
     config = function()
       s = require("lsp-status").config({
         status_symbol = "",

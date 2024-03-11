@@ -27,9 +27,9 @@ return {
       },
       custom_highlights = function(colors)
         return {
-          Whitespace = { fg = "#3B3B3B"},
+          Whitespace = { fg = "#3B3B3B" },
         }
-      end
+      end,
     })
     -- vim.g.catppuccin_flavour = "macchiato"
     -- vim.g.catppuccin_flavour = "moccha"

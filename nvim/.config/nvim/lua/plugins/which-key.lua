@@ -120,6 +120,7 @@ return {
         },
         l = {
           f = { "<cmd>lua vim.lsp.buf.format { async = true, filter = buf_lsp_filter_function }<cr>", "Formatting" },
+          -- f = { "<cmd>lua vim.lsp.buf.format { async = true }", "Formatting" },
           q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Set Location list" },
           l = { "<cmd>lua require('telescope').extensions.gen.prompts({ mode = 'n'})<cr>", "LLM Prompts" },
           L = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Restart LspLines" },
