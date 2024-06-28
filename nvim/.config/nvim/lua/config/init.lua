@@ -62,3 +62,31 @@ augroup JsonnetFiles
   autocmd BufReadPre *.libsonnet setfiletype jsonnet
 augroup END
 ]])
+
+local homedir = os.getenv("HOME")
+local obsidiandir = homedir .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents/"
+
+-- create the autocmd for obsidian files
+vim.api.nvim_create_autocmd({
+  "BufNewFile",
+  "BufRead",
+}, {
+  pattern = "*.md",
+  group = vim.api.nvim_create_augroup("Obsidian", { clear = true }),
+  callback = function(ev)
+    print("event fired from file: " .. ev.file)
+    -- extract the dirname
+    local dirname = vim.fn.fnamemodify(ev.file, ":h")
+    local dirextract = string.sub(dirname, 1, string.len(obsidiandir))
+    if dirextract == obsidiandir then
+      vim.api.nvim_buf_set_option(ev.buf, "filetype", "markdown_obsidian")
+      vim.treesitter.start(0, "markdown")
+    end
+  end,
+  -- callback = function()
+  --     if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
+  --         local buf = vim.api.nvim_get_current_buf()
+  --         vim.api.nvim_buf_set_option(buf, "filetype", "gotmpl")
+  --     end
+  -- end
+})

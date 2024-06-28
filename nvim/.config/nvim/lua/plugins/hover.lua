@@ -1,7 +1,7 @@
 return {
   "lewis6991/hover.nvim",
   dependencies = {
-    "/Users/sebastienledigabel/dev/work/nvim-travelapi/",
+    -- "/Users/sebastienledigabel/dev/work/nvim-travelapi/",
     "nvim-lua/plenary.nvim",
     "neovim/nvim-lspconfig",
   },

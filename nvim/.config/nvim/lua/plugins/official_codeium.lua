@@ -2,6 +2,8 @@
 return {
   {
     "Exafunction/codeium.vim",
+    -- version = "1.8.37",
+    commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
     config = function()
       -- Codeium
       vim.g.codeium_enabled = false

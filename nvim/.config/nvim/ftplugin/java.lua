@@ -6,8 +6,9 @@ end
 
 local home = os.getenv("HOME")
 -- previous jdtls
-local jdtls_home = home .. "/dev/tools/jdtls6/"
-local jdtls_jar_name = "org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
+local jdtls_home = home .. "/dev/tools/jdtls-1.36.0/"
+-- local jdtls_jar_name = "org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
+local jdtls_jar_name = "org.eclipse.equinox.launcher_1.6.800.v20240513-1750.jar"
 
 -- new jdtls
 -- local jdtls_home = home .. "/dev/tools/jdtls-1.33.0/"

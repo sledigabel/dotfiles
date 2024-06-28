@@ -10,7 +10,7 @@ return {
         -- null_ls.builtins.formatting.clang_format,
         -- null_ls.builtins.formatting.golines,
         null_ls.builtins.formatting.google_java_format,
-        -- null_ls.builtins.formatting.isort,
+        null_ls.builtins.formatting.isort,
         -- null_ls.builtins.formatting.autoflake,
         -- null_ls.builtins.formatting.lua_format,
         -- null_ls.builtins.code_actions.eslint,

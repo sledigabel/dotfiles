@@ -108,7 +108,7 @@ return {
           i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Implementations" },
           o = { "<cmd>lua io.popen('gh pr view -w')<cr>", "Open PR in web" },
           O = { "<cmd>Lspsaga outline<cr>", "Saga Outline" },
-          q = { "<cmd>TroubleToggle<cr>", "Diag list" },
+          q = { "<cmd>Trouble diagnostics toggle<cr>", "Diag list" },
           r = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
           t = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type definition" },
           w = {
@@ -153,6 +153,7 @@ return {
         y = { '"*y', "Copy to clipboard" },
         ["lf"] = { "<Esc><cmd>lua vim.lsp.buf.range_formatting()<cr>gv", "Format selection" },
         ["ll"] = { "<cmd>lua require('telescope').extensions.gen.prompts({ mode = 'v'})<cr>", "LLM Prompts" },
+        ["/"] = { "ygv", "Copy and comment" },
       }, { prefix = "<leader>", noremap = true, mode = "v" })
 
       -- Various mappings

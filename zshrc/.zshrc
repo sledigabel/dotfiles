@@ -12,12 +12,7 @@ if [ -n "${ZSH_TMUX_AUTOSTARTED:-}" ]
 then
    if [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM_PROGRAM}" = "alacritty" ] || [ "${TERM_PROGRAM}" = "tmux" ]
    then
-     ZSH_THEME="powerlevel10k/powerlevel10k"
-     # ZSH_THEME="alanpeabody"
-     [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-     if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-       source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-     fi
+     eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/seb.omp.yaml)"
   else
    ZSH_THEME="sorin"
   fi
@@ -173,7 +168,7 @@ fi
 source $ZSH/oh-my-zsh.sh
 unalias buf
 
-alias ls='lsd'
+alias ls='eza --icons=auto'
 alias vi=lnvim
 alias vim=nvim
 alias vimdiff="nvim -d"

@@ -1,5 +1,4 @@
 return {
-
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
@@ -28,7 +27,6 @@ return {
 
       -- python
       nvim_lsp.pylsp.setup({
-        -- on_attach = on_attach_normal,
         -- cmd = { pyenv_bin_path .. "/pylsp" },
         -- cmd = { "pylsp" },
         capabilities = capabilities,
@@ -55,7 +53,6 @@ return {
 
       -- json
       nvim_lsp.jsonls.setup({
-        -- on_attach = on_attach_normal,
         capabilities = capabilities,
         -- cmd = { "/Users/sebastienledigabel/node_modules/.bin/vscode-json-languageserver" },
         commands = {
@@ -75,7 +72,6 @@ return {
 
       -- jsonnet
       nvim_lsp.jsonnet_ls.setup({
-        -- on_attach = on_attach_normal,
         capabilities = capabilities,
         cmd = { "/Users/sebastienledigabel/dev/go/bin/jsonnet-language-server" },
       })
@@ -86,7 +82,6 @@ return {
 
       -- nvim_lsp.sumneko_lua.setup({
       nvim_lsp.lua_ls.setup({
-        -- on_attach = on_attach_normal,
         capabilities = capabilities,
         settings = {
           Lua = {
@@ -122,7 +117,6 @@ return {
       })
 
       nvim_lsp.yamlls.setup({
-        -- on_attach = on_attach_normal,
         capabilities = capabilities,
         settings = {
           yaml = {
@@ -180,17 +174,7 @@ return {
       --   local_dir = vim.fn.getcwd()
       -- end
       --
-      -- local_dir = vim.fn.fnamemodify(local_dir, ":p:h:t")
-      -- local workspace_dir = os.getenv("HOME") .. "/workspaces/" .. local_dir
-      -- nvim_lsp.jdtls.setup({
-      --   cmd = {
-      --     "/Users/sebastienledigabel/dev/tools/jdtls/bin/jdtls",
-      --     "-data",
-      --     workspace_dir,
-      --   },
-      -- })
       -- nvim_lsp.gopls.setup({
-      -- 	on_attach = on_attach_no_formatting,
       -- 	capabilities = capabilities,
       -- })
       -- local servers = { 'gopls', 'rust_analyzer', 'bashls', 'yamlls', 'jsonnet_ls', 'sumneko_lua' }
@@ -198,15 +182,19 @@ return {
 
       nvim_lsp.markdown_oxide.setup({
         capabilities = capabilities,
-        root_dir = function ()
+        root_dir = function()
           return os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents/"
-        end
+        end,
+        filetypes = { "markdown_obsidian" },
+      })
+
+      require("lspconfig").marksman.setup({
+        capabilities = capabilities,
       })
 
       local servers = { "rust_analyzer", "bashls", "jsonnet_ls", "bufls" }
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
-          -- on_attach = on_attach_normal,
           capabilities = capabilities,
         })
       end
@@ -280,7 +268,20 @@ return {
     "folke/trouble.nvim",
     config = function()
       require("trouble").setup({
-        height = 4,
+        win = {
+          type = "split",
+          position = "bottom",
+          size = 5,
+        },
+        modes = {
+          diagnostics = {
+            mode = "diagnostics", -- inherit from diagnostics mode
+            filter = { buf = 0 }, -- filter diagnostics to the current buffer
+            pinned = true,
+            auto_open = true,
+            auto_close = true,
+          },
+        },
       })
     end,
   },
@@ -357,7 +358,7 @@ return {
     "nvim-lua/lsp-status.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
     config = function()
-      s = require("lsp-status").config({
+      require("lsp-status").config({
         status_symbol = "",
         diagnostics = false,
         -- indicator_errors = " ",
