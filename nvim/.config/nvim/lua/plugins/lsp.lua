@@ -276,7 +276,9 @@ return {
         modes = {
           diagnostics = {
             mode = "diagnostics", -- inherit from diagnostics mode
-            filter = { buf = 0 }, -- filter diagnostics to the current buffer
+            filter = { buf = 0, ["not"] = {
+              ft = "markdown_obsidian",
+            } }, -- filter diagnostics to the current buffer
             pinned = true,
             auto_open = true,
             auto_close = true,

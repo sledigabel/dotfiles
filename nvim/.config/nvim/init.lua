@@ -24,9 +24,10 @@ local lazyopts = {
 
 -- vim.g.theme = "gruvbox"
 -- vim.g.theme = "tundra"
+vim.g.theme = "kanagawa-lotus"
 -- vim.g.theme = "kanagawa"
 -- vim.g.theme = "catpuccin"
-vim.g.theme = "nord"
+-- vim.g.theme = "nord"
 -- vim.g.theme = "rose-pine"
 -- vim.g.theme = "tokyonight"
 
