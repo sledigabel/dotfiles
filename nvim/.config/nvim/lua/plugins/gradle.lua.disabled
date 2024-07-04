@@ -1,9 +1,0 @@
-return {
-  dir = "/Users/sebastienledigabel/dev/perso/gradle.nvim/",
-  config = function()
-    require("gradle").setup({})
-  end,
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
-}

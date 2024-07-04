@@ -4,6 +4,8 @@ return {
     config = function()
       local null_ls = require("null-ls")
 
+      null_ls.builtins.diagnostics.write_good.filetypes = { "markdown", "markdown_obsidian" }
+
       local sources = {
         -- null_ls.builtins.diagnostics.luacheck,
         -- null_ls.builtins.diagnostics.pylint,
@@ -32,7 +34,7 @@ return {
         -- null_ls.builtins.diagnostics.shellcheck,
         null_ls.builtins.diagnostics.staticcheck,
         null_ls.builtins.diagnostics.write_good,
-        null_ls.builtins.diagnostics.yamllint,
+        -- null_ls.builtins.diagnostics.yamllint,
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.buf,
         null_ls.builtins.formatting.cmake_format,

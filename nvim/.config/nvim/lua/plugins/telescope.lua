@@ -125,11 +125,11 @@ return {
       require("telescope").load_extension("neoclip")
     end,
   },
-  {
-    "dj95/telescope-gen.nvim",
-    dependencies = "nvim-telescope/telescope.nvim",
-    config = function()
-      require("telescope").load_extension("gen")
-    end,
-  },
+  -- {
+  --   "dj95/telescope-gen.nvim",
+  --   dependencies = "nvim-telescope/telescope.nvim",
+  --   config = function()
+  --     require("telescope").load_extension("gen")
+  --   end,
+  -- },
 }

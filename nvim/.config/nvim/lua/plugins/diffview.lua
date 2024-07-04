@@ -1,7 +1,6 @@
 return {
   "sindrets/diffview.nvim",
-  config = function ()
-  end,
+  config = function() end,
   cmd = {
     "DiffviewOpen",
     "DiffviewClose",
@@ -9,5 +8,5 @@ return {
     "DiffviewFocusFiles",
     "DiffviewRefresh",
     "DiffviewFileHistory",
-  }
+  },
 }

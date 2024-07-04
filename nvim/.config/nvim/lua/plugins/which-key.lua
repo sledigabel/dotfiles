@@ -13,19 +13,7 @@ return {
         },
       })
 
-      function select_test_to_run()
-        -- test which filetype we are in
-        local ft = vim.bo.filetype
-        if ft == "go" then
-          return vim.cmd([[ GoDebug --test]])
-        elseif ft == "python" then
-          return require("dap-python").test_method()
-        else
-          return print("Filetype not supported for unit test")
-        end
-      end
-
-      function run_local_test()
+      local function run_local_test()
         local ft = vim.bo.filetype
         if ft == "go" then
           return vim.cmd([[ GoTestFunc ]])
@@ -36,7 +24,7 @@ return {
         end
       end
 
-      function terminate()
+      local function terminate()
         local ft = vim.bo.filetype
         if ft == "go" then
           return vim.cmd([[ GoDebug --stop]])
@@ -45,7 +33,7 @@ return {
         end
       end
 
-      function buf_lsp_filter_function(client)
+      local function buf_lsp_filter_function(client)
         return client.name ~= "pylsp"
       end
 
@@ -60,8 +48,18 @@ return {
           c = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
           i = { "<cmd>lua require('dap').step_into()<cr>", "Step Into" },
           o = { "<cmd>lua require('dap').step_over()<cr>", "Step Over" },
-          p = { "<cmd>lua select_test_to_run()<cr>", "(Debug) Run test" },
-          S = { "<cmd>lua terminate()<cr>", "Terminate" },
+          p = {
+            function()
+              run_local_test()
+            end,
+            "(Debug) Run test",
+          },
+          S = {
+            function()
+              terminate()
+            end,
+            "Terminate",
+          },
           t = { "<cmd>Telescope dap commands<cr>", "Commands" },
           u = { "<cmd>lua require('dapui').toggle()<cr>", "UI Toggle" },
         },
@@ -119,7 +117,16 @@ return {
           },
         },
         l = {
-          f = { "<cmd>lua vim.lsp.buf.format { async = true, filter = buf_lsp_filter_function }<cr>", "Formatting" },
+          -- f = { "<cmd>lua vim.lsp.buf.format { async = true, filter = buf_lsp_filter_function }<cr>", "Formatting" },
+          f = {
+            function()
+              vim.lsp.buf.format({
+                async = true,
+                filter = buf_lsp_filter_function,
+              })
+            end,
+            "Formatting",
+          },
           -- f = { "<cmd>lua vim.lsp.buf.format { async = true }", "Formatting" },
           q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Set Location list" },
           l = { "<cmd>lua require('telescope').extensions.gen.prompts({ mode = 'n'})<cr>", "LLM Prompts" },

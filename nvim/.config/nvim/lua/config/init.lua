@@ -12,6 +12,7 @@ vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.swapfile = true
 vim.cmd([[
   set signcolumn=yes
+  set conceallevel=1
 ]])
 
 -- search
@@ -63,10 +64,10 @@ augroup JsonnetFiles
 augroup END
 ]])
 
-local homedir = os.getenv("HOME")
-local obsidiandir = homedir .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents/"
-
 -- create the autocmd for obsidian files
+-- local homedir = os.getenv("HOME")
+-- local obsidiandir = homedir .. "/Library/Mobile Documents/iCloud~md~obsidian/"
+local obsidianre = "iCloud~md~obsidian"
 vim.api.nvim_create_autocmd({
   "BufNewFile",
   "BufRead",
@@ -74,19 +75,12 @@ vim.api.nvim_create_autocmd({
   pattern = "*.md",
   group = vim.api.nvim_create_augroup("Obsidian", { clear = true }),
   callback = function(ev)
-    print("event fired from file: " .. ev.file)
     -- extract the dirname
     local dirname = vim.fn.fnamemodify(ev.file, ":h")
-    local dirextract = string.sub(dirname, 1, string.len(obsidiandir))
-    if dirextract == obsidiandir then
+    local lookup = string.find(dirname, obsidianre, 1, true)
+    if lookup ~= nil then
       vim.api.nvim_buf_set_option(ev.buf, "filetype", "markdown_obsidian")
       vim.treesitter.start(0, "markdown")
     end
   end,
-  -- callback = function()
-  --     if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
-  --         local buf = vim.api.nvim_get_current_buf()
-  --         vim.api.nvim_buf_set_option(buf, "filetype", "gotmpl")
-  --     end
-  -- end
 })
