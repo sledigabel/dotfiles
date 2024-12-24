@@ -49,7 +49,6 @@ setopt pushdminus
 setopt sharehistory
 setopt zle
 
-export NVIM_APPNAME=nvim_new
 export EDITOR=nvim
 export FZF_DEFAULT_OPTS="--layout=reverse --preview-window='right:60%' --preview 'bat' --border=rounded"
 export GOPATH="$HOME/dev/go"
@@ -66,32 +65,19 @@ eval "$(pyenv init -)"
 # https://github.com/pyenv/pyenv-virtualenv/issues/259#issuecomment-1007432346
 # eval "$(pyenv virtualenv-init -| sed s/precmd/precwd/g)"
 export SAVEHIST=5000
-# export TERM="xterm-256color"
 export ZSH=${HOME}/.oh-my-zsh
 export VIRTUALENVWRAPPER_VIRTUALENV=/Users/sebastienledigabel/.pyenv/shims/virtualenv
-# export VIRTUALENVWRAPPER_PYTHON="/Users/sebastienledigabel/.pyenv/shims/python3"
-# export CC=`which gcc-11`
-# export LDFLAGS="-L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
-# export CPPFLAGS="-I$(brew --prefix zlib)/include -I$(brew --prefix bzip2)/include"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
 export WORKON_HOME=~/.virtualenvs
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
 export NVM_DIR="$HOME/.nvm"
 export DISABLE_UNTRACKED_FILES_DIRTY=true
-# Only needs to be run once when nvm is installed
-# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 
-# for zsh-highlighters
 [ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# for zsh-git-prompt
-# [ -f "/usr/local/opt/zsh-git-prompt/zshrc.sh" ] && source "/usr/local/opt/zsh-git-prompt/zshrc.sh"
-# for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # for virtualenvwrapper
 [ -e "/opt/homebrew/bin/virtualenvwrapper.sh" ] && source /opt/homebrew/bin/virtualenvwrapper.sh
-# iterm2 integration
-[ -f "${HOME}/.iterm2_shell_integration.zsh" ] && source "${HOME}/.iterm2_shell_integration.zsh"
 # extra sources
 if [ -d "${HOME}/.source" ]
 then
@@ -169,7 +155,6 @@ fi
 source $ZSH/oh-my-zsh.sh
 # unalias buf
 
-# alias ls='eza --icons=auto'
 alias ls='lsd -g'
 alias vi=lnvim
 alias vim=nvim
@@ -179,7 +164,6 @@ alias ssh="ssh -o StrictHostKeyChecking=no"
 alias less="bat"
 alias jira='JIRA_API_TOKEN="$(security find-generic-password -a ${USER} -s jira_token -w)" /opt/homebrew/bin/jira'
 
-# eval "$(starship init zsh)"
 # . ~/.asdf/plugins/java/set-java-home.zsh
 
 autoload -U compinit && compinit
