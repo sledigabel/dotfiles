@@ -4,18 +4,18 @@
 #
 
 # zsh profiling
-zmodload zsh/zprof
+# zmodload zsh/zprof
 
 PARENTPROCESS=$(ps -p `ps -p $$ -o ppid=` -o comm=)
 
 if [ -n "${ZSH_TMUX_AUTOSTARTED:-}" ]
 then
-   if [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM_PROGRAM}" = "alacritty" ] || [ "${TERM_PROGRAM}" = "tmux" ]
-   then
-     eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/seb.omp.yaml)"
-  else
+  #  if [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM_PROGRAM}" = "alacritty" ] || [ "${TERM_PROGRAM}" = "tmux" ]
+  #  then
+  #    eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/seb.omp.yaml)"
+  # else
    ZSH_THEME="sorin"
-  fi
+  # fi
 fi
 # ZSH_THEME="sorin"
 
@@ -49,6 +49,7 @@ setopt pushdminus
 setopt sharehistory
 setopt zle
 
+export NVIM_APPNAME=nvim_new
 export EDITOR=nvim
 export FZF_DEFAULT_OPTS="--layout=reverse --preview-window='right:60%' --preview 'bat' --border=rounded"
 export GOPATH="$HOME/dev/go"
@@ -119,7 +120,7 @@ plugins=(
   brew
   colorize
   colored-man-pages
-  docker
+  # docker
   # docker-compose
   # git
   # git-extras
@@ -136,7 +137,7 @@ plugins=(
   # pip
   # python
   history
-  httpie
+  # httpie
   safe-paste
   tmux
   # virtualenv
@@ -148,7 +149,7 @@ plugins=(
 if [ "${PARENTPROCESS##*/}" = "nvim" ] || [ "${PARENTPROCESS##*/}" = "bash" ]
  then ZSH_TMUX_AUTOSTART=false
 else
-  if [ "${TERM_PROGRAM}" = "iTerm.app" ]; then
+  if [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM}" = "xterm-kitty" ]; then
     ZSH_TMUX_AUTOSTART=true
     ZSH_TMUX_AUTOSTART_ONCE=true
     zstyle :omz:plugins:ssh-agent agent-forwarding on
@@ -166,9 +167,10 @@ fi
 
 # run OMZ
 source $ZSH/oh-my-zsh.sh
-unalias buf
+# unalias buf
 
-alias ls='eza --icons=auto'
+# alias ls='eza --icons=auto'
+alias ls='lsd -g'
 alias vi=lnvim
 alias vim=nvim
 alias vimdiff="nvim -d"
@@ -183,5 +185,5 @@ alias jira='JIRA_API_TOKEN="$(security find-generic-password -a ${USER} -s jira_
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
 
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-zprof > ~/zshProfile
+# source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+# zprof > ~/zshProfile

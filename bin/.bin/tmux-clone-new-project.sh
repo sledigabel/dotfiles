@@ -50,4 +50,5 @@ elif [ -z "$1" ]; then
 else
   echo "Hello, world!"
 fi
+
 read -p "Press enter to continue"
