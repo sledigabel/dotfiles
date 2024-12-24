@@ -1,15 +1,14 @@
-local lspstatus = require("lsp-progress")
-local print_status = function()
-  local ok, msg = pcall(lspstatus.progress)
-  if ok then
-    return msg
-  else
-    return "..."
-  end
-end
+-- local lspstatus = require("lsp-progress")
+-- local print_status = function()
+--   local ok, msg = pcall(lspstatus.progress)
+--   if ok then
+--     return msg
+--   else
+--     return "..."
+--   end
+-- end
 
 local lualine_theme = "auto"
-
 
 function CodeCompleteStatus()
   if vim.g.copilot_enabled then
@@ -18,7 +17,6 @@ function CodeCompleteStatus()
     return "  "
   end
 end
-
 
 require("lualine").setup({
   options = {
@@ -75,14 +73,14 @@ require("lualine").setup({
     },
     lualine_c = {},
     lualine_x = {
-      {
-        print_status,
-        always_visible = true,
-        separator = { left = "", right = "" },
-        fmt = function(str)
-          return str:sub(1, 60)
-        end,
-      },
+      -- {
+      --   print_status,
+      --   always_visible = true,
+      --   separator = { left = "", right = "" },
+      --   fmt = function(str)
+      --     return str:sub(1, 60)
+      --   end,
+      -- },
       { "CodeCompleteStatus()", padding = 0, always_visible = false, separator = { left = "", right = "" } },
       -- "progress",
     },

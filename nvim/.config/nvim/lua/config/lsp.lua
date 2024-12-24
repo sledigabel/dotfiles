@@ -177,12 +177,13 @@ require("lspconfig").marksman.setup({
   capabilities = capabilities,
 })
 
-local servers = { "rust_analyzer", "bashls", "buf_ls" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup({
-    capabilities = capabilities,
-  })
-end
+require("lspconfig").buf_ls.setup({
+  capabilities = capabilities,
+})
+
+require("lspconfig").bashls.setup({
+  capabilities = capabilities,
+})
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do

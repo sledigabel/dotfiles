@@ -113,6 +113,7 @@ require("lazy").setup({
   -- [ Tree sitter ] --
   {
     "nvim-treesitter/nvim-treesitter",
+    build = { ":TSUpdate" },
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -421,7 +422,6 @@ require("lazy").setup({
   {
     "lewis6991/hover.nvim",
     dependencies = {
-      -- "/Users/sebastienledigabel/dev/work/nvim-travelapi/",
       "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",
     },
@@ -434,6 +434,14 @@ require("lazy").setup({
     config = function()
       require("config.null-ls")
     end,
+  },
+  {
+    "j-hui/fidget.nvim",
+    opts = {
+      notification = {
+        override_vim_notify = true,
+      },
+    },
   },
 
   -- [ CMP ]
@@ -533,20 +541,20 @@ require("lazy").setup({
   },
 
   -- [ notify ]
-  {
-    "rcarriga/nvim-notify",
-    -- dependencies = { "neovim/nvim-lspconfig" },
-    config = function()
-      require("notify").setup({
-        background_colour = "#000000",
-        timeout = 500,
-        top_down = false,
-        render = "compact",
-      })
-
-      vim.notify = require("notify")
-    end,
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   -- dependencies = { "neovim/nvim-lspconfig" },
+  --   config = function()
+  --     require("notify").setup({
+  --       background_colour = "#000000",
+  --       timeout = 500,
+  --       top_down = false,
+  --       render = "compact",
+  --     })
+  --
+  --     vim.notify = require("notify")
+  --   end,
+  -- },
 
   -- [ Nvim tree ]
   {
