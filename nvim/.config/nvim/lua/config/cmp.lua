@@ -26,6 +26,8 @@ cmp.setup({
     ["<C-x><C-d>"] = cmp.mapping.complete(),
   },
   sources = cmp.config.sources({
+    { name = "lazydev" },
+    { name = "nvim_lua" },
     {
       name = "nvim_lsp",
       options = {
@@ -34,7 +36,6 @@ cmp.setup({
         },
       },
     },
-    { name = "nvim_lua" },
     { name = "luasnip" },
     { name = "path" },
     -- { name = "buffer", keyword_length = 5 },
@@ -50,6 +51,7 @@ cmp.setup({
       menu = {
         buffer = "[buf]",
         nvim_lsp = "[LSP]",
+        lazydev = "[LZY]",
         nvim_lua = "[api]",
         path = "[path]",
         luasnip = "[snip]",

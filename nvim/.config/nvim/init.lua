@@ -123,6 +123,11 @@ require("lazy").setup({
         highlight = {
           enable = true, -- false will disable the whole extension
           additional_vim_regex_highlighting = false,
+          disable = function(_, bufnr)
+            local buf_name = vim.api.nvim_buf_get_name(bufnr)
+            local file_size = vim.api.nvim_call_function("getfsize", { buf_name })
+            return file_size > 256 * 1024
+          end,
         },
         textobjects = {
           select = {
@@ -175,30 +180,7 @@ require("lazy").setup({
           marks = false,
           registers = false,
         },
-        -- window = {
-        --   border = "double",
-        -- },
       })
-
-      local function run_local_test()
-        local ft = vim.bo.filetype
-        if ft == "go" then
-          return vim.cmd([[ GoTestFunc ]])
-        elseif ft == "python" then
-          return require("dap-python").test_method()
-        else
-          return print("Filetype not supported for unit test")
-        end
-      end
-
-      local function terminate()
-        local ft = vim.bo.filetype
-        if ft == "go" then
-          return vim.cmd([[ GoDebug --stop]])
-        else
-          return vim.cmd([[ DapTerminate ]])
-        end
-      end
 
       local function close_all_windows()
         for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -226,24 +208,6 @@ require("lazy").setup({
 
         { "<leader>d", "<cmd>bd<cr>", desc = "Delete buffer", remap = false },
         --
-        -- Debugging
-        -- { "<leader>B", group = "debugger", remap = false },
-        -- { "<leader>BB", "<cmd>Telescope dap list_breakpoints<cr>", desc = "Breakpoint", remap = false },
-        -- { "<leader>BO", require("dap").step_out, desc = "Step Out", remap = false },
-        -- { "<leader>Bb", require("dap").toggle_breakpoint, desc = "Breakpoint", remap = false },
-        -- { "<leader>Bc", require("dap").continue, desc = "Continue", remap = false },
-        -- { "<leader>Bi", require("dap").step_into, desc = "Step Into", remap = false },
-        -- { "<leader>Bo", require("dap").step_over, desc = "Step Over", remap = false },
-        -- { "<leader>Bt", "<cmd>Telescope dap commands<cr>", desc = "Commands", remap = false },
-        -- { "<leader>Bu", require("dapui").toggle, desc = "UI Toggle", remap = false },
-        -- { "<leader>td", "<cmd>DapUiToggle<cr>", desc = "Toggle DAP UI", remap = false },
-        -- {
-        --   "<leader>BS",
-        --   terminate,
-        --   group = "debugger",
-        --   desc = "Terminate",
-        --   remap = false,
-        -- },
         -- { "<leader>Bp", run_local_test, group = "debugger", desc = "(Debug) Run test", remap = false },
 
         -- Scratch
@@ -337,6 +301,21 @@ require("lazy").setup({
       require("telescope").load_extension("gh")
     end,
   },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("telescope").load_extension("fzf")
+    end,
+  },
+  {
+    "nvim-telescope/telescope-dap.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("telescope").load_extension("dap")
+    end,
+  },
 
   -- [ tmux ] --
   {
@@ -365,22 +344,43 @@ require("lazy").setup({
   {
     "neovim/nvim-lspconfig",
     event = "BufRead",
-    -- dependencies = { "b0o/SchemaStore.nvim", "hrsh7th/cmp-nvim-lsp", "folke/neodev.nvim" },
-    dependencies = { "b0o/SchemaStore.nvim", "folke/neodev.nvim" },
+    dependencies = { "b0o/SchemaStore.nvim" },
     config = function()
       require("config.lsp")
     end,
   },
   {
-    "glepnir/lspsaga.nvim",
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  {
+    "nvimdev/lspsaga.nvim",
     event = "LspAttach",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
     config = function()
+      vim.diagnostic.config({
+        severity_sort = true,
+      })
       local lspsaga = require("lspsaga")
       lspsaga.setup({
         lightbulb = {
           enable = false,
+          sign = true,
+          virtual_text = false,
         },
         diagnostics = {
+          -- let's try this diagnostic_only_current
+          diagnostic_only_current = true,
           keys = {
             quit = "<Esc>",
           },
@@ -428,6 +428,9 @@ require("lazy").setup({
     config = function()
       require("config.hover")
     end,
+    keys = {
+      { "K", "<cmd>lua require('hover').hover()<cr>", desc = "Hover", mode = "n", remap = false },
+    },
   },
   {
     "nvimtools/none-ls.nvim",
@@ -442,6 +445,12 @@ require("lazy").setup({
         override_vim_notify = true,
       },
     },
+  },
+
+  -- sonarqube
+  {
+    dir = "/Users/sebastienledigabel/dev/perso/sonarlint.nvim",
+    lazy = true,
   },
 
   -- [ CMP ]
@@ -469,8 +478,9 @@ require("lazy").setup({
   {
     {
       name = "cmp_obsidian_users",
+      ft = "markdown_obsidian",
       dir = "/Users/sebastienledigabel/dev/work/cmp-obsidian-users/",
-      lazy = true,
+      -- lazy = true,
     },
   },
   {
@@ -494,6 +504,17 @@ require("lazy").setup({
           i(1, "content"),
         }),
       })
+
+      -- for markdown code
+      for _, value in pairs({ "markdown", "markdown_obsidian" }) do
+        ls.add_snippets(value, {
+          s("shell", {
+            t({ "```sh", "" }),
+            i(1, "script"),
+            t({ "", "```", "", "" }),
+          }),
+        })
+      end
     end,
   },
   {
@@ -539,22 +560,6 @@ require("lazy").setup({
       })
     end,
   },
-
-  -- [ notify ]
-  -- {
-  --   "rcarriga/nvim-notify",
-  --   -- dependencies = { "neovim/nvim-lspconfig" },
-  --   config = function()
-  --     require("notify").setup({
-  --       background_colour = "#000000",
-  --       timeout = 500,
-  --       top_down = false,
-  --       render = "compact",
-  --     })
-  --
-  --     vim.notify = require("notify")
-  --   end,
-  -- },
 
   -- [ Nvim tree ]
   {
@@ -615,26 +620,26 @@ require("lazy").setup({
     config = function()
       require("config.status")
     end,
-    event = "BufRead",
+    event = "VimEnter",
   },
-  {
-    "linrongbin16/lsp-progress.nvim",
-    lazy = true,
-    config = function()
-      local api = require("lsp-progress.api")
-      require("lsp-progress").setup({
-        format = function(client_messages)
-          if #client_messages > 0 then
-            return table.concat(client_messages, " ")
-          end
-          if #api.lsp_clients() > 0 then
-            return ""
-          end
-          return ""
-        end,
-      })
-    end,
-  },
+  -- {
+  --   "linrongbin16/lsp-progress.nvim",
+  --   lazy = true,
+  --   config = function()
+  --     local api = require("lsp-progress.api")
+  --     require("lsp-progress").setup({
+  --       format = function(client_messages)
+  --         if #client_messages > 0 then
+  --           return table.concat(client_messages, " ")
+  --         end
+  --         if #api.lsp_clients() > 0 then
+  --           return ""
+  --         end
+  --         return ""
+  --       end,
+  --     })
+  --   end,
+  -- },
 
   -- [ Copilot ]
   {
@@ -685,6 +690,9 @@ require("lazy").setup({
 
       vim.api.nvim_create_user_command("CodeCompleteToggle", ToggleCopilot, {})
     end,
+    keys = {
+      { "<leader>gc", "<cmd>CodeCompleteToggle<cr>", mode = "n", desc = "Toggle Copilot", remap = false },
+    },
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
@@ -696,8 +704,30 @@ require("lazy").setup({
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     config = function()
-      require("CopilotChat").setup({})
+      local default_ops = {
+        chat_autocomplete = false,
+        question_header = "   ", -- Header to use for user questions
+        answer_header = "   ", -- Header to use for AI answers
+        error_header = "   ", -- Header to use for errors
+      }
+      require("CopilotChat").setup(default_ops)
+
+      local function launch_copilot_fullscreen()
+        local copilot = require("CopilotChat")
+        local ops = vim.deepcopy(default_ops)
+        ops.chat_autocomplete = true
+        ops.window = { layout = "replace" }
+        copilot.setup(ops)
+
+        -- the default CopilotChatSelection highlight is making this very hard to read
+        vim.cmd("highlight CopilotChatSelection guibg=NONE guifg=NONE")
+        -- vim.cmd("highlight CopilotChatHeader guibg=NONE guifg=#cfff8c")
+        vim.cmd("CopilotChatOpen")
+      end
+
+      vim.api.nvim_create_user_command("CopilotChatFullScreen", launch_copilot_fullscreen, {})
     end,
+
     cmd = {
       "CopilotChat",
       "CopilotChatOpen",
@@ -717,6 +747,7 @@ require("lazy").setup({
       "CopilotChatTests",
       "CopilotChatFixDiagnostic",
       "CopilotChatCommit",
+      "CopilotChatFullScreen",
     },
     keys = {
       {
@@ -726,13 +757,37 @@ require("lazy").setup({
           if vim.bo.filetype == "gitcommit" then
             vim.cmd("CopilotChatCommit")
           else
-            vim.cmd("CopilotChat")
+            vim.cmd("CopilotChatToggle")
           end
         end,
         desc = "Open Copilot Chat",
         remap = false,
       },
       { "<leader>cc", "<cmd>CopilotChat<cr>", mode = "v", desc = "Open Copilot Chat", remap = false },
+    },
+  },
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+      { "nvim-lua/plenary.nvim" },
+    },
+    opts = {
+      strategies = {
+        chat = { adapter = "copilot" },
+        inline = { adapter = "copilot" },
+      },
+      adapters = {
+        openai = function()
+          return require("codecompanion.adapters").extend("copilot", {
+            schema = {
+              model = {
+                default = "claude-3.7-sonnet",
+              },
+            },
+          })
+        end,
+      },
     },
   },
 
@@ -764,7 +819,7 @@ require("lazy").setup({
     "ray-x/go.nvim",
     ft = { "go" },
     config = function()
-      local on_attach_normal = function(client, bufnr)
+      local on_attach_normal = function(_, _)
         vim.lsp.handlers["textDocument/hover"] =
           vim.lsp.with(vim.lsp.handlers.hover, { border = "single", focusable = false })
         vim.lsp.handlers["textDocument/signatureHelp"] =
@@ -780,6 +835,9 @@ require("lazy").setup({
         lsp_codelens = true,
         lsp_on_attach = on_attach_normal, -- use on_attach from go.nvim
         dap_debug = true,
+        dap_debug_keymap = false,
+        dap_debug_gui = false,
+        dap_debug_vt = { enabled = false },
         icons = false,
         lsp_inlay_hints = {
           enabled = false,
@@ -788,6 +846,7 @@ require("lazy").setup({
 
       vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
     end,
+    dependencies = { "mfussenegger/nvim-dap", "neovim/nvim-lspconfig" },
   },
 
   -- [ java ]
@@ -805,5 +864,112 @@ require("lazy").setup({
     cmd = {
       "CellularAutomaton",
     },
+  },
+
+  -- [ DAP ]
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    cmd = {
+      "DapShowLog",
+      "DapContinue",
+      "DapToggleBreakpoint",
+      "DapClearBreakpoints",
+      "DapToggleRepl",
+      "DapStepOver",
+      "DapStepInto",
+      "DapStepOut",
+      "DapTerminate",
+      "DapDisconnect",
+      "DapRestartFrame",
+    },
+    config = function()
+      vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+      vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "", numhl = "" })
+    end,
+    keys = {
+      { "<leader><leader>b", "<cmd>DapToggleBreakpoint<cr>", desc = "Breakpoint", remap = false },
+      { "<leader><leader>l", "<cmd>DapStepOver<cr>", desc = "Step Over", remap = false },
+      { "<leader><leader>j", "<cmd>DapStepInto<cr>", desc = "Step Into", remap = false },
+      { "<leader><leader>k", "<cmd>DapStepOut<cr>", desc = "Step Out", remap = false },
+      { "<leader><leader>c", "<cmd>DapContinue<cr>", desc = "Continue", remap = false },
+      { "<leader><leader>s", "<cmd>DapDisconnect<cr>", desc = "Stop", remap = false },
+      { "<leader><leader>C", "<cmd>DapClearBreakpoints<cr>", desc = "Clear all breakpoints", remap = false },
+      { "<leader><leader>u", "<cmd>DapUiToggle<cr>", desc = "Toggle the Debug UI", remap = false },
+      -- { "<leader>Bb", "<cmd>DapToggleBreakpoint<cr>", desc = "Breakpoint", remap = false },
+      -- { "<leader>Bl", "<cmd>DapStepOver<cr>", desc = "Step Over", remap = false },
+      -- { "<leader>Bj", "<cmd>DapStepInto<cr>", desc = "Step Into", remap = false },
+      -- { "<leader>Bk", "<cmd>DapStepOut<cr>", desc = "Step Out", remap = false },
+      -- { "<leader>Bc", "<cmd>DapContinue<cr>", desc = "Continue", remap = false },
+      -- { "<leader>Bs", "<cmd>DapDisconnect<cr>", desc = "Stop", remap = false },
+      -- { "<leader>BC", "<cmd>DapClearBreakpoints<cr>", desc = "Clear all breakpoints", remap = false },
+    },
+  },
+  {
+    "leoluz/nvim-dap-go",
+    filetypes = { "go" },
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    config = function()
+      local dapgo = require("dap-go")
+      dapgo.setup({
+        dap_configurations = {
+          {
+            -- Must be "go" or it will be ignored by the plugin
+            type = "go",
+            name = "Attach remote",
+            mode = "remote",
+            request = "attach",
+          },
+          {
+            type = "go",
+            name = "Debug (Build Flags & Arguments)",
+            request = "launch",
+            program = "${file}",
+            args = require("dap-go").get_arguments,
+            buildFlags = require("dap-go").get_build_flags,
+          },
+        },
+      })
+    end,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    config = function()
+      require("dapui").setup({
+        layouts = {
+          {
+            -- You can change the order of elements in the sidebar
+            elements = {
+              -- Provide IDs as strings or tables with "id" and "size" keys
+              {
+                id = "scopes",
+                size = 0.25, -- Can be float or integer > 1
+              },
+              { id = "stacks", size = 0.25 },
+              { id = "watches", size = 0.25 },
+              { id = "repl", size = 0.25 },
+            },
+            size = 40,
+            position = "left", -- Can be "left" or "right"
+          },
+        },
+      })
+      local dap, dapui = require("dap"), require("dapui")
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      -- dap.listeners.before.event_exited.dapui_config = function()
+      --   dapui.close()
+      -- end
+    end,
   },
 })

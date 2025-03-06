@@ -76,16 +76,16 @@ nvim_lsp.lua_ls.setup({
       format = {
         enable = false,
       },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { "vim" },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-        -- disables the prompt
-        checkThirdParty = false,
-      },
+      -- diagnostics = {
+      -- Get the language server to recognize the `vim` global
+      -- globals = { "vim" },
+      -- },
+      -- workspace = {
+      --   -- Make the server aware of Neovim runtime files
+      --   library = vim.api.nvim_get_runtime_file("", true),
+      --   -- disables the prompt
+      --   checkThirdParty = false,
+      -- },
     },
   },
 })
@@ -165,6 +165,11 @@ nvim_lsp.sourcekit.setup({
   capabilities = capabilities,
 })
 
+-- for zig
+nvim_lsp.zls.setup({
+  capabilities = capabilities,
+})
+
 nvim_lsp.markdown_oxide.setup({
   capabilities = capabilities,
   root_dir = function()
@@ -209,6 +214,53 @@ local function do_format()
   vim.lsp.buf.format({ async = true, filter = buf_lsp_filter_function })
 end
 
+-- sonarqube - might not work
+-- local sonarhome = os.getenv("HOME") .. "/dev/tools/sonarlint/latest/extension/"
+-- require("sonarlint").setup({
+--   server = {
+--     cmd = {
+--       "java",
+--       "-jar",
+--       sonarhome .. "server/sonarlint-ls.jar",
+--       -- Ensure that sonarlint-language-server uses stdio channel
+--       "-stdio",
+--       "-analyzers",
+--       sonarhome .. "analyzers/sonargo.jar",
+--       sonarhome .. "analyzers/sonarhtml.jar",
+--       sonarhome .. "analyzers/iac.jar",
+--       sonarhome .. "analyzers/java.jar",
+--       sonarhome .. "analyzers/javasymbolicexecution.jar",
+--       sonarhome .. "analyzers/sonarjs.jar",
+--       sonarhome .. "analyzers/sonarphp.jar",
+--       sonarhome .. "analyzers/sonartext.jar",
+--     },
+--     settings = {
+--       sonarlint = {
+--         connectedMode = {
+--           connections = {
+--             sonarcloud = {
+--               {
+--                 organizationKey = "skyscanner",
+--                 connectionId = "skyscanner_sebastienledigabel",
+--               },
+--             },
+--           },
+--         },
+--       },
+--     },
+--   },
+--   filetypes = {
+--     -- Tested and working
+--     "python",
+--     "cpp",
+--     "java",
+--     "go",
+--     "javascript",
+--     "html",
+--     "php",
+--   },
+-- })
+
 -- [ key bindings ]
 local wk = require("which-key")
 wk.add({
@@ -227,7 +279,7 @@ wk.add({
     { "<leader>gr", vim.lsp.buf.references, desc = "References", remap = false },
 
     -- Copilot
-    { "<leader>gc", "<cmd>CodeCompleteToggle<cr>", desc = "", remap = false },
+    -- { "<leader>gc", "<cmd>CodeCompleteToggle<cr>", desc = "", remap = false },
 
     -- Helpers
     { "<leader>go", "<cmd>lua io.popen('gh pr view -w')<cr>", desc = "Open PR in web", remap = false },

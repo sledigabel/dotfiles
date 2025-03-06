@@ -37,9 +37,7 @@ require("hover").setup({
 
     -- accounts
     local path = os.getenv("HOME") .. "/dev/work/account-config/config/"
-    -- local ACCOUNT_PATTERN = "[%d]+"
     local ACCOUNT_PATTERN = "%d%d%d%d%d%d%d%d%d%d%d%d"
-    -- local ACCOUNT_PATTERN = [[\d{12}]]
 
     local function account_enabled()
       return vim.fn.expand("<cword>"):match(ACCOUNT_PATTERN) ~= nil

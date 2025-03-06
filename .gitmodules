@@ -21,10 +21,10 @@
 	url = git@github.com:dgileadi/vscode-java-decompiler.git
 [submodule "nvim/.config/nvim/java/java-debug"]
 	path = nvim/.config/nvim/java/java-debug
-	url = git@github.com:microsoft/java-debug.git
+	url = https://github.com/microsoft/java-debug
 [submodule "nvim/.config/nvim/java/vscode-java-test"]
 	path = nvim/.config/nvim/java/vscode-java-test
-	url = git@github.com:microsoft/vscode-java-test.git
+	url = https://github.com/microsoft/vscode-java-test
 [submodule "nvim/.config/nvim/java/vscode-gradle"]
 	path = nvim/.config/nvim/java/vscode-gradle
 	url = https://github.com/microsoft/vscode-gradle

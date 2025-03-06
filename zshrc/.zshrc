@@ -135,13 +135,15 @@ plugins=(
 if [ "${PARENTPROCESS##*/}" = "nvim" ] || [ "${PARENTPROCESS##*/}" = "bash" ]
  then ZSH_TMUX_AUTOSTART=false
 else
-  if [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM}" = "xterm-kitty" ]; then
+  if [ -n "${SKIP_TMUX}" ]; then
+  elif [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM}" = "xterm-kitty" ] || [ "${TERM}" = "xterm-ghostty" ]; then
+  # if [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM}" = "xterm-kitty" ]; then
     ZSH_TMUX_AUTOSTART=true
     ZSH_TMUX_AUTOSTART_ONCE=true
     zstyle :omz:plugins:ssh-agent agent-forwarding on
     # zstyle :omz:plugins:ssh-agent ssh-add-args -K
     zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain --apple-use-keychain
-    zstyle :omz:plugins:ssh-agent identities id_rsa_ss_github id_rsa_github_perso bitbucket id_vps
+    zstyle :omz:plugins:ssh-agent identities id_rsa_ss_github id_rsa_github_perso bitbucket id_vps home-assistant
     # we are within the terminal but not in tmux yet. starting the ssh-agent in there.
     plugins=(
       ssh-agent
@@ -150,7 +152,7 @@ else
   elif [ "${TERM_PROGRAM}" = "tmux" ]; then
   fi
 fi
-
+#
 # run OMZ
 source $ZSH/oh-my-zsh.sh
 # unalias buf
@@ -163,6 +165,7 @@ alias obfuscate="sed -Ee 's/[0-9]+(\.[0-9]+){3}/OBFUSCATED_IP/g'"
 alias ssh="ssh -o StrictHostKeyChecking=no"
 alias less="bat"
 alias jira='JIRA_API_TOKEN="$(security find-generic-password -a ${USER} -s jira_token -w)" /opt/homebrew/bin/jira'
+alias ghostty_config="vim ~/.config/ghostty/config"
 
 # . ~/.asdf/plugins/java/set-java-home.zsh
 
