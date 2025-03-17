@@ -93,13 +93,6 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # start the ssh-agent if not started already
 [ -z "${SSH_AUTH_SOCK}" ] && eval $(ssh-agent)
 
-
-# git setup
-gitlog() {
-    git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-}
-
-
 plugins=(
   # aws
   asdf
@@ -136,8 +129,7 @@ if [ "${PARENTPROCESS##*/}" = "nvim" ] || [ "${PARENTPROCESS##*/}" = "bash" ]
  then ZSH_TMUX_AUTOSTART=false
 else
   if [ -n "${SKIP_TMUX}" ]; then
-  elif [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM}" = "xterm-kitty" ] || [ "${TERM}" = "xterm-ghostty" ]; then
-  # if [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM}" = "xterm-kitty" ]; then
+  elif [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM}" = "xterm-ghostty" ]; then
     ZSH_TMUX_AUTOSTART=true
     ZSH_TMUX_AUTOSTART_ONCE=true
     zstyle :omz:plugins:ssh-agent agent-forwarding on
