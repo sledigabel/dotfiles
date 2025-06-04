@@ -97,28 +97,28 @@ require("telescope").setup({
 local wk = require("which-key")
 wk.add({
   mode = "n",
-  { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Buffers", remap = false },
-
+  -- { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Buffers", remap = false },
+  --
   { "<leader>f", group = "Telescope", remap = false },
-  {
-    "<leader>f.",
-    "<cmd>Telescope find_files hidden=true cwd=~/.config/nvim no_ignore=true find_command=fd,-e,lua<cr>",
-    desc = "Neovim files",
-    remap = false,
-  },
-  {
-    "<leader>fa",
-    "<cmd>lua require('telescope.builtin').live_grep({hidden=true})<cr>",
-    desc = "Grep files",
-    remap = false,
-  },
+  -- {
+  --   "<leader>f.",
+  --   "<cmd>Telescope find_files hidden=true cwd=~/.config/nvim no_ignore=true find_command=fd,-e,lua<cr>",
+  --   desc = "Neovim files",
+  --   remap = false,
+  -- },
+  -- {
+  --   "<leader>fa",
+  --   "<cmd>lua require('telescope.builtin').live_grep({hidden=true})<cr>",
+  --   desc = "Grep files",
+  --   remap = false,
+  -- },
   { "<leader>fc", require("telescope").extensions.gh.gist, desc = "Gists", remap = false },
-  {
-    "<leader>ff",
-    "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>",
-    desc = "Find files",
-    remap = false,
-  },
+  -- {
+  --   "<leader>ff",
+  --   "<cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>",
+  --   desc = "Find files",
+  --   remap = false,
+  -- },
   {
     "<leader>fi",
     require("telescope").extensions.gh.issues,
@@ -137,10 +137,10 @@ wk.add({
     desc = "Pull requests",
     remap = false,
   },
-  {
-    "<c-p>",
-    require("telescope.builtin").git_files,
-    desc = "Git files",
-    remap = false,
-  },
+  -- {
+  --   "<c-p>",
+  --   require("telescope.builtin").git_files,
+  --   desc = "Git files",
+  --   remap = false,
+  -- },
 })

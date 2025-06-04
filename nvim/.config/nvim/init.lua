@@ -170,6 +170,74 @@ require("lazy").setup({
       require("surround").setup({ mappings_style = "surround", map_insert_mode = false })
     end,
   },
+  -- snacks
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      explorer = { enabled = true },
+      indent = { enabled = false },
+      input = { enabled = true },
+      picker = {
+        enabled = true,
+        win = {
+          input = {
+            keys = {
+              ["<Esc>"] = { "close", mode = { "i" } },
+            },
+          },
+        },
+        sort = function(a, b)
+          local upstream_sorter = require("snacks.picker").sort.default()
+
+          local penalty = function(item)
+            local label = (item.file or ""):lower()
+            if label:find("test") == nil then
+              return 1000
+            end
+            return nil
+          end
+
+          a.score_add = penalty(a)
+          b.score_add = penalty(b)
+
+          return upstream_sorter(a, b)
+        end,
+      },
+      notifier = { enabled = false },
+      quickfile = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = false },
+      statuscolumn = { enabled = false },
+      words = { enabled = true },
+    },
+    keys = {
+      {
+        "<leader>tt",
+        "<cmd>lua require('snacks').explorer({ auto_close = true, })<cr>",
+        desc = "Toggle explorer",
+        remap = false,
+      },
+      { "<leader>gf", "<cmd>lua require('snacks').explorer.reveal()<cr>", desc = "Reveal file", remap = false },
+      { "<leader>ff", "<cmd>lua require('snacks').picker.files()<cr>", desc = "Find file", remap = false },
+      {
+        "<leader>f.",
+        "<cmd>lua require('snacks').picker.files({ cwd = vim.fn.stdpath('config'), ft = 'lua' })<cr>",
+        desc = "Find Config File",
+        remap = false,
+      },
+      { "<leader>b", "<cmd>lua require('snacks').picker.buffers()<cr>", desc = "Find buffer", remap = false },
+      { "<leader>fa", "<cmd>lua require('snacks').picker.grep()<cr>", desc = "Grep files", remap = false },
+      { "<c-p>", "<cmd>lua require('snacks').picker.git_files()<cr>", desc = "Git files", remap = false },
+      { "<leader>gG", "<cmd>lua require('snacks').lazygit()<cr>", desc = "lazyGit", remap = false },
+      -- Scratch
+      { "<leader>sn", "<cmd>lua require('snacks').scratch()<cr>", desc = "New Scratch", remap = false },
+      { "<leader>so", "<cmd>lua require('snacks').scratch.select()<cr>", desc = "Open Scratch", remap = false },
+    },
+  },
 
   {
     "folke/which-key.nvim",
@@ -209,15 +277,6 @@ require("lazy").setup({
         { "<leader>d", "<cmd>bd<cr>", desc = "Delete buffer", remap = false },
         --
         -- { "<leader>Bp", run_local_test, group = "debugger", desc = "(Debug) Run test", remap = false },
-
-        -- Scratch
-        { "<leader>sn", "<cmd>ScratchWithName<cr>", desc = "New Scratch", remap = false },
-        { "<leader>so", "<cmd>ScratchOpenFzf<cr>", desc = "Open Scratch", remap = false },
-        { "<leader>ss", "<cmd>Scratch<cr>", desc = "Open New Daily Scratch", remap = false },
-
-        -- Neoclip
-        { "<leader>p", group = "Neoclip", remap = false },
-        { "<leader>pp", "<cmd>Telescope neoclip<cr>", desc = "Neoclip", remap = false },
       })
 
       wk.add({
@@ -245,77 +304,80 @@ require("lazy").setup({
     end,
   },
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "webhooked/kanso.nvim",
+    lazy = false,
+    priority = 1000,
     config = function()
-      local catppuccin = require("catppuccin")
-      catppuccin.setup({
-        transparent_background = true,
-        integrations = {
-          treesitter = true,
-          native_lsp = {
-            enabled = true,
-          },
-          cmp = true,
-          lsp_saga = true,
-          gitsigns = true,
-          telescope = true,
-          nvimtree = {
-            enabled = true,
-            show_root = true,
-          },
-          indent_blankline = {
-            enabled = true,
-            colored_indent_levels = true,
-          },
-          which_key = true,
-          markdown = true,
-        },
-        custom_highlights = function(colors)
-          return {
-            Whitespace = { fg = "#3B3B3B" },
-          }
-        end,
+      require("kanso").setup({
+
+        theme = "ink",
       })
-      -- vim.g.catppuccin_flavour = "macchiato"
-      -- vim.g.catppuccin_flavour = "moccha"
-      vim.g.catppuccin_flavour = "frappe"
+      vim.cmd("colorscheme kanso")
+    end,
+  },
+  -- {
+  --   "thesimonho/kanagawa-paper.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("kanagawa-paper").setup({})
+  --     vim.cmd("colorscheme kanagawa-paper-ink")
+  --   end,
+  -- },
+  -- {
+  --   "rebelot/kanagawa.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("kanagawa").setup({
+  --       theme = "dragon",
+  --     })
+  --
+  --     vim.cmd("colorscheme kanagawa")
+  --   end,
+  -- },
 
-      vim.cmd([[ colorscheme catppuccin ]])
-    end,
-    enabled = true,
-  },
-
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "folke/which-key.nvim" },
-
-    config = function()
-      require("config.telescope")
-    end,
-  },
-  {
-    "nvim-telescope/telescope-github.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("telescope").load_extension("gh")
-    end,
-  },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("telescope").load_extension("fzf")
-    end,
-  },
-  {
-    "nvim-telescope/telescope-dap.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("telescope").load_extension("dap")
-    end,
-  },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   config = function()
+  --     local catppuccin = require("catppuccin")
+  --     catppuccin.setup({
+  --       transparent_background = true,
+  --       integrations = {
+  --         treesitter = true,
+  --         native_lsp = {
+  --           enabled = true,
+  --         },
+  --         cmp = true,
+  --         lsp_saga = true,
+  --         gitsigns = true,
+  --         telescope = true,
+  --         nvimtree = {
+  --           enabled = false,
+  --           show_root = true,
+  --         },
+  --         indent_blankline = {
+  --           enabled = true,
+  --           colored_indent_levels = true,
+  --         },
+  --         which_key = true,
+  --         markdown = true,
+  --       },
+  --       custom_highlights = function(colors)
+  --         return {
+  --           Whitespace = { fg = "#3B3B3B" },
+  --         }
+  --       end,
+  --     })
+  --     -- vim.g.catppuccin_flavour = "macchiato"
+  --     -- vim.g.catppuccin_flavour = "moccha"
+  --     vim.g.catppuccin_flavour = "frappe"
+  --
+  --     vim.cmd([[ colorscheme catppuccin ]])
+  --   end,
+  --   enabled = true,
+  -- },
 
   -- [ tmux ] --
   {
@@ -561,55 +623,6 @@ require("lazy").setup({
     end,
   },
 
-  -- [ Nvim tree ]
-  {
-    "nvim-tree/nvim-tree.lua",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons", -- optional, for file icon
-      "folke/which-key.nvim",
-    },
-    config = function()
-      require("nvim-tree").setup({
-        hijack_cursor = true,
-        git = {
-          enable = true,
-          ignore = false,
-          timeout = 400,
-        },
-        filters = {
-          -- git_ignored = true,
-          custom = { "node_modules", ".idea", "^.git$" },
-        },
-        view = {
-          adaptive_size = true,
-          preserve_window_proportions = true,
-        },
-        renderer = {
-          indent_markers = {
-            enable = false,
-          },
-        },
-        actions = {
-          open_file = {
-            quit_on_open = true,
-          },
-        },
-      })
-
-      local wk = require("which-key")
-      wk.add({
-        mode = "n",
-        { "<leader>t", group = "NvimTree", remap = false },
-      })
-    end,
-    lazy = true,
-    cmd = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeFindFileToggle" },
-    keys = {
-      { "<leader>tt", "<cmd>NvimTreeToggle<cr>", desc = "Toggle NvimTree", remap = false },
-      { "<leader>gf", "<cmd>NvimTreeFindFile<cr>", desc = "Find file", remap = false },
-    },
-  },
-
   -- [ lua line ]
   {
     "nvim-lualine/lualine.nvim",
@@ -622,24 +635,6 @@ require("lazy").setup({
     end,
     event = "VimEnter",
   },
-  -- {
-  --   "linrongbin16/lsp-progress.nvim",
-  --   lazy = true,
-  --   config = function()
-  --     local api = require("lsp-progress.api")
-  --     require("lsp-progress").setup({
-  --       format = function(client_messages)
-  --         if #client_messages > 0 then
-  --           return table.concat(client_messages, " ")
-  --         end
-  --         if #api.lsp_clients() > 0 then
-  --           return ""
-  --         end
-  --         return ""
-  --       end,
-  --     })
-  --   end,
-  -- },
 
   -- [ Copilot ]
   {
@@ -667,9 +662,14 @@ require("lazy").setup({
         filetypes = {
           gitcommit = false,
           gitrebase = false,
+          markdown = true,
+          yaml = true,
+          codecompanion = false,
         },
         copilot_node_command = "node", -- Node.js version must be > 18.x
-        server_opts_overrides = {},
+        server_opts_overrides = {
+          -- trace = "verbose",
+        },
       })
 
       function ToggleCopilot()
@@ -694,60 +694,53 @@ require("lazy").setup({
       { "<leader>gc", "<cmd>CodeCompleteToggle<cr>", mode = "n", desc = "Toggle Copilot", remap = false },
     },
   },
+
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    -- branch = "canary",
-    branch = "main",
+    -- "olimorris/codecompanion.nvim",
+    dir = "/Users/sebastienledigabel/dev/perso/codecompanion.nvim",
     dependencies = {
-      -- { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "github/copilot.vim" },
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+      { "nvim-treesitter/nvim-treesitter" },
+      { "nvim-lua/plenary.nvim" },
     },
-    config = function()
-      local default_ops = {
-        chat_autocomplete = false,
-        question_header = "   ", -- Header to use for user questions
-        answer_header = "   ", -- Header to use for AI answers
-        error_header = "   ", -- Header to use for errors
-      }
-      require("CopilotChat").setup(default_ops)
-
-      local function launch_copilot_fullscreen()
-        local copilot = require("CopilotChat")
-        local ops = vim.deepcopy(default_ops)
-        ops.chat_autocomplete = true
-        ops.window = { layout = "replace" }
-        copilot.setup(ops)
-
-        -- the default CopilotChatSelection highlight is making this very hard to read
-        vim.cmd("highlight CopilotChatSelection guibg=NONE guifg=NONE")
-        -- vim.cmd("highlight CopilotChatHeader guibg=NONE guifg=#cfff8c")
-        vim.cmd("CopilotChatOpen")
-      end
-
-      vim.api.nvim_create_user_command("CopilotChatFullScreen", launch_copilot_fullscreen, {})
-    end,
-
+    opts = {
+      opts = {
+        log_level = "TRACE",
+      },
+      strategies = {
+        chat = {
+          adapter = "copilot",
+          opts = {
+            register = "*",
+          },
+        },
+        inline = { adapter = "copilot" },
+      },
+      display = {
+        action_palette = {
+          provider = "snacks",
+        },
+      },
+      adapters = {
+        copilot = function()
+          return require("codecompanion.adapters").extend("copilot", {
+            schema = {
+              model = {
+                -- get the list of models:
+                -- lua =require("codecompanion.adapters.copilot").schema.model.choices()
+                -- this only works after you've started a chat.
+                -- default = "claude-3.7-sonnet",
+                default = "o3-mini",
+              },
+            },
+          })
+        end,
+      },
+    },
     cmd = {
-      "CopilotChat",
-      "CopilotChatOpen",
-      "CopilotChatClose",
-      "CopilotChatToggle",
-      "CopilotChatStop",
-      "CopilotChatReset",
-      "CopilotChatSave",
-      "CopilotChatLoad",
-      "CopilotChatDebugInfo",
-      "CopilotChatModels",
-      "CopilotChatExplain",
-      "CopilotChatReview",
-      "CopilotChatFix",
-      "CopilotChatOptimize",
-      "CopilotChatDocs",
-      "CopilotChatTests",
-      "CopilotChatFixDiagnostic",
-      "CopilotChatCommit",
-      "CopilotChatFullScreen",
+      "CodeCompanion",
+      "CodeCompanionChat",
+      "CodeCompanionCmd",
+      "CodeCompanionActions",
     },
     keys = {
       {
@@ -755,38 +748,29 @@ require("lazy").setup({
         function()
           -- if filetype is commit, open the copilot with CommitStaged
           if vim.bo.filetype == "gitcommit" then
-            vim.cmd("CopilotChatCommit")
+            vim.cmd("CodeCompanionChat /commit")
           else
-            vim.cmd("CopilotChatToggle")
+            vim.cmd("CodeCompanionChat toggle")
           end
         end,
         desc = "Open Copilot Chat",
         remap = false,
       },
-      { "<leader>cc", "<cmd>CopilotChat<cr>", mode = "v", desc = "Open Copilot Chat", remap = false },
-    },
-  },
-  {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-      { "nvim-lua/plenary.nvim" },
-    },
-    opts = {
-      strategies = {
-        chat = { adapter = "copilot" },
-        inline = { adapter = "copilot" },
-      },
-      adapters = {
-        openai = function()
-          return require("codecompanion.adapters").extend("copilot", {
-            schema = {
-              model = {
-                default = "claude-3.7-sonnet",
-              },
-            },
-          })
+      { "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", mode = "v", desc = "Toggle Copilot Chat", remap = false },
+      {
+        "<leader>c?",
+        function()
+          local extended_model_list = require("codecompanion.adapters.copilot").schema.model.choices()
+          local my_model_list = {}
+          for k, v in pairs(extended_model_list) do
+            vim.print(k, v)
+            -- table.insert(my_model_list, value.name)
+          end
+          vim.print(my_model_list)
         end,
+        mode = "n",
+        desc = "List all models",
+        remap = false,
       },
     },
   },
@@ -869,7 +853,6 @@ require("lazy").setup({
   -- [ DAP ]
   {
     "mfussenegger/nvim-dap",
-    dependencies = { "nvim-telescope/telescope.nvim" },
     cmd = {
       "DapShowLog",
       "DapContinue",
@@ -896,13 +879,6 @@ require("lazy").setup({
       { "<leader><leader>s", "<cmd>DapDisconnect<cr>", desc = "Stop", remap = false },
       { "<leader><leader>C", "<cmd>DapClearBreakpoints<cr>", desc = "Clear all breakpoints", remap = false },
       { "<leader><leader>u", "<cmd>DapUiToggle<cr>", desc = "Toggle the Debug UI", remap = false },
-      -- { "<leader>Bb", "<cmd>DapToggleBreakpoint<cr>", desc = "Breakpoint", remap = false },
-      -- { "<leader>Bl", "<cmd>DapStepOver<cr>", desc = "Step Over", remap = false },
-      -- { "<leader>Bj", "<cmd>DapStepInto<cr>", desc = "Step Into", remap = false },
-      -- { "<leader>Bk", "<cmd>DapStepOut<cr>", desc = "Step Out", remap = false },
-      -- { "<leader>Bc", "<cmd>DapContinue<cr>", desc = "Continue", remap = false },
-      -- { "<leader>Bs", "<cmd>DapDisconnect<cr>", desc = "Stop", remap = false },
-      -- { "<leader>BC", "<cmd>DapClearBreakpoints<cr>", desc = "Clear all breakpoints", remap = false },
     },
   },
   {
@@ -971,5 +947,29 @@ require("lazy").setup({
       --   dapui.close()
       -- end
     end,
+  },
+
+  -- for a smooth cursor
+  -- {
+  --   "sphamba/smear-cursor.nvim",
+  --   opts = {
+  --     stiffness = 0.8, -- 0.6      [0, 1]
+  --     trailing_stiffness = 0.5, -- 0.4      [0, 1]
+  --     stiffness_insert_mode = 0.6, -- 0.4      [0, 1]
+  --     trailing_stiffness_insert_mode = 0.6, -- 0.4      [0, 1]
+  --     distance_stop_animating = 0.5, -- 0.1      > 0
+  --   },
+  -- },
+
+  -- markdown
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+    ft = { "markdown" },
   },
 })
