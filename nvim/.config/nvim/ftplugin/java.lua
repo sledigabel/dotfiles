@@ -5,15 +5,9 @@ if not local_dir then
 end
 
 local home = os.getenv("HOME")
--- previous jdtls
--- local jdtls_home = home .. "/dev/tools/jdtls-1.36.0/"
-local jdtls_home = home .. "/dev/tools/jdtls-1.43.0/"
--- local jdtls_jar_name = "org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
-local jdtls_jar_name = "org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"
-
--- new jdtls
--- local jdtls_home = home .. "/dev/tools/jdtls-1.33.0/"
--- local jdtls_jar_name = "org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar"
+local jdtls_home = home .. "/dev/tools/jdtls/latest/"
+local launcher_glob = jdtls_home .. "/plugins/" .. "org.eclipse.equinox.launcher_*.jar"
+local jdtls_jar_path = vim.fn.glob(launcher_glob)
 
 local local_dir_name = vim.fn.fnamemodify(local_dir, ":p:h:t")
 local workspace_dir = home .. "/workspaces/" .. local_dir_name
@@ -41,8 +35,7 @@ end
 
 -- eclipse jdtls settings
 local settings = {
-  -- ["java.format.settings.url"] = "/Users/sebastienledigabel/dev/perso/dotfiles/nvim/.config/nvim/lua/config/google-formatter.xml",
-  -- ["java.format.settings.profile"] = "GoogleStyle",
+  -- we leave the formatting to none-ls
   ["java.format.enabled"] = false,
   java = {
     signatureHelp = { enabled = true },
@@ -156,7 +149,8 @@ local config = {
     "--add-opens",
     "java.base/sun.nio.fs=ALL-UNNAMED",
     "-jar",
-    jdtls_home .. "/plugins/" .. jdtls_jar_name,
+    -- jdtls_home .. "/plugins/" .. jdtls_jar_name,
+    jdtls_jar_path,
     "-data",
     workspace_dir,
   },

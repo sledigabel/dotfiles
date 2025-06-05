@@ -696,8 +696,7 @@ require("lazy").setup({
   },
 
   {
-    -- "olimorris/codecompanion.nvim",
-    dir = "/Users/sebastienledigabel/dev/perso/codecompanion.nvim",
+    "olimorris/codecompanion.nvim",
     dependencies = {
       { "nvim-treesitter/nvim-treesitter" },
       { "nvim-lua/plenary.nvim" },
@@ -748,7 +747,7 @@ require("lazy").setup({
         function()
           -- if filetype is commit, open the copilot with CommitStaged
           if vim.bo.filetype == "gitcommit" then
-            vim.cmd("CodeCompanionChat /commit")
+            vim.cmd("CodeCompanion /commit")
           else
             vim.cmd("CodeCompanionChat toggle")
           end
@@ -772,6 +771,23 @@ require("lazy").setup({
         desc = "List all models",
         remap = false,
       },
+    },
+  },
+  {
+    "HakonHarnes/img-clip.nvim",
+    event = "VeryLazy",
+    opts = {
+      filetypes = {
+        codecompanion = {
+          prompt_for_file_name = false,
+          template = "[Image]($FILE_PATH)",
+          use_absolute_path = true,
+        },
+      },
+    },
+    keys = {
+      -- suggested keymap
+      { "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
     },
   },
 
