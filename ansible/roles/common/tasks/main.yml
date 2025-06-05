@@ -1,0 +1,4 @@
+---
+- name: Ensure required packages are installed (MacOS)
+  include_tasks: darwin.yml
+  when: ansible_os_family == "Darwin"

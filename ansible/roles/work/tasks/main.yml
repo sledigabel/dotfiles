@@ -1,0 +1,4 @@
+---
+- name: Setup Work Environment tasks
+  debug:
+    msg: "Setting up work environment."

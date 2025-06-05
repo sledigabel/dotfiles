@@ -1,0 +1,4 @@
+---
+- name: "Debug message for Darwin"
+  debug:
+    msg: "This is a Darwin specific task."

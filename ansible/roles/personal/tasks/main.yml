@@ -1,0 +1,4 @@
+---
+- name: Setup Personal Environment tasks
+  debug:
+    msg: "Setting up personal environment."
