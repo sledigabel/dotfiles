@@ -1,5 +1,25 @@
 #!bin/zsh
 
+set -eou pipefail
+
+# assumes git is installed
+which git >/dev/null 2>&1 || {
+  echo "Git is not installed. Please install Git to continue."
+  exit 1
+}
+
+# Clone this repository
+if [ -d ~/dev/config/dotfiles ]; then
+  echo "The directory ~/dev/config/dotfiles already exists."
+else
+  mkdir -p ~/dev/config/
+  git clone https://github.com/sledigabel/dotfiles.git ~/dev/config/dotfiles
+fi
+
+
+cd ~/dev/config/dotfiles
+git pull origin main
+
 # This script is used to bootstrap the environment for the project
 which ansible >/dev/null 2>&1 || {
   echo "Ansible is not installed. Installing Ansible..."
