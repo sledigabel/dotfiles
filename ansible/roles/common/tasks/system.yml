@@ -7,6 +7,11 @@
   set_fact:
     stripped_path: "{{ current_path | regex_replace('/ansible$', '') }}"
 
+- name: "Install Oh-My-Zsh"
+  shell: 'sh -c "$(cd $HOME && curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+  args:
+    creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
+
 - name: "Configure Zshrc"
   file:
     src: "{{ stripped_path }}/zshrc/.zshrc"
@@ -32,3 +37,27 @@
     dest: "{{ ansible_env.HOME }}/.gitconfig_{{ item }}"
     mode: "0644"
   loop: "{{ git.includes.keys() }}"
+
+- name: "Configure tmux.conf"
+  file:
+    src: "{{ stripped_path }}/tmux/.tmux.conf"
+    dest: "{{ ansible_env.HOME }}/.tmux.conf"
+    state: link
+
+- name: "Configure tmux directory"
+  file:
+    src: "{{ stripped_path }}/tmux/.tmux"
+    dest: "{{ ansible_env.HOME }}/.tmux"
+    state: link
+
+- name: "Configure terminfo"
+  file:
+    src: "{{ stripped_path }}/tmux/.terminfo"
+    dest: "{{ ansible_env.HOME }}/.terminfo"
+    state: link
+
+- name: "Configure Ghostty"
+  file:
+    src: "{{ stripped_path }}/ghostty"
+    dest: "{{ ansible_env.HOME }}/.config/ghostty"
+    state: link

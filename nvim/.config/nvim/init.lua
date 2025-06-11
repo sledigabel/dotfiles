@@ -728,7 +728,9 @@ require("lazy").setup({
                 -- lua =require("codecompanion.adapters.copilot").schema.model.choices()
                 -- this only works after you've started a chat.
                 -- default = "claude-3.7-sonnet",
-                default = "o3-mini",
+                -- default = "o3-mini",
+                -- default = "claude-3.7-sonnet",
+                default = "gpt-4o"
               },
             },
           })

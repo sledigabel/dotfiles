@@ -5,6 +5,21 @@
 
 - name: "Configure homebrew"
   include_tasks: "homebrew.yml"
+  tags:
+    - homebrew
+    - brew
+    - brewfile
 
 - name: "Install System stuffs"
   include_tasks: "system.yml"
+  tags:
+    - system
+    - zsh
+    - git
+    - tmux
+
+- name: "Install Neovim"
+  include_tasks: "nvim.yml"
+  tags:
+    - nvim
+    - neovim

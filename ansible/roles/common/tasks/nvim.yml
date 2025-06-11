@@ -1,0 +1,92 @@
+---
+- name: "Install neovim link"
+  file:
+    src: "{{ stripped_path }}/nvim/.config/nvim"
+    dest: "{{ ansible_env.HOME }}/.config/nvim"
+    state: link
+
+- name: "fetch the latest tag from jdtls"
+  shell: |
+    curl -s https://api.github.com/repos/eclipse-jdtls/eclipse.jdt.ls/tags
+  register: jdtls_tags
+  ignore_errors: true
+  tags:
+    - nvim
+    - neovim
+    - jdtls
+
+- name: "Default to value if command failed"
+  set_fact:
+    jdtls_latest_tag: "1.47.0"
+  when: jdtls_tags.rc != 0  or "API rate limit exceeded for" in jdtls_tags.stdout
+  tags:
+    - nvim
+    - neovim
+    - jdtls
+
+- name: "Pick up the latest one if command succeeded"
+  set_fact:
+    jdtls_latest_tag: "{{ (jdtls_tags.stdout | from_json | map(attribute='name') | list)[0] | regex_replace('^v', '') }}"
+  # )[0] | regex_replace('^v', '') }}"
+  when: jdtls_tags.rc == 0 and "API rate limit exceeded for" not in jdtls_tags.stdout
+  tags:
+    - nvim
+    - neovim
+    - jdtls
+
+- name: "Install jdtls"
+  debug:
+    msg: "Installing jdtls version {{ jdtls_latest_tag }}"
+  when: jdtls_latest_tag is defined
+  tags:
+    - nvim
+    - neovim
+    - jdtls
+
+- name: "find the package"
+  shell: "curl https://download.eclipse.org/jdtls/milestones/{{ jdtls_latest_tag }}/ | grep tar.gz | grep {{ jdtls_latest_tag }}"
+  register: jdtls_package_line
+  tags:
+    - nvim
+    - neovim
+    - jdtls
+
+- name: "Extract the package URL"
+  set_fact:
+    jdtls_package_url: "{{ jdtls_package_line.stdout | regex_search(\"https://www.eclipse.org/downloads/download.php\\?file=[^']*\") }}"
+  tags:
+    - nvim
+    - neovim
+    - jdtls
+
+- name: "Creating the jdtls directory"
+  file:
+    dest: "{{ ansible_env.HOME }}/dev/tools/jdtls/jdtls-{{ jdtls_latest_tag }}/"
+    state: directory
+  tags:
+    - nvim
+    - neovim
+    - jdtls
+
+- name: "Extracting the jdtls package"
+  unarchive:
+    # src: "/tmp/jdtls.tar.gz"
+    src: "{{ jdtls_package_url }}"
+    dest: "{{ ansible_env.HOME }}/dev/tools/jdtls/jdtls-{{ jdtls_latest_tag }}/"
+    remote_src: yes
+  args:
+    creates: "{{ ansible_env.HOME }}/dev/tools/jdtls/jdtls-{{ jdtls_latest_tag }}/bin"
+  tags:
+    - nvim
+    - neovim
+    - jdtls
+
+- name: "Creating the symlink for jdtls"
+  file:
+    src: "{{ ansible_env.HOME }}/dev/tools/jdtls/jdtls-{{ jdtls_latest_tag }}"
+    dest: "{{ ansible_env.HOME }}/dev/tools/jdtls/latest"
+    state: link
+  tags:
+    - nvim
+    - neovim
+    - jdtls
