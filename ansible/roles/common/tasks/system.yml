@@ -1,0 +1,34 @@
+---
+- name: "stripping ansible from path"
+  set_fact:
+    current_path: "{{ ansible_env.PWD }}"
+
+- name: "stripped path"
+  set_fact:
+    stripped_path: "{{ current_path | regex_replace('/ansible$', '') }}"
+
+- name: "Configure Zshrc"
+  file:
+    src: "{{ stripped_path }}/zshrc/.zshrc"
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    state: link
+
+- name: "Configure .gitignore"
+  file:
+    src: "{{ stripped_path }}/git/.gitignore"
+    dest: "{{ ansible_env.HOME }}/.gitignore"
+    state: link
+
+- name: "Configure .gitconfig"
+  template:
+    src: "templates/gitconfig.j2"
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    mode: "0644"
+
+- name: "Configuring the specific .gitconfig(s)"
+  template:
+    src: "templates/gitconfig_special.j2"
+    # dest: "{{ ansible_env.HOME }}/.gitconfig_{{ item }}_test"
+    dest: "{{ ansible_env.HOME }}/.gitconfig_{{ item }}"
+    mode: "0644"
+  loop: "{{ git.includes.keys() }}"

@@ -2,3 +2,9 @@
 - name: "Debug message for Darwin"
   debug:
     msg: "This is a Darwin specific task."
+
+- name: "Configure homebrew"
+  include_tasks: "homebrew.yml"
+
+- name: "Install System stuffs"
+  include_tasks: "system.yml"

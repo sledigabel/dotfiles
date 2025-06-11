@@ -1,0 +1,10 @@
+[user]
+	name = {{ git.includes[item].name }}
+	email = {{ git.includes[item].email }}
+{% if git.includes[item].signingkey is defined %}
+	signingkey = {{ git.includes[item].signingkey }}
+[commit]
+	gpgSign = true
+[gpg]
+	program = /opt/homebrew/bin/gpg
+{% endif %}

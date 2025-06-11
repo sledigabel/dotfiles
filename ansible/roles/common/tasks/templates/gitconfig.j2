@@ -1,0 +1,48 @@
+{% for inc in (git.includes.keys()) %}
+{% if git.includes[inc]["matching_patterns"] is defined and git.includes[inc]["matching_patterns"] | length > 0 %}
+{% for pat in git.includes[inc]["matching_patterns"] %}
+[includeIf "{{ pat }}"]
+    path = .gitconfig_{{ inc }}
+{% endfor %}
+{% else %}
+[include]
+    path = .gitconfig_{{ inc }}
+{% endif %}
+{% endfor %}
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+[pull]
+	rebase = false
+	ff = only
+
+[pretty]
+	better-oneline = "format:%C(auto)%h%d %s %Cblue[%cn]"
+
+[alias]
+	tree    = log --pretty=better-oneline --all --graph
+	ls      = log --pretty=better-oneline
+	ll      = log --pretty=better-oneline --numstat
+	last = log -1 --unified
+
+	details = "!f() { git ll "$1"^.."$1"; }; f"
+[core]
+	excludesfile = ~/.gitignore
+[commit]
+	template = ~/.stCommitMsg
+[init]
+	defaultBranch = main
+[oh-my-zsh]
+	hide-info = 1
+	hide-status = 1
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+	required = true
+[user]
+	name = {{ git.user.name }}
+	email = {{ git.user.email }}
+
