@@ -13,7 +13,7 @@ if [ -d ~/dev/config/dotfiles ]; then
   echo "The directory ~/dev/config/dotfiles already exists."
 else
   mkdir -p ~/dev/config/
-  git clone https://github.com/sledigabel/dotfiles.git ~/dev/config/dotfiles
+  git clone --recursive-submodules https://github.com/sledigabel/dotfiles.git ~/dev/config/dotfiles
 fi
 
 
