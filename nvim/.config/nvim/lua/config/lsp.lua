@@ -15,16 +15,16 @@ nvim_lsp.pylsp.setup({
   capabilities = capabilities,
   settings = {
     pylsp = {
-      configurationSources = { "black" },
+      -- configurationSources = { "black" },
       plugins = {
-        flake8 = {
-          enabled = false,
-        },
-        black = { enabled = true, line_length = 120 },
-        pycodestyle = {
+        flake8 = { enabled = false },
+        black = {
           enabled = true,
-          maxLineLength = 160,
+          line_length = 120,
+          skip_magic_trailing_comma = true,
+          skip_magic_string_normalization = true,
         },
+        pycodestyle = { enabled = true, maxLineLength = 160 },
         yapf = { enabled = false },
         mccabe = { enabled = true },
         autopep8 = { enabled = false },
@@ -36,7 +36,6 @@ nvim_lsp.pylsp.setup({
 -- json
 nvim_lsp.jsonls.setup({
   capabilities = capabilities,
-  -- cmd = { "/Users/sebastienledigabel/node_modules/.bin/vscode-json-languageserver" },
   commands = {
     Format = {
       function()
@@ -207,7 +206,8 @@ vim.diagnostic.config({
 
 -- Formatting helpers
 local function buf_lsp_filter_function(client)
-  return client.name ~= "pylsp"
+  -- return client.name ~= "pylsp"
+  return true
 end
 
 local function do_format()

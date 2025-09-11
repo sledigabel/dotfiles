@@ -29,6 +29,8 @@ echo "installing all the cots for dev"
 "$(pyenv root)/versions/$PROJECT_NAME"/bin/pip install 'pytest-cov'
 "$(pyenv root)/versions/$PROJECT_NAME"/bin/pip install 'coverage'
 "$(pyenv root)/versions/$PROJECT_NAME"/bin/pip install 'pip-tools'
+"$(pyenv root)/versions/$PROJECT_NAME"/bin/pip install 'python-lsp-black'
+"$(pyenv root)/versions/$PROJECT_NAME"/bin/pip install 'python-lsp-isort'
 echo
 echo
 echo "pyenv activate ${PROJECT_NAME}"

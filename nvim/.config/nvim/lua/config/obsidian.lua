@@ -22,6 +22,7 @@ local opts = {
     -- Set to false to disable completion.
     nvim_cmp = true,
     min_chars = 2,
+    create_new = true,
   },
   mappings = {
     -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
@@ -32,7 +33,10 @@ local opts = {
       opts = { noremap = false, expr = true, buffer = true },
     },
   },
-  finder = "telescope.nvim",
+
+  picker = {
+    name = "snacks.pick",
+  },
 
   image_name_func = function()
     return "Pasted_image_" .. tostring(os.date("%Y%m%d%H%M%S"))
