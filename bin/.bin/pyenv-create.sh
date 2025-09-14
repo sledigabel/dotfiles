@@ -18,6 +18,7 @@ eval "$(pyenv virtualenv-init - | sed s/precmd/precwd/g)"
 echo "Installing new pyenv virtualenv for $PROJECT_NAME"
 pyenv virtualenv "${1}" "$PROJECT_NAME" || true
 echo "installing all the cots for dev"
+"$(pyenv root)/versions/$PROJECT_NAME"/bin/pip install 'python-lsp-server'
 "$(pyenv root)/versions/$PROJECT_NAME"/bin/pip install 'python-lsp-server[all]'
 "$(pyenv root)/versions/$PROJECT_NAME"/bin/pip install 'isort'
 "$(pyenv root)/versions/$PROJECT_NAME"/bin/pip install 'black'
