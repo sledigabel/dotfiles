@@ -60,9 +60,7 @@ wk.add({
   mode = "n",
   -- Obsidian
   { "<leader>O", group = "Obsidian", remap = false },
-  { "<leader>O/", "<cmd>Obsidian search<cr>", desc = "Search in Obsidian", remap = false },
   { "<leader>On", "<cmd>Obsidian new<cr>", desc = "New file in Obsidian", remap = false },
-  { "<leader>Oo", "<cmd>Obsidian open<cr>", desc = "Open in Obsidian", remap = false },
 })
 
 wk.add({
