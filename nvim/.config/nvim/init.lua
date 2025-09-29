@@ -480,7 +480,7 @@ require("lazy").setup({
 	{ "folke/neoconf.nvim", cmd = "Neoconf" },
 	-- travelapi
 	{
-		dir = os.getenv("HOME") .. "dev/work/nvim-travelapi/",
+		dir = os.getenv("HOME") .. "/dev/work/nvim-travelapi/",
 		opts = {},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
