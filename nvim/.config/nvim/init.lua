@@ -892,7 +892,6 @@ require("lazy").setup({
   {
     "mfussenegger/nvim-jdtls",
     dependencies = { "mfussenegger/nvim-dap", "neovim/nvim-lspconfig" },
-    -- lazy = false,
     ft = "java",
   },
 
@@ -1004,25 +1003,24 @@ require("lazy").setup({
     end,
   },
 
-  -- for a smooth cursor
-  -- {
-  --   "sphamba/smear-cursor.nvim",
-  --   opts = {
-  --     stiffness = 0.8, -- 0.6      [0, 1]
-  --     trailing_stiffness = 0.5, -- 0.4      [0, 1]
-  --     stiffness_insert_mode = 0.6, -- 0.4      [0, 1]
-  --     trailing_stiffness_insert_mode = 0.6, -- 0.4      [0, 1]
-  --     distance_stop_animating = 0.5, -- 0.1      > 0
-  --   },
-  -- },
-
   -- markdown
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+    dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you prefer nvim-web-devicons
     ---@module 'render-markdown'
-    ---@type render.md.UserConfig
     opts = {},
     ft = { "markdown" },
+  },
+
+  -- remindian
+  {
+    -- dir = "/Users/sebastienledigabel/dev/perso/remindian/",
+    "sledigabel/remindian",
+    build = "make dist",
+    opts = {
+      filetype = "markdown_obsidian",
+      enable_logging = true,
+    },
+    ft = { "markdown_obsidian" },
   },
 })

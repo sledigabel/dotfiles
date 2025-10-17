@@ -24,8 +24,9 @@ palette = 14=#7aa89f
 palette = 15=#c5c9c7
 
 background = #14171d
-background-opacity = 0.92
-background-blur-radius = 20
+background-opacity = 0.95
+# background-blur-radius = 30
+background-blur-radius = 50
 foreground = #c5c9c7
 cursor-color = #c5c9c7
 selection-background = #393B42
