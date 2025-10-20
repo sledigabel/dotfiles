@@ -408,14 +408,15 @@ require("lazy").setup({
   },
 
   -- [ LSP ] --
-  {
-    "neovim/nvim-lspconfig",
-    event = "BufRead",
-    dependencies = { "b0o/SchemaStore.nvim" },
-    config = function()
-      require("config.lsp")
-    end,
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   event = "BufRead",
+  --   dependencies = { "b0o/SchemaStore.nvim" },
+  --   config = function()
+  --     require("config.lsp")
+  --   end,
+  -- },
+  { "b0o/SchemaStore.nvim", lazy = true },
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
@@ -491,7 +492,6 @@ require("lazy").setup({
     "lewis6991/hover.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "neovim/nvim-lspconfig",
     },
     config = function()
       require("config.hover")
@@ -885,13 +885,13 @@ require("lazy").setup({
 
       vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
     end,
-    dependencies = { "mfussenegger/nvim-dap", "neovim/nvim-lspconfig" },
+    dependencies = { "mfussenegger/nvim-dap" },
   },
 
   -- [ java ]
   {
     "mfussenegger/nvim-jdtls",
-    dependencies = { "mfussenegger/nvim-dap", "neovim/nvim-lspconfig" },
+    dependencies = { "mfussenegger/nvim-dap" },
     ft = "java",
   },
 
@@ -1024,3 +1024,5 @@ require("lazy").setup({
     ft = { "markdown_obsidian" },
   },
 })
+
+require("config.lsp")
