@@ -135,7 +135,7 @@ wk.add({
     -- { "<leader>gc", "<cmd>CodeCompleteToggle<cr>", desc = "", remap = false },
 
     -- Helpers
-    { "<leader>go", "<cmd>lua io.popen('gh pr view -w')<cr>", desc = "Open PR in web", remap = false },
+    { "<leader>go", "<cmd>lua io.popen('gh pr view -w || gh repo view -w')<cr>", desc = "Open PR in web", remap = false },
 
     -- Rename
     { "<leader>rN", "<cmd>Lspsaga rename ++project<cr>", desc = "Rename", remap = false },

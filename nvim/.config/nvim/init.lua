@@ -309,17 +309,27 @@ require("lazy").setup({
     end,
   },
   {
-    "webhooked/kanso.nvim",
+    "ellisonleao/gruvbox.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require("kanso").setup({
-        theme = "ink",
-        transparent = true,
-      })
-      vim.cmd("colorscheme kanso")
+      require("gruvbox").setup({})
+      vim.o.background = "dark"
+      vim.cmd("colorscheme gruvbox")
     end,
   },
+  -- {
+  --   "webhooked/kanso.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("kanso").setup({
+  --       theme = "ink",
+  --       transparent = true,
+  --     })
+  --     vim.cmd("colorscheme kanso")
+  --   end,
+  -- },
   -- {
   --   "thesimonho/kanagawa-paper.nvim",
   --   lazy = false,

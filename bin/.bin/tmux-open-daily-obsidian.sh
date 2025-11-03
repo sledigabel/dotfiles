@@ -12,7 +12,7 @@ tmux has-session -t "$OBSIDIAN_SESSION" &&
 
 OBSIDIAN_PATH="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Work/"
 tmux has-session -t "$OBSIDIAN_SESSION" ||
-  tmux new-session -s "$OBSIDIAN_SESSION" -c "$OBSIDIAN_PATH" -d 'nvim -c "Obsidian today"'
+  tmux new-session -s "$OBSIDIAN_SESSION" -c "$OBSIDIAN_PATH" -d 'nvim -c "Obsidian today"; tmux switch-client -t 0'
 
+tmux send-keys -t "$OBSIDIAN_SESSION" Escape Escape G i
 tmux switch-client -t "$OBSIDIAN_SESSION"
-tmux send-keys -t "$OBSIDIAN_SESSION" Escape Escape "Gi"
