@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 # This opens up stree for the current tmux pane's current working directory
 # if the session dir is defined, use this, and if not use the pane's cwd

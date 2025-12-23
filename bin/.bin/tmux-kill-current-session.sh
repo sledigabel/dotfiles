@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 current_session=$(tmux display-message -p '#S')
 

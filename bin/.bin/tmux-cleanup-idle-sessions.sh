@@ -1,4 +1,6 @@
 #!/bin/bash
+set -euo pipefail
+
 # Terminates all sessions that only have idle shells running
 # Safe to run - won't kill sessions with active processes
 

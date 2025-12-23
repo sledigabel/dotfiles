@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 # Maintains a global history of ACTIVE session switches
 
 # Use a single shared history file for all processes

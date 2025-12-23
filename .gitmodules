@@ -7,12 +7,6 @@
 [submodule "tmux/.tmux/plugins/tmux-base16-statusline"]
 	path = tmux/.tmux/plugins/tmux-base16-statusline
 	url = git@github.com:sledigabel/tmux-base16-statusline.git
-[submodule "tmux/.tmux/plugins/tmux-yank"]
-	path = tmux/.tmux/plugins/tmux-yank
-	url = git@github.com:tmux-plugins/tmux-yank.git
-[submodule "tmux/.tmux/plugins/tmux-copycat"]
-	path = tmux/.tmux/plugins/tmux-copycat
-	url = git@github.com:tmux-plugins/tmux-copycat.git
 [submodule "nvim/.config/nvim/friendly-snippets"]
 	path = nvim/.config/nvim/friendly-snippets
 	url = git@github.com:rafamadriz/friendly-snippets.git

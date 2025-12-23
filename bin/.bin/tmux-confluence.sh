@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # this script just takes some input and opens up a confluence URL
 # to search this input.

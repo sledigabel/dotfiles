@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 repo=""
 if [[ "${#}" -eq 1 ]]; then
@@ -12,8 +13,6 @@ else
   exit 1
 fi
 
-echo ${#}
-echo "cloning ${repo}"
 
 if echo "$repo" | grep -q "^https://"; then
   endpoint_name=$(echo "$repo" | awk -F '/' '{print $3}')
@@ -49,12 +48,4 @@ case ${endpoint_name} in
   exit 1
   ;;
 esac
-if [ "$1" == "--help" ]; then
-  echo "Usage: ./script.sh <input>"
-elif [ "$1" = "" ]; then
-  echo "Input argument cannot be empty."
-else
-  echo "Hello, world!"
-fi
-
 read -p "Press enter to continue"
