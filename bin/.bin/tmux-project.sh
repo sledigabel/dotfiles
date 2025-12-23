@@ -12,7 +12,7 @@ NEW_SESSION_SAFE=$(tr -d '.' <<<"$NEW_SESSION")
 
 SHORT_SESSION=$(basename "$NEW_SESSION_SAFE")
 
-tmux new-session -s "$SHORT_SESSION" -c "$NEW_SESSION" -e "CURRENT_SESSION=${SHORT_SESSION}" -e "TMUX_SESSION_DIR=${NEW_SESSION}" -d 'zsh; tmux switch-client -t 0'
+tmux new-session -s "$SHORT_SESSION" -c "$NEW_SESSION" -e "CURRENT_SESSION=${SHORT_SESSION}" -e "TMUX_SESSION_DIR=${NEW_SESSION}" -d 'zsh; ~/.bin/tmux-return-and-cleanup.sh'
 tmux set-environment -t "$SHORT_SESSION" CURRENT_SESSION="$SHORT_SESSION"
 tmux set-environment -t "$SHORT_SESSION" TMUX_SESSION_DIR="$NEW_SESSION"
 tmux switch-client -t "$SHORT_SESSION"
