@@ -313,7 +313,9 @@ require("lazy").setup({
     lazy = false,
     priority = 1000,
     config = function()
-      require("gruvbox").setup({})
+      require("gruvbox").setup({
+        transparent_mode = true,
+      })
       vim.o.background = "dark"
       vim.cmd("colorscheme gruvbox")
     end,
@@ -713,6 +715,51 @@ require("lazy").setup({
     },
   },
 
+  -- {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   dependencies = {
+  --     { "nvim-lua/plenary.nvim", branch = "master" },
+  --   },
+  --   build = "make tiktoken",
+  --   opts = {
+  --     -- See Configuration section for options
+  --   },
+  --   cmd = {
+  --     "CopilotChat",
+  --     "CopilotChatOpen",
+  --     "CopilotChatClose",
+  --     "CopilotChatToggle",
+  --     "CopilotChatStop",
+  --     "CopilotChatReset",
+  --     "CopilotChatSave",
+  --     "CopilotChatLoad",
+  --     "CopilotChatPrompts",
+  --     "CopilotChatModels",
+  --   },
+  --   keys = {
+  --     {
+  --       "<leader>cc",
+  --       function()
+  --         -- if filetype is commit, open the copilot with CommitStaged
+  --         if vim.bo.filetype == "gitcommit" then
+  --           vim.cmd("CopilotChat /Commit")
+  --         else
+  --           vim.cmd("CopilotChat")
+  --         end
+  --       end,
+  --       desc = "Open Copilot Chat",
+  --       remap = false,
+  --     },
+  --     {
+  --       "<leader>cc",
+  --       "<cmd>CodeCompanionChat Toggle<cr>",
+  --       mode = "v",
+  --       desc = "Toggle Copilot Chat",
+  --       remap = false,
+  --     },
+  --   },
+  -- },
+
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
@@ -726,7 +773,7 @@ require("lazy").setup({
       },
       strategies = {
         chat = {
-          adapter = "copilot",
+          -- adapter = "copilot",
           opts = {
             register = "*",
           },
@@ -748,8 +795,8 @@ require("lazy").setup({
                 -- this only works after you've started a chat.
                 -- default = "claude-3.7-sonnet",
                 -- default = "o3-mini",
-                -- default = "claude-3.7-sonnet",
-                default = "gpt-4o",
+                default = "claude-4.5-sonnet",
+                -- default = "gpt-4o",
                 -- default = "o1"
                 -- default = "o3-mini",
               },

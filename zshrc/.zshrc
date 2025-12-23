@@ -6,19 +6,17 @@
 # zsh profiling
 # zmodload zsh/zprof
 
-PARENTPROCESS=$(ps -p `ps -p $$ -o ppid=` -o comm=)
+PARENTPROCESS=$(ps -p $(ps -p $$ -o ppid=) -o comm=)
 
-if [ -n "${ZSH_TMUX_AUTOSTARTED:-}" ]
-then
+if [ -n "${ZSH_TMUX_AUTOSTARTED:-}" ]; then
   #  if [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM_PROGRAM}" = "alacritty" ] || [ "${TERM_PROGRAM}" = "tmux" ]
   #  then
   #    eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/seb.omp.yaml)"
   # else
-   ZSH_THEME="sorin"
+  ZSH_THEME="sorin"
   # fi
 fi
 # ZSH_THEME="sorin"
-
 
 # http://zsh.sourceforge.net/Doc/Release/Options.html#Options
 setopt alwaystoend
@@ -59,7 +57,7 @@ export HISTSIZE=5000
 # export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 export LC_ALL=en_GB.UTF-8
 # export PATH="/Users/sebastienledigabel/.pyenv/shims:${HOME}/.bin:${GOPATH}/bin:${PATH}:${HOME}/nvim-osx64/bin:/usr/local/kubebuilder/bin:$(npm bin)"
-export PATH="/Users/sebastienledigabel/.pyenv/bin:${HOME}/.bin:${GOPATH}/bin:/opt/homebrew/bin:${PATH}:${TMUX_SESSION_DIR:-/Users/sebastienledigabel}/node_modules/.bin:${HOME}/.cargo/bin"
+export PATH="/Users/sebastienledigabel/.pyenv/bin:${HOME}/.bin:${GOPATH}/bin:/opt/homebrew/bin:${PATH}:${TMUX_SESSION_DIR:-/Users/sebastienledigabel}/node_modules/.bin:${HOME}/.cargo/bin:/Users/sebastienledigabel/.local/bin"
 export NODE_PATH="/opt/homebrew/lib/node_modules"
 eval "$(pyenv init -)"
 # https://github.com/pyenv/pyenv-virtualenv/issues/259#issuecomment-1007432346
@@ -79,10 +77,8 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 # for virtualenvwrapper
 [ -e "/opt/homebrew/bin/virtualenvwrapper.sh" ] && source /opt/homebrew/bin/virtualenvwrapper.sh
 # extra sources
-if [ -d "${HOME}/.source" ]
-then
-  for source_file in ${HOME}/.source/*.sh
-  do
+if [ -d "${HOME}/.source" ]; then
+  for source_file in ${HOME}/.source/*.sh; do
     source ${source_file}
   done
 fi
@@ -125,8 +121,8 @@ plugins=(
   # zsh-syntax-highlighting
 )
 
-if [ "${PARENTPROCESS##*/}" = "nvim" ] || [ "${PARENTPROCESS##*/}" = "bash" ]
- then ZSH_TMUX_AUTOSTART=false
+if [ "${PARENTPROCESS##*/}" = "nvim" ] || [ "${PARENTPROCESS##*/}" = "bash" ]; then
+  ZSH_TMUX_AUTOSTART=false
 else
   if [ -n "${SKIP_TMUX}" ]; then
   elif [ "${TERM_PROGRAM}" = "iTerm.app" ] || [ "${TERM}" = "xterm-ghostty" ]; then
@@ -158,6 +154,31 @@ alias ssh="ssh -o StrictHostKeyChecking=no"
 alias less="bat"
 alias jira='JIRA_API_TOKEN="$(security find-generic-password -a ${USER} -s jira_token -w)" /opt/homebrew/bin/jira'
 alias ghostty_config="vim ~/.config/ghostty/config"
+
+opencode-portkey() {
+  export PORTKEY_API_KEY=$(security find-generic-password -a "$USER" -s "portkey-api-key" -w 2>/dev/null)
+  export PORTKEY_CONFIG_ID=$(security find-generic-password -a "$USER" -s "portkey-config-id" -w 2>/dev/null)
+  export PORTKEY_URL=$(security find-generic-password -a "$USER" -s "portkey-url" -w 2>/dev/null)
+
+  if [ -z "$PORTKEY_API_KEY" ]; then
+    echo "Error: Portkey API key not found in Keychain"
+    return 1
+  fi
+
+  if [ -z "$PORTKEY_CONFIG_ID" ]; then
+    echo "Error: Portkey config ID not found in Keychain"
+    return 1
+  fi
+
+  if [ -z "$PORTKEY_URL" ]; then
+    echo "Error: Portkey URL not found in Keychain"
+    return 1
+  fi
+
+  opencode "$@"
+}
+
+alias opencode="opencode-portkey"
 
 # . ~/.asdf/plugins/java/set-java-home.zsh
 

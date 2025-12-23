@@ -4,5 +4,96 @@
   "share": "disabled",
   "keybinds": {
     "leader": "ctrl+space"
-  }
+  },
+  "provider": {
+    "openai-compatible": {
+      "name": "Skyscanner ModelOps (Claude)",
+      "npm": "@ai-sdk/openai-compatible",
+      "api": "{env:PORTKEY_URL}",
+      "options": {
+        "apiKey": "dummy",
+        "baseURL": "{env:PORTKEY_URL}",
+        "headers": {
+          "x-portkey-api-key": "{env:PORTKEY_API_KEY}",
+          "x-portkey-config": "{env:PORTKEY_CONFIG_ID}"
+        },
+        "timeout": 120000
+      },
+      "models": {
+        "claude-sonnet-4-5": {
+          "id": "claude-sonnet-4-5-20250929",
+          "name": "Claude Sonnet 4.5",
+          "family": "claude",
+          "tool_call": true,
+          "attachment": true,
+          "temperature": true,
+          "reasoning": false,
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          },
+          "limit": {
+            "context": 200000,
+            "output": 32768
+          },
+          "cost": {
+            "input": 3.0,
+            "output": 15.0,
+            "cache_read": 0.3,
+            "cache_write": 3.75
+          },
+          "release_date": "2025-09-29"
+        },
+        "claude-haiku-4-5": {
+          "id": "claude-haiku-4-5-20251001",
+          "name": "Claude Haiku 4.5",
+          "family": "claude",
+          "tool_call": true,
+          "attachment": true,
+          "temperature": true,
+          "reasoning": false,
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          },
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          },
+          "cost": {
+            "input": 1.0,
+            "output": 5.0,
+            "cache_read": 0.1,
+            "cache_write": 1.25
+          },
+          "release_date": "2025-10-01"
+        },
+        "claude-opus-4-5": {
+          "id": "claude-opus-4-5-20251101",
+          "name": "Claude Opus 4.5",
+          "family": "claude",
+          "tool_call": true,
+          "attachment": true,
+          "temperature": true,
+          "reasoning": false,
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          },
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          },
+          "cost": {
+            "input": 15.0,
+            "output": 75.0,
+            "cache_read": 1.5,
+            "cache_write": 18.75
+          },
+          "release_date": "2025-11-01"
+        }
+      }
+    }
+  },
+  "model": "openai-compatible/claude-sonnet-4-5"
 }
