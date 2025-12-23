@@ -1,6 +1,7 @@
 local icloud_path = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents/"
 
 local opts = {
+  legacy_commands = false,
   workspaces = {
     {
       name = "Work",
@@ -23,15 +24,6 @@ local opts = {
     nvim_cmp = true,
     min_chars = 2,
     create_new = true,
-  },
-  mappings = {
-    -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-    ["gf"] = {
-      action = function()
-        return require("obsidian").util.gf_passthrough()
-      end,
-      opts = { noremap = false, expr = true, buffer = true },
-    },
   },
 
   picker = {
