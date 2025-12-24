@@ -33,5 +33,9 @@ else
   tmux new-session -s "$SESSION_NAME" -c "$WORKING_DIR" -d "$COMMAND; ~/.bin/tmux-return-and-cleanup.sh"
 fi
 
-# Switch to the session
-tmux switch-client -t "$SESSION_NAME"
+# Switch to the session (use switch-client if inside tmux, attach if outside)
+if [ -n "${TMUX:-}" ]; then
+  tmux switch-client -t "$SESSION_NAME"
+else
+  tmux attach-session -t "$SESSION_NAME"
+fi
