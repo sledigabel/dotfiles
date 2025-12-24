@@ -43,7 +43,6 @@ cmp.setup({
     { name = "calc" },
     { name = "git" },
     { name = "obsidian_users", max_item_count = 5 },
-    { name = "blah" },
   }),
   formatting = {
     format = lspkind.cmp_format({

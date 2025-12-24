@@ -68,7 +68,18 @@ local obsidianre = "iCloud~md~obsidian"
 local obsidian_group = vim.api.nvim_create_augroup("Obsidian", { clear = true })
 
 function at_work()
-  return os.getenv("USER") == "sebastienledigabel"
+  local work_dirs = {
+    vim.fn.expand("~/dev/work/nvim-travelapi"),
+    vim.fn.expand("~/dev/work/cmp-obsidian-users"),
+  }
+  
+  for _, dir in ipairs(work_dirs) do
+    if vim.fn.isdirectory(dir) == 1 then
+      return true
+    end
+  end
+  
+  return false
 end
 
 vim.api.nvim_create_autocmd({
@@ -82,7 +93,7 @@ vim.api.nvim_create_autocmd({
     local dirname = vim.fn.fnamemodify(ev.file, ":h")
     local lookup = string.find(dirname, obsidianre, 1, true)
     if lookup ~= nil then
-      vim.api.nvim_buf_set_option(ev.buf, "filetype", "markdown_obsidian")
+      vim.bo[ev.buf].filetype = "markdown_obsidian"
       vim.treesitter.start(0, "markdown")
       vim.o.autoread = true
       local map = vim.keymap.set
@@ -275,13 +286,9 @@ require("lazy").setup({
         { "<C-s>", ":w<cr>", desc = "save", remap = false },
         { "<C-u>", "<C-u>zz", desc = "scroll up", remap = false },
         { "[[", "<cmd>Gitsigns prev_hunk<cr>", desc = "[Git] next hunk", remap = false },
-        { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer", remap = false },
         { "]]", "<cmd>Gitsigns next_hunk<cr>", desc = "[Git] previous hunk", remap = false },
-        { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer", remap = false },
 
         { "<leader>d", "<cmd>bd<cr>", desc = "Delete buffer", remap = false },
-        --
-        -- { "<leader>Bp", run_local_test, group = "debugger", desc = "(Debug) Run test", remap = false },
       })
 
       wk.add({
@@ -420,14 +427,6 @@ require("lazy").setup({
   },
 
   -- [ LSP ] --
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   event = "BufRead",
-  --   dependencies = { "b0o/SchemaStore.nvim" },
-  --   config = function()
-  --     require("config.lsp")
-  --   end,
-  -- },
   { "b0o/SchemaStore.nvim", lazy = true },
   {
     "folke/lazydev.nvim",
@@ -493,6 +492,7 @@ require("lazy").setup({
   { "folke/neoconf.nvim", cmd = "Neoconf" },
   -- travelapi
   {
+    name = "nvim-travelapi",
     dir = os.getenv("HOME") .. "/dev/work/nvim-travelapi/",
     opts = {},
     dependencies = {
@@ -529,7 +529,8 @@ require("lazy").setup({
 
   -- sonarqube
   {
-    dir = "/Users/sebastienledigabel/dev/perso/sonarlint.nvim",
+    name = "sonarlint",
+    dir = os.getenv("HOME") .. "/dev/perso/sonarlint.nvim",
     lazy = true,
     enabled = at_work,
   },
@@ -714,51 +715,6 @@ require("lazy").setup({
       { "<leader>gc", "<cmd>CodeCompleteToggle<cr>", mode = "n", desc = "Toggle Copilot", remap = false },
     },
   },
-
-  -- {
-  --   "CopilotC-Nvim/CopilotChat.nvim",
-  --   dependencies = {
-  --     { "nvim-lua/plenary.nvim", branch = "master" },
-  --   },
-  --   build = "make tiktoken",
-  --   opts = {
-  --     -- See Configuration section for options
-  --   },
-  --   cmd = {
-  --     "CopilotChat",
-  --     "CopilotChatOpen",
-  --     "CopilotChatClose",
-  --     "CopilotChatToggle",
-  --     "CopilotChatStop",
-  --     "CopilotChatReset",
-  --     "CopilotChatSave",
-  --     "CopilotChatLoad",
-  --     "CopilotChatPrompts",
-  --     "CopilotChatModels",
-  --   },
-  --   keys = {
-  --     {
-  --       "<leader>cc",
-  --       function()
-  --         -- if filetype is commit, open the copilot with CommitStaged
-  --         if vim.bo.filetype == "gitcommit" then
-  --           vim.cmd("CopilotChat /Commit")
-  --         else
-  --           vim.cmd("CopilotChat")
-  --         end
-  --       end,
-  --       desc = "Open Copilot Chat",
-  --       remap = false,
-  --     },
-  --     {
-  --       "<leader>cc",
-  --       "<cmd>CodeCompanionChat Toggle<cr>",
-  --       mode = "v",
-  --       desc = "Toggle Copilot Chat",
-  --       remap = false,
-  --     },
-  --   },
-  -- },
 
   {
     "olimorris/codecompanion.nvim",
