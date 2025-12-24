@@ -31,6 +31,14 @@ if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 else
   # Create new session
   tmux new-session -s "$SESSION_NAME" -c "$WORKING_DIR" -d "$COMMAND; ~/.bin/tmux-return-and-cleanup.sh"
+  
+  # Wait for session to be fully initialized (with timeout)
+  for i in {1..10}; do
+    if tmux has-session -t "$SESSION_NAME" 2>/dev/null && tmux list-panes -t "$SESSION_NAME" >/dev/null 2>&1; then
+      break
+    fi
+    sleep 0.05
+  done
 fi
 
 # Switch to the session (use switch-client if inside tmux, attach if outside)
