@@ -17,8 +17,15 @@ local opts = {
     -- Optional, if you want to change the date format of the default alias of daily notes.
     alias_format = "%B %-d, %Y",
     -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-    template = nil,
+    template = "daily-template.md",
   },
+
+  templates = {
+    folder = "templates",
+    date_format = "%Y-%m-%d",
+    time_format = "%H:%M",
+  },
+
   completion = {
     -- Set to false to disable completion.
     nvim_cmp = true,
@@ -35,14 +42,9 @@ local opts = {
   end,
 
   attachments = {
-    img_folder = "images", -- This is the default
+    folder = "attachments",
     confirm_img_paste = false,
   },
-
-  -- Opening URL
-  follow_url_func = function(url)
-    vim.fn.jobstart({ "open", url })
-  end,
 }
 
 require("obsidian").setup(opts)

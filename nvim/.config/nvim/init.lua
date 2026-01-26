@@ -72,13 +72,13 @@ function at_work()
     vim.fn.expand("~/dev/work/nvim-travelapi"),
     vim.fn.expand("~/dev/work/cmp-obsidian-users"),
   }
-  
+
   for _, dir in ipairs(work_dirs) do
     if vim.fn.isdirectory(dir) == 1 then
       return true
     end
   end
-  
+
   return false
 end
 
@@ -97,8 +97,8 @@ vim.api.nvim_create_autocmd({
       vim.treesitter.start(0, "markdown")
       vim.o.autoread = true
       local map = vim.keymap.set
-      map("i", "<C-P>", "<esc><esc>:ObsidianPasteImg<cr>GA", { buffer = true, remap = false })
-      map("n", "<C-P>", ":ObsidianPasteImg<cr>", { buffer = true, remap = false })
+      map("i", "<C-P>", "<esc><esc>:Obsidian paste_img<cr>GA", { buffer = true, remap = false })
+      map("n", "<C-P>", ":Obsidian paste_img<cr>", { buffer = true, remap = false })
     end
   end,
 })
@@ -864,6 +864,9 @@ require("lazy").setup({
     config = function()
       require("config.obsidian")
     end,
+    keys = {
+      { "<leader>Oo", "<cmd>Obsidian open<cr>", desc = "Open page" },
+    },
   },
 
   -- [ Go ]
@@ -1027,7 +1030,6 @@ require("lazy").setup({
 
   -- remindian
   {
-    -- dir = "/Users/sebastienledigabel/dev/perso/remindian/",
     "sledigabel/remindian",
     build = "make dist",
     opts = {
@@ -1035,6 +1037,20 @@ require("lazy").setup({
       enable_logging = true,
     },
     ft = { "markdown_obsidian" },
+  },
+
+  -- outlook
+  {
+    dir = "/Users/sebastienledigabel/dev/perso/obsidian-outlook-sync.nvim",
+    -- "sledigabel/obsidian-outlook-sync.nvim",
+    ft = { "markdown_obsidian" },
+    build = { "make build" },
+    config = function()
+      require("obsidian_outlook_sync").setup({
+        -- cli_path = "outlook-md",
+        -- timezone = "Local",
+      })
+    end,
   },
 })
 
