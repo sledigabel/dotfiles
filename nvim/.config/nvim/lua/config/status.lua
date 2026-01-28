@@ -12,9 +12,20 @@ local lualine_theme = "auto"
 
 function CodeCompleteStatus()
   if vim.g.copilot_enabled then
-    return " "
+    return " "
   else
     return "  "
+  end
+end
+
+function LspStatus()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+  
+  if #clients > 0 then
+    return " "  -- LSP is active
+  else
+    return ""  -- No LSP attached
   end
 end
 
@@ -81,6 +92,7 @@ require("lualine").setup({
       --     return str:sub(1, 60)
       --   end,
       -- },
+      { "LspStatus()", padding = 0, always_visible = true },
       { "CodeCompleteStatus()", padding = 0, always_visible = false, separator = { left = "", right = "" } },
       -- "progress",
     },

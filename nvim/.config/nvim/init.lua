@@ -1041,8 +1041,8 @@ require("lazy").setup({
 
   -- outlook
   {
-    dir = "/Users/sebastienledigabel/dev/perso/obsidian-outlook-sync.nvim",
-    -- "sledigabel/obsidian-outlook-sync.nvim",
+    -- dir = "/Users/sebastienledigabel/dev/perso/obsidian-outlook-sync.nvim",
+    "sledigabel/obsidian-outlook-sync.nvim",
     ft = { "markdown_obsidian" },
     build = { "make build" },
     config = function()
@@ -1051,6 +1051,10 @@ require("lazy").setup({
         -- timezone = "Local",
       })
     end,
+    keys = {
+      {"<leader>Or", desc = "Sync from Outlook to Obsidian", "<cmd>OutlookAgendaToday<cr>"},
+      {"<leader>Or", desc = "Sync from Outlook to Obsidian", "<cmd>OutlookAgendaToday<cr>"},
+    },
   },
 })
 
