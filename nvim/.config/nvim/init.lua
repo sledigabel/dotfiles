@@ -96,6 +96,14 @@ vim.api.nvim_create_autocmd({
       vim.bo[ev.buf].filetype = "markdown_obsidian"
       vim.treesitter.start(0, "markdown")
       vim.o.autoread = true
+      -- Start the LSP for markdown_obsidian after setting the filetype
+      vim.lsp.start({
+        name = "markdown_oxide",
+        cmd = { "markdown-oxide" },
+        root_dir = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents/",
+        filetypes = { "markdown_obsidian" },
+        single_file_support = true,
+      }, { bufnr = ev.buf })
       local map = vim.keymap.set
       map("i", "<C-P>", "<esc><esc>:Obsidian paste_img<cr>GA", { buffer = true, remap = false })
       map("n", "<C-P>", ":Obsidian paste_img<cr>", { buffer = true, remap = false })
@@ -727,39 +735,50 @@ require("lazy").setup({
       opts = {
         log_level = "TRACE",
       },
-      strategies = {
-        chat = {
-          -- adapter = "copilot",
-          opts = {
-            register = "*",
-          },
-        },
-        inline = { adapter = "copilot" },
-      },
+      -- strategies = {
+      --   chat = {
+      --     -- adapter = "copilot",
+      --     opts = {
+      --       register = "*",
+      --     },
+      --   },
+      --   inline = { adapter = "copilot" },
+      -- },
       display = {
         action_palette = {
           provider = "snacks",
         },
       },
-      adapters = {
-        copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {
-            schema = {
-              model = {
-                -- get the list of models:
-                -- lua =require("codecompanion.adapters.copilot").schema.model.choices()
-                -- this only works after you've started a chat.
-                -- default = "claude-3.7-sonnet",
-                -- default = "o3-mini",
-                default = "claude-4.5-sonnet",
-                -- default = "gpt-4o",
-                -- default = "o1"
-                -- default = "o3-mini",
-              },
-            },
-          })
-        end,
+      interactions = {
+        inline = {
+          adapter = {
+            name = "opencode",
+          },
+        },
+        chat = {
+          -- adapter = "opencode",
+          adapter = "claude_code",
+        },
       },
+      -- adapters = {
+      -- copilot = function()
+      --   return require("codecompanion.adapters").extend("copilot", {
+      --     schema = {
+      --       model = {
+      --         -- get the list of models:
+      --         -- lua =require("codecompanion.adapters.copilot").schema.model.choices()
+      --         -- this only works after you've started a chat.
+      --         -- default = "claude-3.7-sonnet",
+      --         -- default = "o3-mini",
+      --         default = "claude-4.5-sonnet",
+      --         -- default = "gpt-4o",
+      --         -- default = "o1"
+      --         -- default = "o3-mini",
+      --       },
+      --     },
+      --   })
+      -- end,
+      -- },
       extensions = {
         mcphub = {
           callback = "mcphub.extensions.codecompanion",
@@ -921,103 +940,103 @@ require("lazy").setup({
   },
 
   -- [ DAP ]
-  {
-    "mfussenegger/nvim-dap",
-    cmd = {
-      "DapShowLog",
-      "DapContinue",
-      "DapToggleBreakpoint",
-      "DapClearBreakpoints",
-      "DapToggleRepl",
-      "DapStepOver",
-      "DapStepInto",
-      "DapStepOut",
-      "DapTerminate",
-      "DapDisconnect",
-      "DapRestartFrame",
-    },
-    config = function()
-      vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
-      vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "", numhl = "" })
-    end,
-    keys = {
-      { "<leader><leader>b", "<cmd>DapToggleBreakpoint<cr>", desc = "Breakpoint", remap = false },
-      { "<leader><leader>l", "<cmd>DapStepOver<cr>", desc = "Step Over", remap = false },
-      { "<leader><leader>j", "<cmd>DapStepInto<cr>", desc = "Step Into", remap = false },
-      { "<leader><leader>k", "<cmd>DapStepOut<cr>", desc = "Step Out", remap = false },
-      { "<leader><leader>c", "<cmd>DapContinue<cr>", desc = "Continue", remap = false },
-      { "<leader><leader>s", "<cmd>DapDisconnect<cr>", desc = "Stop", remap = false },
-      { "<leader><leader>C", "<cmd>DapClearBreakpoints<cr>", desc = "Clear all breakpoints", remap = false },
-      { "<leader><leader>u", "<cmd>DapUiToggle<cr>", desc = "Toggle the Debug UI", remap = false },
-    },
-  },
-  {
-    "leoluz/nvim-dap-go",
-    filetypes = { "go" },
-    dependencies = {
-      "mfussenegger/nvim-dap",
-    },
-    config = function()
-      local dapgo = require("dap-go")
-      dapgo.setup({
-        dap_configurations = {
-          {
-            -- Must be "go" or it will be ignored by the plugin
-            type = "go",
-            name = "Attach remote",
-            mode = "remote",
-            request = "attach",
-          },
-          {
-            type = "go",
-            name = "Debug (Build Flags & Arguments)",
-            request = "launch",
-            program = "${file}",
-            args = require("dap-go").get_arguments,
-            buildFlags = require("dap-go").get_build_flags,
-          },
-        },
-      })
-    end,
-  },
-  {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-    config = function()
-      require("dapui").setup({
-        layouts = {
-          {
-            -- You can change the order of elements in the sidebar
-            elements = {
-              -- Provide IDs as strings or tables with "id" and "size" keys
-              {
-                id = "scopes",
-                size = 0.25, -- Can be float or integer > 1
-              },
-              { id = "stacks", size = 0.25 },
-              { id = "watches", size = 0.25 },
-              { id = "repl", size = 0.25 },
-            },
-            size = 40,
-            position = "left", -- Can be "left" or "right"
-          },
-        },
-      })
-      local dap, dapui = require("dap"), require("dapui")
-      dap.listeners.before.attach.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.launch.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated.dapui_config = function()
-        dapui.close()
-      end
-      -- dap.listeners.before.event_exited.dapui_config = function()
-      --   dapui.close()
-      -- end
-    end,
-  },
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   cmd = {
+  --     "DapShowLog",
+  --     "DapContinue",
+  --     "DapToggleBreakpoint",
+  --     "DapClearBreakpoints",
+  --     "DapToggleRepl",
+  --     "DapStepOver",
+  --     "DapStepInto",
+  --     "DapStepOut",
+  --     "DapTerminate",
+  --     "DapDisconnect",
+  --     "DapRestartFrame",
+  --   },
+  --   config = function()
+  --     vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+  --     vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "", numhl = "" })
+  --   end,
+  --   keys = {
+  --     { "<leader><leader>b", "<cmd>DapToggleBreakpoint<cr>", desc = "Breakpoint", remap = false },
+  --     { "<leader><leader>l", "<cmd>DapStepOver<cr>", desc = "Step Over", remap = false },
+  --     { "<leader><leader>j", "<cmd>DapStepInto<cr>", desc = "Step Into", remap = false },
+  --     { "<leader><leader>k", "<cmd>DapStepOut<cr>", desc = "Step Out", remap = false },
+  --     { "<leader><leader>c", "<cmd>DapContinue<cr>", desc = "Continue", remap = false },
+  --     { "<leader><leader>s", "<cmd>DapDisconnect<cr>", desc = "Stop", remap = false },
+  --     { "<leader><leader>C", "<cmd>DapClearBreakpoints<cr>", desc = "Clear all breakpoints", remap = false },
+  --     { "<leader><leader>u", "<cmd>DapUiToggle<cr>", desc = "Toggle the Debug UI", remap = false },
+  --   },
+  -- },
+  -- {
+  --   "leoluz/nvim-dap-go",
+  --   filetypes = { "go" },
+  --   dependencies = {
+  --     "mfussenegger/nvim-dap",
+  --   },
+  --   config = function()
+  --     local dapgo = require("dap-go")
+  --     dapgo.setup({
+  --       dap_configurations = {
+  --         {
+  --           -- Must be "go" or it will be ignored by the plugin
+  --           type = "go",
+  --           name = "Attach remote",
+  --           mode = "remote",
+  --           request = "attach",
+  --         },
+  --         {
+  --           type = "go",
+  --           name = "Debug (Build Flags & Arguments)",
+  --           request = "launch",
+  --           program = "${file}",
+  --           args = require("dap-go").get_arguments,
+  --           buildFlags = require("dap-go").get_build_flags,
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   "rcarriga/nvim-dap-ui",
+  --   dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+  --   config = function()
+  --     require("dapui").setup({
+  --       layouts = {
+  --         {
+  --           -- You can change the order of elements in the sidebar
+  --           elements = {
+  --             -- Provide IDs as strings or tables with "id" and "size" keys
+  --             {
+  --               id = "scopes",
+  --               size = 0.25, -- Can be float or integer > 1
+  --             },
+  --             { id = "stacks", size = 0.25 },
+  --             { id = "watches", size = 0.25 },
+  --             { id = "repl", size = 0.25 },
+  --           },
+  --           size = 40,
+  --           position = "left", -- Can be "left" or "right"
+  --         },
+  --       },
+  --     })
+  --     local dap, dapui = require("dap"), require("dapui")
+  --     dap.listeners.before.attach.dapui_config = function()
+  --       dapui.open()
+  --     end
+  --     dap.listeners.before.launch.dapui_config = function()
+  --       dapui.open()
+  --     end
+  --     dap.listeners.before.event_terminated.dapui_config = function()
+  --       dapui.close()
+  --     end
+  --     -- dap.listeners.before.event_exited.dapui_config = function()
+  --     --   dapui.close()
+  --     -- end
+  --   end,
+  -- },
 
   -- markdown
   {
@@ -1041,8 +1060,8 @@ require("lazy").setup({
 
   -- outlook
   {
-    -- dir = "/Users/sebastienledigabel/dev/perso/obsidian-outlook-sync.nvim",
-    "sledigabel/obsidian-outlook-sync.nvim",
+    dir = "/Users/sebastienledigabel/dev/perso/obsidian-outlook-sync.nvim",
+    -- "sledigabel/obsidian-outlook-sync.nvim",
     ft = { "markdown_obsidian" },
     build = { "make build" },
     config = function()
@@ -1052,8 +1071,8 @@ require("lazy").setup({
       })
     end,
     keys = {
-      {"<leader>Or", desc = "Sync from Outlook to Obsidian", "<cmd>OutlookAgendaToday<cr>"},
-      {"<leader>Or", desc = "Sync from Outlook to Obsidian", "<cmd>OutlookAgendaToday<cr>"},
+      { "<leader><leader>r", desc = "Sync from Outlook to Obsidian", "<cmd>OutlookAgendaToday<cr>" },
+      { "<leader><leader>f", desc = "Sync from Outlook to Obsidian", "<cmd>OutlookJumpToCurrentNotes<cr>" },
     },
   },
 })

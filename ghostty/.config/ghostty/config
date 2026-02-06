@@ -26,7 +26,6 @@ theme = Gruvbox Dark Hard
 
 background = #14171d
 background-opacity = 0.95
-# background-blur-radius = 30
 background-blur-radius = 50
 foreground = #c5c9c7
 cursor-color = #c5c9c7
@@ -34,8 +33,13 @@ selection-background = #393B42
 selection-foreground = #c5c9c7
 
 # fonts
-font-family = JetBrainsMono Nerd Font Mono
-font-size = 16
+# font-family = JetBrainsMono Nerd Font Mono
+# font-size = 16
+# for MonoLisa we need to adjust the heights and widths
+font-size = 19
+font-family = MonoLisa Nerd Font Mono
+adjust-cell-height = 39%
+adjust-cell-width = -15%
 
 # keybindings
 keybind = clear
