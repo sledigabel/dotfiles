@@ -22,3 +22,6 @@
 [submodule "nvim/.config/nvim/java/vscode-gradle"]
 	path = nvim/.config/nvim/java/vscode-gradle
 	url = https://github.com/microsoft/vscode-gradle
+[submodule "opencode/.config/opencode/superpowers"]
+	path = opencode/.config/opencode/superpowers
+	url = https://github.com/obra/superpowers.git

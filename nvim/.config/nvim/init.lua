@@ -735,15 +735,15 @@ require("lazy").setup({
       opts = {
         log_level = "TRACE",
       },
-      -- strategies = {
-      --   chat = {
-      --     -- adapter = "copilot",
-      --     opts = {
-      --       register = "*",
-      --     },
-      --   },
-      --   inline = { adapter = "copilot" },
-      -- },
+      strategies = {
+        chat = {
+          -- adapter = "copilot",
+          opts = {
+            register = "*",
+          },
+        },
+        inline = { adapter = "copilot" },
+      },
       display = {
         action_palette = {
           provider = "snacks",
@@ -756,29 +756,25 @@ require("lazy").setup({
           },
         },
         chat = {
-          -- adapter = "opencode",
-          adapter = "claude_code",
+          -- adapter = "claude_code",
+          adapter = "opencode",
+          model = "claude-haiku-4-5",
         },
       },
-      -- adapters = {
-      -- copilot = function()
-      --   return require("codecompanion.adapters").extend("copilot", {
-      --     schema = {
-      --       model = {
-      --         -- get the list of models:
-      --         -- lua =require("codecompanion.adapters.copilot").schema.model.choices()
-      --         -- this only works after you've started a chat.
-      --         -- default = "claude-3.7-sonnet",
-      --         -- default = "o3-mini",
-      --         default = "claude-4.5-sonnet",
-      --         -- default = "gpt-4o",
-      --         -- default = "o1"
-      --         -- default = "o3-mini",
-      --       },
-      --     },
-      --   })
-      -- end,
-      -- },
+      adapters = {
+        copilot = function()
+          return require("codecompanion.adapters").extend("copilot", {
+            schema = {
+              model = {
+                -- get the list of models:
+                -- lua =require("codecompanion.adapters.copilot").schema.model.choices()
+                -- this only works after you've started a chat.
+                default = "claude-4.5-sonnet",
+              },
+            },
+          })
+        end,
+      },
       extensions = {
         mcphub = {
           callback = "mcphub.extensions.codecompanion",
@@ -809,9 +805,9 @@ require("lazy").setup({
         function()
           -- if filetype is commit, open the copilot with CommitStaged
           if vim.bo.filetype == "gitcommit" then
-            vim.cmd("CodeCompanion /commit")
+            vim.cmd("CodeCompanionChat adapter=opencode /commit")
           else
-            vim.cmd("CodeCompanionChat toggle")
+            vim.cmd("CodeCompanionChat adapter=opencode toggle")
           end
         end,
         desc = "Open Copilot Chat",
@@ -819,7 +815,7 @@ require("lazy").setup({
       },
       {
         "<leader>cc",
-        "<cmd>CodeCompanionChat Toggle<cr>",
+        "<cmd>CodeCompanionChat adapter=opencode Toggle<cr>",
         mode = "v",
         desc = "Toggle Copilot Chat",
         remap = false,
@@ -1060,8 +1056,8 @@ require("lazy").setup({
 
   -- outlook
   {
-    dir = "/Users/sebastienledigabel/dev/perso/obsidian-outlook-sync.nvim",
-    -- "sledigabel/obsidian-outlook-sync.nvim",
+    -- dir = "/Users/sebastienledigabel/dev/perso/obsidian-outlook-sync.nvim",
+    "sledigabel/obsidian-outlook-sync.nvim",
     ft = { "markdown_obsidian" },
     build = { "make build" },
     config = function()
