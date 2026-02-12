@@ -742,7 +742,7 @@ require("lazy").setup({
             register = "*",
           },
         },
-        inline = { adapter = "copilot" },
+        -- inline = { adapter = "copilot" },
       },
       display = {
         action_palette = {
@@ -750,31 +750,31 @@ require("lazy").setup({
         },
       },
       interactions = {
-        inline = {
-          adapter = {
-            name = "opencode",
-          },
-        },
+        -- inline = {
+        --   adapter = {
+        --     name = "opencode",
+        --   },
+        -- },
         chat = {
           -- adapter = "claude_code",
           adapter = "opencode",
-          model = "claude-haiku-4-5",
+          model = "claude-opus-4-6",
         },
       },
-      adapters = {
-        copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {
-            schema = {
-              model = {
-                -- get the list of models:
-                -- lua =require("codecompanion.adapters.copilot").schema.model.choices()
-                -- this only works after you've started a chat.
-                default = "claude-4.5-sonnet",
-              },
-            },
-          })
-        end,
-      },
+      -- adapters = {
+      --   copilot = function()
+      --     return require("codecompanion.adapters").extend("copilot", {
+      --       schema = {
+      --         model = {
+      --           -- get the list of models:
+      --           -- lua =require("codecompanion.adapters.copilot").schema.model.choices()
+      --           -- this only works after you've started a chat.
+      --           default = "claude-4.5-sonnet",
+      --         },
+      --       },
+      --     })
+      --   end,
+      -- },
       extensions = {
         mcphub = {
           callback = "mcphub.extensions.codecompanion",
@@ -807,7 +807,7 @@ require("lazy").setup({
           if vim.bo.filetype == "gitcommit" then
             vim.cmd("CodeCompanionChat adapter=opencode /commit")
           else
-            vim.cmd("CodeCompanionChat adapter=opencode toggle")
+            vim.cmd("CodeCompanionChat adapter=opencode Toggle")
           end
         end,
         desc = "Open Copilot Chat",

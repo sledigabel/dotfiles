@@ -382,20 +382,20 @@
   "agent": {
     "build": {
       "mode": "primary",
-      "model": "openai-compatible/claude-sonnet-4-5"
+      "model": "openai-compatible/claude-opus-4-6"
     },
     "plan": {
       "mode": "primary",
-      "model": "openai-compatible/claude-sonnet-4-5"
+      "model": "openai-compatible/claude-opus-4-5"
     },
     "build-fast": {
       "mode": "primary",
-      "model": "openai-compatible/claude-haiku-4-5",
+      "model": "openai-compatible/claude-sonnet-4-5",
       "description": "Fast development agent using Claude Haiku"
     },
     "plan-fast": {
       "mode": "primary",
-      "model": "openai-compatible/claude-haiku-4-5",
+      "model": "openai-compatible/claude-sonnet-4-5",
       "description": "Fast planning agent using Claude Haiku",
       "tools": {
         "write": false,
